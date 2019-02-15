@@ -91,13 +91,6 @@ public class CoinInfoActivity extends AppCompatActivity {
         CoinMS = intent.getStringExtra("COIN_MS");
         CoinUsage = intent.getStringExtra("COIN_USAGE");
 
-        /**
-         Toast.makeText(this, "CoinId " + CoinId + "CoinName " + CoinName + "CoinSymbol " + CoinSymbol
-         + "CoinRank " + CoinRank + "CoinPrice " + CoinPrice + "CoinPriceBTC " + CoinPriceBTC + "CoinP1H " + CoinP1H
-         + "CoinP24H " + CoinP24H + "CoinP7D " + CoinP7D + "CoinMCAP " + CoinMCAP + "CoinV24H " + CoinV24H
-         + "CoinCS " + CoinCS + "CoinMS " + CoinMS + "CoinUsage " + CoinUsage, Toast.LENGTH_LONG).show();
-         */
-
         setInformationAboutCoin();
         getCoinInfo();
         getCoinInfoTicker();
@@ -212,7 +205,6 @@ public class CoinInfoActivity extends AppCompatActivity {
         CoinUsage = Double.valueOf(Double.valueOf(CoinUsage) * 100).toString();
         CoinUsage = df3.format(Double.valueOf(CoinUsage));
         CoinUsage += getResources().getString(R.string.percent) + " of cap.";
-        // Toast.makeText(this, "CoinUsage " + CoinUsage, Toast.LENGTH_LONG).show();
         tvUsage.setText(CoinUsage);
     }
 
@@ -418,7 +410,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                     .load(IMAGE_URL)
                     .into(imageViewCoin);
         } catch (Exception e) {
-            Log.e("error image", e.toString());
+            //Log.e("error ", e.toString());
         }
     }
 }
