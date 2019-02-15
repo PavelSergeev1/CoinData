@@ -1,3 +1,74 @@
 <resources>
     <string name="app_name">CoinData</string>
+
+    <string name="Name">Name</string>
+    <string name="NAME">NAME</string>
+    <string name="Symbol">Symbol</string>
+    <string name="Price">Price</string>
+    <string name="PRICE">PRICE</string>
+    <string name="PriceDollar">Price $</string>
+    <string name="PriceBTC">Price in BTC:</string>
+    <string name="ChangeOfPrice">Price Change</string>
+    <string name="ChangePrice">PRICE CHANGE</string>
+    <string name="Rank">Rank:</string>
+
+    <string name="MarketCap">Market cap.</string>
+    <string name="MarketCapitalization">Market capitalization:</string>
+    <string name="Volume24">Volume 24 h</string>
+    <string name="Volume24Hours">Volume in 24 hours:</string>
+
+    <string name="CirculatingSupply">Circulating supply:</string>
+    <string name="TotalSupply">Total supply:</string>
+    <string name="Description">Description</string>
+    <string name="Markets">Markets</string>
+    <string name="Exchange">Exchange</string>
+
+    <string name="PriceChange">Price change:</string>
+    <string name="PercentOneHour">1 h</string>
+    <string name="PercentTwentyFourHour">24 h</string>
+    <string name="PercentSevenDays">7 d</string>
+
+    <string name="About">ABOUT</string>
+    <string name="AboutApp">CoinDataProject gives you whole list of cryptocurrencies (2000+, which sorted by its market capitalization), prices on a few markets and description about choosed coin. All data updates online and provides by very good services (see below).</string>
+    <string name="Donations">Donations</string>
+    <string name="DonationsDescription">Do you like this app? Want to support the developer? Best way to do this - is sending me coins, no matter how much. By using cryptocurrencies you bring our decentralized future closer :)  </string>
+    <string name="BTC">BTC</string>
+    <string name="ETH">ETH</string>
+    <string name="USDT">USDT</string>
+    <string name="LTC">LTC</string>
+    <string name="DASH">DASH</string>
+    <string name="NEO">NEO</string>
+    <string name="ZCASH">ZEC</string>
+
+    <string name="BTC_Address">1FX7FBmcRekNds2dZAgVs7dXYrakVFqNxy</string>
+    <string name="ETH_Address">0x26dfC4202cd137d644712B1aedd23A05E5c57Dfd</string>
+    <string name="USDT_Address">0x26dfC4202cd137d644712B1aedd23A05E5c57Dfd</string>
+    <string name="LTC_Address">LR2UmeprfCD9io3ZzsbodmJwoz53z1wd9Q</string>
+    <string name="DASH_Address">Xj7ZwF9X3MdXwkdjkPNeUrbXhD6u1Qc56m</string>
+    <string name="NEO_Address">AWdq5wNAyT7pwXG1dLmNxXnvMRbinx2VLd</string>
+    <string name="ZCASH_Address">t1WeZXfK4kwpg6iMjQGUkqpWo2ie3Wu5pLv</string>
+    <string name="Copy">COPY</string>
+
+    <string name="Update">UPDATE</string>
+
+    <string name="Category">Category:</string>
+
+    <string name="percent">%</string>
+    <string name="dollar">$</string>
+    <string name="space">&#032;</string>
+
+    <string name="data_not_found">No data found</string>
+    <string name="internet_error">oh no! something went wrong, check your internet connection</string>
+
+    <string name="Coinlore">Coinlore</string>
+    <string name="CoinloreLink">www.coinlore.com</string>
+
+    <string name="Coingecko">Coingecko</string>
+    <string name="CoingeckoLink">www.coingecko.com</string>
+
+    <string name="Cryptonator">Cryptonator</string>
+    <string name="CryptonatorLink">www.cryptonator.com</string>
+
+    <string name="Cryptocompare">Cryptocompare</string>
+    <string name="CryptocompareLink">www.cryptocompare.com</string>
 </resources>

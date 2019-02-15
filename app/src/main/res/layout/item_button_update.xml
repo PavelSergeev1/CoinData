@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/btnAbout"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="15dp"
+        android:background="#c88719"
+        android:onClick="onClickAbout"
+        android:text="about"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:background="#c88719"
+        android:onClick="onClickUpdate"
+        android:text="@string/Update"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnShow"
+        android:layout_width="95dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="20dp"
+        android:background="#c88719"
+        android:onClick="onClickAddMoreCoins"
+        android:text="show more"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"/>
+</FrameLayout>

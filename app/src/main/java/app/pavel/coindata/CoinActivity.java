@@ -58,7 +58,7 @@ public class CoinActivity extends AppCompatActivity {
 
     String CoinId = "";
 
-    String[][] COIN = new String[2000][15];
+    String[][] COIN = new String[2100][15];
 
     Handler handler;
 
@@ -395,7 +395,8 @@ public class CoinActivity extends AppCompatActivity {
             public void run() {
                 ScrollView scrollView = findViewById(R.id.scrollView);
                 View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
-                if (view.getBottom() == scrollView.getScrollY() + scrollView.getHeight() && !endoflist) {
+                if (view.getBottom() == scrollView.getScrollY() + scrollView.getHeight()
+                        && !endoflist && start < 2100) {
                     endoflist = true;
                     Button btnShow = findViewById(R.id.btnShow);
                     btnShow.setVisibility(View.VISIBLE);
