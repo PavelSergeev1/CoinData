@@ -1,22 +1,31 @@
 package app.pavel.coindata;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
@@ -24,17 +33,8 @@ import java.text.DecimalFormat;
 
 public class CoinInfoActivity extends AppCompatActivity {
 
-    int start = 100;
-
     DecimalFormat df3 = new DecimalFormat("#.##");
 
-    String data = "data";
-    String symbol = "symbol";
-    String name = "name";
-    String id = "id";
-
-    String rank = "rank";
-    String volume24 = "volume24";
     String categories = "categories";
     String description = "description";
     String ticker = "ticker";
@@ -63,6 +63,14 @@ public class CoinInfoActivity extends AppCompatActivity {
     String USD = "USD";
     String IMAGEURL = "IMAGEURL";
 
+    String M15 = "M15";
+    String M30 = "M30";
+    String H1 = "H1";
+    String H4 = "H4";
+    String D1 = "D1";
+
+    String graph_title = "price $ on hitbtc.com";
+
     Handler handler;
 
     public CoinInfoActivity() {
@@ -73,6 +81,8 @@ public class CoinInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info);
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         Intent intent = getIntent();
 
@@ -95,6 +105,8 @@ public class CoinInfoActivity extends AppCompatActivity {
         getCoinInfo();
         getCoinInfoTicker();
         getCoinImage();
+
+        getPriceInfo(CoinSymbol, M15, false, false);
     }
 
     public void setInformationAboutCoin() {
@@ -180,13 +192,13 @@ public class CoinInfoActivity extends AppCompatActivity {
             String CS = String.format("%,d", Long.parseLong(cs.replace(".0", "")));
             tvCirculatingSupplyData.setText(CS.replaceAll(",", " "));
 
-            if (!CoinMS.equals("") && CoinMS != null && !CoinMS.equals("0") && !CoinMS.equals("null")
-                    && Double.parseDouble(CoinCS) < Double.parseDouble(CoinMS)) {
+            if (!CoinMS.equals("") && CoinMS != null && !CoinMS.equals("0") && !CoinMS.equals("null")) {
                 BigDecimal B = new BigDecimal(CoinMS.replaceAll(" ", ""));
                 B = new BigDecimal(B.toPlainString());
                 String ms = B.setScale(0, BigDecimal.ROUND_HALF_DOWN).toString();
                 String MS = String.format("%,d", Long.parseLong(ms.replace(".0", "")));
                 tvTotalSupplyData.setText(MS.replaceAll(",", " "));
+
             } else tvTotalSupplyData.setText(R.string.data_not_found);
 
         } else tvCirculatingSupplyData.setText(R.string.data_not_found);
@@ -256,6 +268,8 @@ public class CoinInfoActivity extends AppCompatActivity {
                 tvDescription.setVisibility(View.VISIBLE);
 
                 tvCategoryData.setText(obj.substring(1, obj.length() - 1)
+                        .replaceAll(",",", ")
+                        .replaceAll("\"", "")
                         .replaceAll("\",\"", "\", \""));
 
                 text = "<html><body><p align=\"justify\">";
@@ -264,6 +278,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                         .replaceAll("”", "\"")
                         .replaceAll("“", "\"")
                         .replaceAll("’", "'")
+                        .replaceAll("‘", "'")
                         .replaceAll("–", "-");
                 text+= "</p></body></html>";
                 tvDescriptionData.loadData(text, "text/html", "utf-8");
@@ -306,10 +321,15 @@ public class CoinInfoActivity extends AppCompatActivity {
 
                 if (arr.length() != 0) {
                     TextView tvMarkets = MainContainer.findViewById(R.id.tvMarkets);
+                    tvMarkets.setText(getResources().getString(R.string.Markets));
                     tvMarkets.setVisibility(View.VISIBLE);
+
                     TextView tvCol1 = MainContainer.findViewById(R.id.tvColumn1);
                     TextView tvCol2 = MainContainer.findViewById(R.id.tvColumn2);
                     TextView tvCol3 = MainContainer.findViewById(R.id.tvColumn3);
+                    tvCol1.setText(getResources().getString(R.string.Exchange));
+                    tvCol2.setText(getResources().getString(R.string.PriceDollar));
+                    tvCol3.setText(getResources().getString(R.string.Volume24));
                     tvCol1.setVisibility(View.VISIBLE);
                     tvCol2.setVisibility(View.VISIBLE);
                     tvCol3.setVisibility(View.VISIBLE);
@@ -377,9 +397,6 @@ public class CoinInfoActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(CoinInfoActivity.this,
-                                    getString(R.string.data_not_found),
-                                    Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
@@ -408,10 +425,217 @@ public class CoinInfoActivity extends AppCompatActivity {
             ImageView imageViewCoin = findViewById(R.id.imageViewCoin);
             Glide.with(this)
                     .load(IMAGE_URL)
+                    .apply(new RequestOptions()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL))
                     .into(imageViewCoin);
         } catch (Exception e) {
-            //Log.e("error ", e.toString());
         }
+    }
+
+    public void getGraph(View view) {
+        LinearLayout graph_linear_layout = findViewById(R.id.graph_linear_layout);
+        graph_linear_layout.removeAllViews();
+        LayoutInflater inflater = getLayoutInflater();
+        final View item = inflater.inflate(R.layout.item_graph, graph_linear_layout, false);
+
+        graph_linear_layout.addView(item);
+
+        GraphView graph = item.findViewById(R.id.graph);
+        graph.removeAllSeries();
+        graph.setVisibility(View.INVISIBLE);
+
+        switch (view.getId()) {
+            case R.id.btnM15:
+                getPriceInfo(CoinSymbol, M15, false, false);
+                break;
+            case R.id.btnM30:
+                getPriceInfo(CoinSymbol, M30, false, false);
+                break;
+            case R.id.btnH1:
+                getPriceInfo(CoinSymbol, H1, false, false);
+                break;
+            case R.id.btnH4:
+                getPriceInfo(CoinSymbol, H4, true, false);
+                break;
+            case R.id.btnD1:
+                getPriceInfo(CoinSymbol, D1, false, true);
+                break;
+        }
+    }
+
+    private void getPriceInfo(final String CoinSymbol, final String period, final boolean h4, final boolean d1){
+        new Thread() {
+            public void run() {
+                final JSONArray json = RemoteFetchGraph.getJSON(CoinSymbol, period);
+                if (json == null) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                        }
+                    });
+                } else {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            onDrawGraph(json, h4, d1, period);
+                        }
+                    });
+                }
+            }
+        }.start();
+    }
+
+    public void onDrawGraph(JSONArray json, boolean h4, boolean d1, String period){
+
+        LinearLayout graph_linear_layout = findViewById(R.id.graph_linear_layout);
+        graph_linear_layout.removeAllViews();
+        LayoutInflater inflater = getLayoutInflater();
+        final View item = inflater.inflate(R.layout.item_graph, graph_linear_layout, false);
+
+        graph_linear_layout.addView(item);
+
+        GraphView graph = item.findViewById(R.id.graph);
+        graph.removeAllSeries();
+        graph.setVisibility(View.INVISIBLE);
+
+        graph.removeAllSeries();
+        graph.setVisibility(View.INVISIBLE);
+
+        int i = json.length();
+        DataPoint[] dp = new DataPoint[i];
+
+        String dt = "";
+        int data_num = 0;
+
+        for (int o = 0; o < i; o++){
+            try {
+                String a = json.getJSONObject(o).getString("timestamp");
+                a = a.substring(5, 10);
+                if (o == 0 && !h4 && !d1) {
+                    dt = a;
+                    data_num += 1;
+                }
+                if(!dt.equals(a) && !h4 && !d1) {
+                    data_num += 1;
+                    dt = a;
+                }
+                if(!dt.equals(a) && h4 && !d1 && ( o % 25 == 0) ) {
+                    data_num += 1;
+                    dt = a;
+                }
+                if(!dt.equals(a) && !h4 && d1 && ( o % 25 == 0) ) {
+                    data_num += 1;
+                    dt = a;
+                }
+                if (o == i - 1 && ( h4 || d1 )) {
+                    dt = a;
+                    data_num += 1;
+                }
+            } catch (JSONException er) {
+            }
+        }
+
+        if (data_num > 5) data_num = 5;
+
+        String[] dates = new String[data_num];
+        int e = 0;
+        String a_curr = "";
+        for (int x = 0; x < i; x++) {
+            try {
+                String a = json.getJSONObject(x).getString("timestamp");
+                a = a.substring(5, 10);
+                if (x == 0 && !h4 && !d1) {
+                    a_curr = a;
+                    dates[e] = a;
+                    e++;
+                }
+                if (!a_curr.equals(a) && !h4 && !d1 && e <= data_num - 1) {
+                    a_curr = a;
+                    dates[e] = a;
+                    e++;
+                }
+                if (!a_curr.equals(a) && h4 && !d1 && (x % 25 == 0) && e < data_num - 1) {
+                    a_curr = a;
+                    dates[e] = a;
+                    e++;
+                }
+                if (!a_curr.equals(a) && !h4 && d1 && (x % 25 == 0) && e < data_num - 1) {
+                    a_curr = a;
+                    dates[e] = a;
+                    e++;
+                }
+                if (x == i - 1 && ( h4 || d1 )) {
+                    a_curr = a;
+                    dates[e] = a;
+                    e++;
+                }
+                String b = json.getJSONObject(x).getString("close");
+                dp[x] = new DataPoint(x, Double.parseDouble(b));
+
+            } catch (JSONException er) {
+                er.printStackTrace();
+                dp[x] = new DataPoint(x, 1);
+            }
+        }
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp);
+        series.setThickness(8);
+        series.setColor(Color.parseColor("#75a478"));
+        series.setDrawBackground(true);
+        graph.addSeries(series);
+        graph.setTitle(graph_title);
+        graph.setTitleTextSize(40);
+
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        staticLabelsFormatter.setHorizontalLabels(dates);
+        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
+        graph.setVisibility(View.VISIBLE);
+
+        Button m15 = findViewById(R.id.btnM15);
+        Button m30 = findViewById(R.id.btnM30);
+        Button h1 = findViewById(R.id.btnH1);
+        Button h44 = findViewById(R.id.btnH4);
+        Button d11 = findViewById(R.id.btnD1);
+
+        if (period.equals(M15)) {
+            m15.setBackgroundColor(Color.parseColor("#75a478"));
+            m30.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            h1.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            h44.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            d11.setBackgroundColor(Color.parseColor("#a5d6a7"));
+        } else if (period.equals(M30)) {
+            m15.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            m30.setBackgroundColor(Color.parseColor("#75a478"));
+            h1.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            h44.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            d11.setBackgroundColor(Color.parseColor("#a5d6a7"));
+        } else if (period.equals(H1)) {
+            m15.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            m30.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            h1.setBackgroundColor(Color.parseColor("#75a478"));
+            h44.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            d11.setBackgroundColor(Color.parseColor("#a5d6a7"));
+        } else if (period.equals(H4)) {
+            m15.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            m30.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            h1.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            h44.setBackgroundColor(Color.parseColor("#75a478"));
+            d11.setBackgroundColor(Color.parseColor("#a5d6a7"));
+        } else if (period.equals(D1)) {
+            m15.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            m30.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            h1.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            h44.setBackgroundColor(Color.parseColor("#a5d6a7"));
+            d11.setBackgroundColor(Color.parseColor("#75a478"));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }
 

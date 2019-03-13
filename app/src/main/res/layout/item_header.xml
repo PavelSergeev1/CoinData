@@ -2,7 +2,8 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="30dp"
+    android:layout_gravity="center_vertical"
     android:orientation="horizontal">
 
     <TextView
@@ -10,12 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="40dp"
         android:gravity="center"
         android:text="@string/NAME"
         android:textColor="@color/colorWhite"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:textSize="14sp"
+        />
 
     <TextView
         android:id="@+id/tvPrice"
@@ -25,8 +26,8 @@
         android:gravity="center_vertical"
         android:text="@string/PRICE"
         android:textColor="@color/colorWhite"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:textSize="14sp"
+        />
 
     <TextView
         android:id="@+id/tvChangeOfPrice"
@@ -37,6 +38,6 @@
         android:gravity="center_vertical"
         android:text="@string/ChangePrice"
         android:textColor="@color/colorWhite"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:textSize="14sp"
+        />
 </FrameLayout>

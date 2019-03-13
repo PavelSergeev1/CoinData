@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:scrollbars="horizontal"
-              android:background="@color/colorWhite">
+              android:background="@color/colorWhite"
+              android:orientation="vertical"
+              android:scrollbars="horizontal">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,23 +14,25 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="About"
+                android:textColor="@color/Black"
                 android:textSize="28sp"
-                android:textStyle="bold"/>
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/AboutApp"
+                android:textColor="@color/Black"
                 android:textSize="14sp"/>
 
             <TextView
@@ -39,15 +41,16 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="Sourses"
+                android:textColor="@color/Black"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                />
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
                 android:orientation="horizontal">
 
                 <RadioGroup
@@ -58,25 +61,36 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Coinlore"/>
+                        android:text="@string/Coinlore"
+                        android:textColor="@color/Black"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="@string/Coingecko"/>
+                        android:text="@string/Coingecko"
+                        android:textColor="@color/Black"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="@string/Cryptonator"/>
+                        android:text="@string/Cryptonator"
+                        android:textColor="@color/Black"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="@string/Cryptocompare"/>
+                        android:text="@string/Cryptocompare"
+                        android:textColor="@color/Black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/HitBTC"
+                        android:textColor="@color/Black"/>
 
                 </RadioGroup>
 
@@ -112,6 +126,13 @@
                         android:layout_marginTop="3dp"
                         android:autoLink="web"
                         android:text="@string/CryptocompareLink"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:autoLink="web"
+                        android:text="@string/HitBTCLink"/>
                 </RadioGroup>
             </RadioGroup>
 
@@ -121,14 +142,16 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="@string/Donations"
+                android:textColor="@color/Black"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/DonationsDescription"
+                android:textColor="@color/Black"
                 android:textSize="14sp"/>
 
             <RadioGroup
@@ -151,22 +174,22 @@
                         android:layout_weight="30"
                         android:text="@string/BTC"
                         android:textColor="@android:color/background_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        />
 
                     <Button
                         android:id="@+id/BTC_COPY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="70"
                         android:background="@color/Gray3"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:textSize="15sp"
+                        />
                 </RadioGroup>
 
                 <RadioGroup
@@ -182,7 +205,7 @@
                         android:text="@string/BTC_Address"
                         android:textColor="@android:color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold"/>
+                        />
                 </RadioGroup>
             </RadioGroup>
 
@@ -206,22 +229,22 @@
                         android:layout_weight="30"
                         android:text="@string/ETH"
                         android:textColor="@android:color/background_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        />
 
                     <Button
                         android:id="@+id/ETH_COPY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="70"
                         android:background="@color/Gray3"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:textSize="15sp"
+                        />
                 </RadioGroup>
 
                 <RadioGroup
@@ -237,7 +260,7 @@
                         android:text="@string/ETH_Address"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        />
                 </RadioGroup>
             </RadioGroup>
 
@@ -261,22 +284,22 @@
                         android:layout_weight="30"
                         android:text="@string/USDT"
                         android:textColor="@android:color/background_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        />
 
                     <Button
                         android:id="@+id/USDT_COPY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="70"
                         android:background="@color/Gray3"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:textSize="15sp"
+                        />
                 </RadioGroup>
 
                 <RadioGroup
@@ -292,7 +315,7 @@
                         android:text="@string/USDT_Address"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        />
                 </RadioGroup>
             </RadioGroup>
 
@@ -316,22 +339,22 @@
                         android:layout_weight="30"
                         android:text="@string/LTC"
                         android:textColor="@android:color/background_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        />
 
                     <Button
                         android:id="@+id/LTC_COPY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="70"
                         android:background="@color/Gray3"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:textSize="15sp"
+                        />
                 </RadioGroup>
 
                 <RadioGroup
@@ -347,7 +370,7 @@
                         android:text="@string/LTC_Address"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        />
                 </RadioGroup>
             </RadioGroup>
 
@@ -371,22 +394,22 @@
                         android:layout_weight="30"
                         android:text="@string/DASH"
                         android:textColor="@android:color/background_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        />
 
                     <Button
                         android:id="@+id/DASH_COPY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="70"
                         android:background="@color/Gray3"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:textSize="15sp"
+                        />
                 </RadioGroup>
 
                 <RadioGroup
@@ -402,7 +425,7 @@
                         android:text="@string/DASH_Address"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        />
                 </RadioGroup>
             </RadioGroup>
 
@@ -426,22 +449,22 @@
                         android:layout_weight="30"
                         android:text="@string/NEO"
                         android:textColor="@android:color/background_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        />
 
                     <Button
                         android:id="@+id/NEO_COPY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="70"
                         android:background="@color/Gray3"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:textSize="15sp"
+                        />
                 </RadioGroup>
 
                 <RadioGroup
@@ -458,7 +481,7 @@
                         android:text="@string/NEO_Address"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        />
                 </RadioGroup>
             </RadioGroup>
 
@@ -482,22 +505,22 @@
                         android:layout_weight="30"
                         android:text="@string/ZCASH"
                         android:textColor="@android:color/background_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        />
 
                     <Button
                         android:id="@+id/ZCASH_COPY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="70"
                         android:background="@color/Gray3"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:textSize="15sp"
+                        />
                 </RadioGroup>
 
                 <RadioGroup
@@ -515,9 +538,10 @@
                         android:text="@string/ZCASH_Address"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        />
                 </RadioGroup>
             </RadioGroup>
+
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="30dp">

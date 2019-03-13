@@ -12,6 +12,8 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     public void onCopyAddress(View view) {
@@ -59,5 +61,12 @@ public class AboutActivity extends AppCompatActivity {
                 Toast.makeText(this, "ZEC address successfully copied",Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
               android:background="@color/colorWhite"
               android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              tools:context=".CoinInfoActivity">
 
-    <ScrollView android:layout_height="match_parent"
-                android:layout_width="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:id="@+id/CoinContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:orientation="horizontal">
+
             <RadioGroup
-                android:layout_height="match_parent"
-                android:layout_width="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -31,17 +35,20 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="65"
                         android:gravity="center"
-                        android:textSize="36sp"
-                        android:textStyle="bold"/>
+                        android:textColor="@color/Black"
+                        android:textSize="24sp"
+                        />
 
                     <TextView
                         android:id="@+id/tvCoinSymbolData"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="20"
                         android:gravity="center"
-                        android:textSize="17sp"
-                        android:textStyle="bold"/>
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"
+                        />
 
                     <ImageView
                         android:id="@+id/imageViewCoin"
@@ -49,288 +56,379 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="15"/>
                 </RadioGroup>
-                <RadioGroup
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
+
+                <LinearLayout
+                    android:id="@+id/graph_linear_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvRank"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:text="@string/Rank"
-                        android:textSize="17sp"/>
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"/>
+
                     <TextView
                         android:id="@+id/tvRankData"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:textStyle="bold"
-                        android:textSize="17sp"/>
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="false"
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
                         android:text="@string/Category"
-                        android:textSize="15sp"
-                        />
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"/>
+
                     <TextView
                         android:id="@+id/tvCategoryData"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:textSize="15sp"
-                        android:textStyle="bold"/>
-                </RadioGroup>
-                <RadioGroup
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvCoinPRICE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Price"
-                        android:textSize="15sp"/>
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"/>
+
                     <TextView
                         android:id="@+id/tvCoinPRICEData"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:textStyle="bold"
-                        android:textSize="24sp"/>
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvCoinPriceBTC"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="40dp"
                         android:text="@string/PriceBTC"
-                        android:textSize="15sp"/>
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"/>
+
                     <TextView
                         android:id="@+id/tvCoinPriceBTCData"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:textStyle="bold"
-                        android:textSize="15sp"/>
-                </RadioGroup>
-                <RadioGroup
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="30dp"
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/tvCoinPriceBTCData"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginLeft="5dp"
+                        android:text="sat."
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvPriceChange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/PriceChange"
-                        android:textSize="14sp"
-                        />
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"/>
 
-                    <TextView
-                        android:id="@+id/tvPercentOneHour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/PercentOneHour"
-                        android:textSize="13sp"
-                        />
-                    <TextView
-                        android:id="@+id/tvPercentOneHourData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/tvPercentTwentyFourHour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/PercentTwentyFourHour"
-                        android:textSize="13sp"
-                        />
-                    <TextView
-                        android:id="@+id/tvPercentTwentyFourHourData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/tvPercentSevenDays"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/PercentSevenDays"
-                        android:textSize="13sp"
-                        />
-                    <TextView
-                        android:id="@+id/tvPercentSevenDaysData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-                </RadioGroup>
-                <RadioGroup
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
                     <RadioGroup
-                        android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvPercentOneHour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/PercentOneHour"
+                            android:textColor="@color/Black"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/tvPercentOneHourData"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvPercentTwentyFourHour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/PercentTwentyFourHour"
+                            android:textColor="@color/Black"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/tvPercentTwentyFourHourData"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="14sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvPercentSevenDays"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/PercentSevenDays"
+                            android:textColor="@color/Black"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/tvPercentSevenDaysData"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="14sp"
+                            />
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvMarketCap"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/MarketCapitalization"
-                            android:textSize="15sp"
-                            />
+                            android:textColor="@color/Black"
+                            android:textSize="14sp"/>
 
                         <TextView
                             android:id="@+id/tvVolume24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:text="@string/Volume24Hours"
-                            android:textSize="15sp"
-                            />
+                            android:textColor="@color/Black"
+                            android:textSize="14sp"/>
                     </RadioGroup>
+
                     <RadioGroup
-                        android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:layout_marginStart="10dp">
-                        <TextView
-                            android:id="@+id/tvMarketCapData"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+                        <RadioGroup
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textStyle="bold"/>
-                        <TextView
-                            android:id="@+id/tvVolume24Data"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvUsage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:textSize="12sp"
+                                />
+                        </RadioGroup>
+
+                        <RadioGroup
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:textSize="15sp"
-                            android:textStyle="bold"/>
+                            android:layout_marginLeft="10dp"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvMarketCapData"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/Black"
+                                android:textSize="14sp"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvVolume24Data"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/Black"
+                                android:textSize="14sp"
+                                />
+                        </RadioGroup>
                     </RadioGroup>
-                    <RadioGroup
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:layout_marginStart="10dp">
-                        <TextView
-                            android:id="@+id/tv1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textStyle="bold"/>
-                        <TextView
-                            android:id="@+id/tvUsage"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:textSize="12sp"
-                            android:textStyle="bold"/>
-                    </RadioGroup>
-                </RadioGroup>
-                <RadioGroup
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+
                     <RadioGroup
-                        android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvCirculatingSupply"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/CirculatingSupply"
-                            android:textSize="15sp"
-                            />
+                            android:textColor="@color/Black"
+                            android:textSize="14sp"/>
 
                         <TextView
                             android:id="@+id/tvTotalSupply"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:text="@string/TotalSupply"
-                            android:textSize="15sp"
-                            />
+                            android:textColor="@color/Black"
+                            android:textSize="14sp"/>
                     </RadioGroup>
+
                     <RadioGroup
-                        android:orientation="vertical"
-                        android:layout_marginStart="10dp"
-                        android:gravity="end"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/tvCirculatingSupplyData"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textStyle="bold"/>
-                        <TextView
-                            android:id="@+id/tvTotalSupplyData"
+                            android:layout_marginEnd="10dp"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvEmission"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                />
+                        </RadioGroup>
+
+                        <RadioGroup
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:textSize="15sp"
-                            android:textStyle="bold"/>
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvCirculatingSupplyData"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/Black"
+                                android:textSize="14sp"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvTotalSupplyData"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/Black"
+                                android:textSize="14sp"
+                                />
+                        </RadioGroup>
                     </RadioGroup>
-                    <RadioGroup
-                        android:orientation="vertical"
-                        android:layout_marginStart="10dp"
-                        android:gravity="end"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/tvEmission"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:textStyle="bold"/>
-                    </RadioGroup>
-                </RadioGroup>
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/tvMarkets"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:text="@string/Markets"
-                    android:textSize="17sp"
+                    android:textColor="@color/Black"
+                    android:textSize="18sp"
                     android:visibility="invisible"/>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/tvColumn1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Exchange"
-                        android:layout_marginStart="60dp"
+                        android:layout_marginStart="70dp"
+                        android:textColor="@color/Black"
                         android:textSize="15sp"
                         android:visibility="invisible"/>
 
@@ -340,7 +438,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:text="@string/PriceDollar"
+                        android:textColor="@color/Black"
                         android:textSize="15sp"
                         android:visibility="invisible"/>
 
@@ -348,19 +446,20 @@
                         android:id="@+id/tvColumn3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginEnd="60dp"
-                        android:text="@string/Volume24"
+                        android:textColor="@color/Black"
                         android:textSize="15sp"
                         android:visibility="invisible"/>
                 </RelativeLayout>
+
                 <TableLayout
                     android:id="@+id/tlMarkets"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp">
                 </TableLayout>
 
@@ -371,20 +470,18 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
                     android:text="@string/Description"
-                    android:textSize="17sp"
-                    android:visibility="invisible"
-                    />
+                    android:textColor="@color/Black"
+                    android:textSize="18sp"
+                    android:visibility="invisible"/>
+
                 <WebView
                     android:id="@+id/tvDescriptionData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
                     android:autoLink="web"
                     android:linksClickable="true"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textSize="14sp"
+                    />
             </RadioGroup>
         </LinearLayout>
     </ScrollView>

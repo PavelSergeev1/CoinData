@@ -6,6 +6,7 @@
 
     <color name="colorRed">#cd5c5c</color>
     <color name="colorGreen">#32CD32</color>
+    <color name="Green1">#d7ffd9</color>
     <color name="colorBrown">#a1887f</color>
     <color name="colorWhite">#FFFFFF</color>
 
@@ -14,4 +15,6 @@
     <color name="Gray2">#616161</color>
     <color name="Gray3">#424242</color>
     <color name="Gray4">#212121</color>
+
+    <color name="Black">#000000</color>
 </resources>

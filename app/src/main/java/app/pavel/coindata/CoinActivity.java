@@ -3,18 +3,21 @@ package app.pavel.coindata;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,6 +36,9 @@ public class CoinActivity extends AppCompatActivity {
     int billion = Integer.parseInt("1000000000");
     int million = Integer.parseInt("1000000");
     int thousand = Integer.parseInt("1000");
+
+    // to avoid double insertion when button Update was pressed ()
+    int update = 1;
 
     boolean endoflist = false;
 
@@ -56,6 +62,10 @@ public class CoinActivity extends AppCompatActivity {
     String usage;
     String time;
 
+    String RAW = "RAW";
+    String USD = "USD";
+    String IMAGEURL = "IMAGEURL";
+
     String CoinId = "";
 
     String[][] COIN = new String[2100][15];
@@ -70,6 +80,8 @@ public class CoinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin);
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         setHeader();
         setButton();
@@ -87,11 +99,18 @@ public class CoinActivity extends AppCompatActivity {
             }
             String t = savedInstanceState.getString("time");
             time = t;
-            TextView updateTime = findViewById(R.id.updateTime);
-            if (!Objects.equals(t, null)) { updateTime.setText(t); } else updateTime.setText("");
+            LinearLayout TimeUpdateContainer = findViewById(R.id.TimeUpdateContainer);
+            TextView updateTime = TimeUpdateContainer.findViewById(R.id.updateTime);
+            if (!Objects.equals(t, null)) {
+                updateTime.setText(t);
+            } else {
+                updateTime.setText("");
+            }
         }
 
-        if (savedInstanceState == null) updatePrice();
+        if (savedInstanceState == null) {
+            updatePrice();
+        }
     }
 
     @Override
@@ -170,8 +189,6 @@ public class CoinActivity extends AppCompatActivity {
         View item = inflater.inflate(R.layout.item_button_update, ButtonContainer, false);
         item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
         ButtonContainer.addView(item);
-        Button btnShow = findViewById(R.id.btnShow);
-        btnShow.setVisibility(View.INVISIBLE);
     }
 
     public void clearPrice() {
@@ -179,15 +196,13 @@ public class CoinActivity extends AppCompatActivity {
         MainContainer.removeAllViews();
     }
 
-    public void onClickAddMoreCoins(View view) {
-        Button btnShow = findViewById(R.id.btnShow);
-        btnShow.setVisibility(View.INVISIBLE);
+    public void onAddMoreCoins() {
         start += 50;
         updatePrice();
     }
 
     private void updatePrice(){
-        startAnimation(1);
+        if (update == 1) startAnimation(1);
         new Thread() {
             public void run() {
                 final JSONObject json = RemoteFetch.getJSON(start);
@@ -336,14 +351,15 @@ public class CoinActivity extends AppCompatActivity {
 
             COIN[r][14] = usage;
 
+            getCoinListImage(COIN[r][2], item);
+
         } catch (Exception e) {
-            //Log.e("CoinActivity", "One or more fields not found in the JSON data");
         }
+
 
         item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
         item.setTag(CoinId);
         MainContainer.addView(item);
-
         item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -373,22 +389,65 @@ public class CoinActivity extends AppCompatActivity {
         });
 
         if (end) {
-            stopAnimation(0);
-            endoflist = false;
-            Button btnShow = findViewById(R.id.btnShow);
-            btnShow.setVisibility(View.INVISIBLE);
-            showButtonAdd();
+            if (update == 1) stopAnimation(0);
+            showMoreCoins();
             showCurrentTime();
+            endoflist = false;
+        }
+    }
+
+    public void getCoinListImage(final String symbol, final View item){
+        new Thread() {
+            public void run() {
+                final JSONObject json = RemoteFetchCoinImage.getJSONinfo(symbol);
+                if (json == null) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                        }
+                    });
+                } else {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            setCoinListImage(json, item, symbol);
+                        }
+                    });
+                }
+            }
+        }.start();
+    }
+
+    public void setCoinListImage(JSONObject js, View item, String symbol) {
+        try {
+            String IMAGE_URL = "https://www.cryptocompare.com";
+
+            JSONObject Obj1 = js.getJSONObject(RAW);
+            JSONObject Obj2 = Obj1.getJSONObject(symbol);
+            JSONObject Obj3 = Obj2.getJSONObject(USD);
+            String Obj4 = Obj3.getString(IMAGEURL);
+
+            IMAGE_URL += Obj4;
+
+            ImageView imageViewList = item.findViewById(R.id.imageViewList);
+            Glide.with(this)
+                    .load(IMAGE_URL)
+                    .apply(new RequestOptions()
+                            .override(100, 100)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL))
+                    .into(imageViewList);
+        } catch (Exception e) {
         }
     }
 
     public void onClickUpdate(View view) {
-        start = 50;
         clearPrice();
+        start = 50;
+        update = 1;
         updatePrice();
     }
 
-    public void showButtonAdd() {
+    public void showMoreCoins() {
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
@@ -397,9 +456,14 @@ public class CoinActivity extends AppCompatActivity {
                 View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
                 if (view.getBottom() == scrollView.getScrollY() + scrollView.getHeight()
                         && !endoflist && start < 2100) {
-                    endoflist = true;
-                    Button btnShow = findViewById(R.id.btnShow);
-                    btnShow.setVisibility(View.VISIBLE);
+                    if (update == 1) {
+                        update ++;
+                    } else if (update > 1) {
+                        endoflist = true;
+                        Toast.makeText(CoinActivity.this,getString(R.string.loading),
+                                Toast.LENGTH_SHORT).show();
+                        onAddMoreCoins();
+                    }
                 }
                 handler.postDelayed(this, 100);
             }
@@ -437,26 +501,29 @@ public class CoinActivity extends AppCompatActivity {
         COIN[i][7] = ARRAY_COIN[7];
         COIN[i][8] = ARRAY_COIN[8];
 
-        if (!ARRAY_COIN[6].equals("")) {
-            if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1).replaceAll("%", "")) > 0) {
-                tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorGreen));
-            } else if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1).replaceAll("%", "")) < 0) {
-                tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorRed));
+        try {
+            if (!ARRAY_COIN[6].equals("") && ARRAY_COIN[6] != null && !ARRAY_COIN[6].equals("null")) {
+                if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1).replaceAll("%", "")) > 0) {
+                    tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorGreen));
+                } else if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1).replaceAll("%", "")) < 0) {
+                    tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorRed));
+                }
             }
-        }
-        if (!ARRAY_COIN[7].equals("")) {
-            if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1).replaceAll("%", "")) > 0) {
-                tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorGreen));
-            } else if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1).replaceAll("%", "")) < 0) {
-                tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorRed));
+            if (!ARRAY_COIN[7].equals("") && ARRAY_COIN[7] != null && !ARRAY_COIN[7].equals("null")) {
+                if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1).replaceAll("%", "")) > 0) {
+                    tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorGreen));
+                } else if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1).replaceAll("%", "")) < 0) {
+                    tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorRed));
+                }
             }
-        }
-        if (!ARRAY_COIN[8].equals("")) {
-            if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1).replaceAll("%", "")) > 0) {
-                tvPercentSevenDaysData.setTextColor(getResources().getColor(R.color.colorGreen));
-            } else if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1).replaceAll("%", "")) < 0) {
-                tvPercentSevenDaysData.setTextColor(getResources().getColor(R.color.colorRed));
+            if (!ARRAY_COIN[8].equals("") && ARRAY_COIN[8] != null && !ARRAY_COIN[8].equals("null")) {
+                if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1).replaceAll("%", "")) > 0) {
+                    tvPercentSevenDaysData.setTextColor(getResources().getColor(R.color.colorGreen));
+                } else if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1).replaceAll("%", "")) < 0) {
+                    tvPercentSevenDaysData.setTextColor(getResources().getColor(R.color.colorRed));
+                }
             }
+        } catch (Exception e) {
         }
 
         tvMarketNumber.setText(ARRAY_COIN[3]);
@@ -488,6 +555,8 @@ public class CoinActivity extends AppCompatActivity {
         item.setTag(CoinId);
         MainContainer.addView(item);
 
+        getCoinListImage(COIN[i][2], item);
+
         item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -518,10 +587,7 @@ public class CoinActivity extends AppCompatActivity {
 
         if (end) {
             endoflist = false;
-            FrameLayout BC = findViewById(R.id.ButtonContainer);
-            Button btnShow = BC.findViewById(R.id.btnShow);
-            btnShow.setVisibility(View.INVISIBLE);
-            showButtonAdd();
+            showMoreCoins();
         }
     }
 

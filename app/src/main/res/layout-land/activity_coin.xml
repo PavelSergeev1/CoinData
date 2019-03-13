@@ -14,15 +14,17 @@
         android:id="@+id/TimeUpdateContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
-        android:gravity="center"
-        android:background="#ffe97d">
+        android:layout_weight="5"
+        android:background="#98ee99"
+        android:gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="UPDATE TIME"
-            android:textSize="12sp"
-            android:textStyle="bold"/>
+            android:gravity="center_vertical"
+            android:text="@string/UPDATE_TIME"
+            android:textSize="12sp"/>
+
         <TextView
             android:id="@+id/updateTime"
             android:layout_width="wrap_content"
@@ -30,14 +32,15 @@
             android:layout_marginStart="5dp"
             android:gravity="center"
             android:textSize="12sp"
-            android:textStyle="bold"/>
+            />
     </LinearLayout>
+
     <FrameLayout
         android:id="@+id/HeaderContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="14"
-        android:background="#ffb74d">
+        android:layout_weight="7"
+        android:background="#66bb6a">
     </FrameLayout>
     <ScrollView
         android:id="@+id/scrollView"
@@ -56,7 +59,7 @@
         android:id="@+id/ButtonContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="14"
-        android:background="#ffb74d">
+        android:layout_weight="10"
+        android:background="#66bb6a">
     </FrameLayout>
 </LinearLayout>

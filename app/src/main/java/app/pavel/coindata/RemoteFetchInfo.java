@@ -9,8 +9,6 @@ import java.net.URL;
 
 public class RemoteFetchInfo {
 
-    static String[] array;
-
     private static String OPEN_COIN_API;
 
     static void setString(String CoinId) {
