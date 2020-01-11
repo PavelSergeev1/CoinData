@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,18 +29,18 @@ import java.util.Objects;
 
 public class CoinActivity extends AppCompatActivity {
 
-    AnimationDrawable animation;
+    // AnimationDrawable animation;
 
-    int array_coin_len = 0;
-    int start = 50;
-    int billion = Integer.parseInt("1000000000");
-    int million = Integer.parseInt("1000000");
-    int thousand = Integer.parseInt("1000");
+    private int array_coin_len = 0;
+    private int start = 50;
+    private static final int billion = Integer.parseInt("1000000000");
+    private static final int million = Integer.parseInt("1000000");
+    private static final int thousand = Integer.parseInt("1000");
 
     // to avoid double insertion when button Update was pressed ()
-    int update = 1;
+    private int update = 1;
 
-    boolean endoflist = false;
+    private boolean end_of_list = false;
 
     DecimalFormat df2 = new DecimalFormat("#.##");
 
@@ -147,12 +147,12 @@ public class CoinActivity extends AppCompatActivity {
                     COIN_P24H, COIN_P7D, COIN_MCAP, COIN_V24H, COIN_CS, COIN_MS, COIN_ID,
                     COIN_USAGE
             };
-            String ARRAY_NAME = "COIN_" + String.valueOf(i);
+            String ARRAY_NAME = "COIN_" + i;
             outState.putStringArray(ARRAY_NAME, ARRAY_COIN);
         }
     }
 
-    public void setHeader(){
+    private void setHeader(){
         FrameLayout HeaderContainer = findViewById(R.id.HeaderContainer);
         LayoutInflater inflater = getLayoutInflater();
         View item = inflater.inflate(R.layout.item_header, HeaderContainer, false);
@@ -160,30 +160,32 @@ public class CoinActivity extends AppCompatActivity {
         HeaderContainer.addView(item);
     }
 
-    public void startAnimation(int i) {
+    private void startAnimation(int i) {
         if (i == 1) {
             LinearLayout MainContainer = findViewById(R.id.MainContainer);
             LayoutInflater inflater = getLayoutInflater();
-            View item = inflater.inflate(R.layout.loading_circle, MainContainer, false);
+            // View item = inflater.inflate(R.layout.loading_circle, MainContainer, false);
+            View item = inflater.inflate(R.layout.progress_bar, MainContainer, false);
             item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
             MainContainer.addView(item);
 
-            ImageView loading = MainContainer.findViewById(R.id.imageView);
-            animation = (AnimationDrawable)loading.getDrawable();
-            animation.start();
+            // ImageView loading = MainContainer.findViewById(R.id.imageView);
+            // animation = (AnimationDrawable)loading.getDrawable();
+            // animation.start();
         }
     }
 
-    public void stopAnimation(int i) {
+    private void stopAnimation(int i) {
         if (i == 0) {
-            animation.stop();
+            // animation.stop();
             LinearLayout MainContainer = findViewById(R.id.MainContainer);
-            View loading = MainContainer.findViewById(R.id.Loading_Layout);
+            // View loading = MainContainer.findViewById(R.id.Loading_Layout);
+            View loading = MainContainer.findViewById(R.id.progress_bar_linear_layout);
             MainContainer.removeView(loading);
         }
     }
 
-    public void setButton() {
+    private void setButton() {
         FrameLayout ButtonContainer = findViewById(R.id.ButtonContainer);
         LayoutInflater inflater = getLayoutInflater();
         View item = inflater.inflate(R.layout.item_button_update, ButtonContainer, false);
@@ -191,12 +193,12 @@ public class CoinActivity extends AppCompatActivity {
         ButtonContainer.addView(item);
     }
 
-    public void clearPrice() {
+    private void clearPrice() {
         LinearLayout MainContainer = findViewById(R.id.MainContainer);
         MainContainer.removeAllViews();
     }
 
-    public void onAddMoreCoins() {
+    private void onAddMoreCoins() {
         start += 50;
         updatePrice();
     }
@@ -354,6 +356,7 @@ public class CoinActivity extends AppCompatActivity {
             getCoinListImage(COIN[r][2], item);
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
@@ -392,11 +395,11 @@ public class CoinActivity extends AppCompatActivity {
             if (update == 1) stopAnimation(0);
             showMoreCoins();
             showCurrentTime();
-            endoflist = false;
+            end_of_list = false;
         }
     }
 
-    public void getCoinListImage(final String symbol, final View item){
+    private void getCoinListImage(final String symbol, final View item){
         new Thread() {
             public void run() {
                 final JSONObject json = RemoteFetchCoinImage.getJSONinfo(symbol);
@@ -418,7 +421,7 @@ public class CoinActivity extends AppCompatActivity {
         }.start();
     }
 
-    public void setCoinListImage(JSONObject js, View item, String symbol) {
+    private void setCoinListImage(JSONObject js, View item, String symbol) {
         try {
             String IMAGE_URL = "https://www.cryptocompare.com";
 
@@ -437,6 +440,7 @@ public class CoinActivity extends AppCompatActivity {
                             .diskCacheStrategy(DiskCacheStrategy.ALL))
                     .into(imageViewList);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -447,7 +451,7 @@ public class CoinActivity extends AppCompatActivity {
         updatePrice();
     }
 
-    public void showMoreCoins() {
+    private void showMoreCoins() {
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
@@ -455,11 +459,11 @@ public class CoinActivity extends AppCompatActivity {
                 ScrollView scrollView = findViewById(R.id.scrollView);
                 View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
                 if (view.getBottom() == scrollView.getScrollY() + scrollView.getHeight()
-                        && !endoflist && start < 2100) {
+                        && !end_of_list && start < 2100) {
                     if (update == 1) {
                         update ++;
                     } else if (update > 1) {
-                        endoflist = true;
+                        end_of_list = true;
                         Toast.makeText(CoinActivity.this,getString(R.string.loading),
                                 Toast.LENGTH_SHORT).show();
                         onAddMoreCoins();
@@ -470,7 +474,7 @@ public class CoinActivity extends AppCompatActivity {
         });
     }
 
-    public void showCurrentTime(){
+    private void showCurrentTime(){
         TextView updateTime = findViewById(R.id.updateTime);
         Date date = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("HH:mm");
@@ -478,7 +482,7 @@ public class CoinActivity extends AppCompatActivity {
         updateTime.setText(time);
     }
 
-    public void setCoinInList(String[] ARRAY_COIN, int i, boolean end) {
+    private void setCoinInList(String[] ARRAY_COIN, int i, boolean end) {
         LinearLayout MainContainer = findViewById(R.id.MainContainer);
         LayoutInflater inflater = getLayoutInflater();
 
@@ -524,6 +528,7 @@ public class CoinActivity extends AppCompatActivity {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         tvMarketNumber.setText(ARRAY_COIN[3]);
@@ -586,14 +591,20 @@ public class CoinActivity extends AppCompatActivity {
         });
 
         if (end) {
-            endoflist = false;
+            end_of_list = false;
             showMoreCoins();
         }
     }
 
-    public void onClickAbout(View view){
+     public void onClickAbout(View view){
         Intent intent = new Intent(CoinActivity.this, AboutActivity.class);
         startActivity(intent);
+
+         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    private void addAnimation() {
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
 }

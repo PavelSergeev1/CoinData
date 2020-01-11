@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -82,7 +82,9 @@ public class CoinInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info);
 
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        // overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         Intent intent = getIntent();
 
@@ -199,9 +201,15 @@ public class CoinInfoActivity extends AppCompatActivity {
                 String MS = String.format("%,d", Long.parseLong(ms.replace(".0", "")));
                 tvTotalSupplyData.setText(MS.replaceAll(",", " "));
 
-            } else tvTotalSupplyData.setText(R.string.data_not_found);
+            } else {
+                tvTotalSupplyData.setText(R.string.data_not_found);
+                tvTotalSupplyData.setTextColor(getResources().getColor(R.color.Gray1));
+            }
 
-        } else tvCirculatingSupplyData.setText(R.string.data_not_found);
+        } else {
+            tvCirculatingSupplyData.setText(R.string.data_not_found);
+            tvCirculatingSupplyData.setTextColor(getResources().getColor(R.color.Gray1));
+        }
 
 
 
@@ -259,6 +267,7 @@ public class CoinInfoActivity extends AppCompatActivity {
 
             if (obj.equals("[]") && obj1.equals("[]")) {
                 tvCategoryData.setText(R.string.data_not_found);
+                tvCategoryData.setTextColor(getResources().getColor(R.color.Gray1));
                 text = "<html><body><p align=\"justify\">";
                 text += getResources().getString(R.string.data_not_found);
                 text+= "</p></body></html>";
@@ -532,6 +541,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                     data_num += 1;
                 }
             } catch (JSONException er) {
+                er.printStackTrace();
             }
         }
 
@@ -635,7 +645,6 @@ public class CoinInfoActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }
-

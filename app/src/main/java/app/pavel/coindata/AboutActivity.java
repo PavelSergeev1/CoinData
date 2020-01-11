@@ -3,7 +3,7 @@ package app.pavel.coindata;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,7 +13,7 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void onCopyAddress(View view) {
@@ -67,6 +67,6 @@ public class AboutActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }

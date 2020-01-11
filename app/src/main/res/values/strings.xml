@@ -36,8 +36,9 @@
 
     <string name="About">ABOUT</string>
     <string name="AboutApp">CoinData gives you whole list of cryptocurrencies (2000+, which sorted by its market capitalization), prices on a few markets and description about choosed coin. All data updates online and provides by very good services (see below).</string>
-    <string name="Donations">Donations</string>
-    <string name="DonationsDescription">Do you like this app? Want to support the developer? Best way to do this is sending me coins, no matter how much. By using cryptocurrencies you bring our decentralized future closer :)  </string>
+    <string name="Donations">Support the developer</string>
+    <string name="DonationsDescription">By using cryptocurrencies
+        you bring our decentralized future closer :)  </string>
     <string name="BTC">BTC</string>
     <string name="ETH">ETH</string>
     <string name="USDT">USDT</string>
