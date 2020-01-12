@@ -1,7 +1,6 @@
 package app.pavel.coindata;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -91,11 +90,11 @@ public class CoinActivity extends AppCompatActivity {
             start = array_coin_len;
             boolean end = false;
             for (int i = 1; i <= array_coin_len; i++) {
-                String ARRAY_NAME = "COIN_" + String.valueOf(i);
+                String ARRAY_NAME = "COIN_" + i;
                 String[] ARRAY_COIN;
                 ARRAY_COIN = savedInstanceState.getStringArray(ARRAY_NAME);
                 if (i == array_coin_len) end = true;
-                setCoinInList(ARRAY_COIN, i, end);
+                setCoinInList(ARRAY_COIN != null ? ARRAY_COIN : new String[0], i, end);
             }
             String t = savedInstanceState.getString("time");
             time = t;
@@ -532,6 +531,7 @@ public class CoinActivity extends AppCompatActivity {
         }
 
         tvMarketNumber.setText(ARRAY_COIN[3]);
+        tvMarketNumber.setTextColor(getResources().getColor(R.color.Gray0));
         COIN[i][3] = ARRAY_COIN[3];
 
         tvCoin.setText(ARRAY_COIN[2]);
@@ -603,9 +603,4 @@ public class CoinActivity extends AppCompatActivity {
          overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    private void addAnimation() {
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-    }
-
 }
-

@@ -293,6 +293,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                 tvDescriptionData.loadData(text, "text/html", "utf-8");
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -390,11 +391,10 @@ public class CoinInfoActivity extends AppCompatActivity {
                     }
                     tlMarkets.addView(tableRow);
                 }
-            } else {
             }
 
-
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -438,6 +438,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                             .diskCacheStrategy(DiskCacheStrategy.ALL))
                     .into(imageViewCoin);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -589,7 +590,7 @@ public class CoinInfoActivity extends AppCompatActivity {
         }
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dp);
-        series.setThickness(8);
+        series.setThickness(5);
         series.setColor(Color.parseColor("#75a478"));
         series.setDrawBackground(true);
         graph.addSeries(series);

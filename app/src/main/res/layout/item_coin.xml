@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_coin"
     android:layout_width="match_parent"
     android:layout_height="65dp"
-    android:layout_margin="0dp"
-    android:background="@drawable/border">
+    android:layout_margin="0dp">
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -16,39 +15,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="3dp"
-            android:textColor="@color/Black"
-            android:textSize="10sp"/>
+            android:textSize="10sp"
+            android:theme="@style/RobotoTextViewStyle"
+            tools:text="1" />
     </RadioGroup>
 
     <RadioGroup
         android:layout_width="105dp"
         android:layout_height="match_parent"
         android:layout_gravity="start|center"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:orientation="horizontal">
 
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageViewList"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:contentDescription="@string/coin_logo" />
 
         </RadioGroup>
 
         <RadioGroup
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
             android:orientation="vertical">
 
             <TextView
@@ -56,20 +57,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="BTC"
                 android:textAlignment="center"
-                android:textColor="@color/Black"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:theme="@style/RobotoTextViewStyle"
+                tools:text="BTC" />
 
             <TextView
                 android:id="@+id/tvCoinName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="bitcoin"
                 android:textAlignment="center"
-                android:textSize="11sp"/>
+                android:textSize="11sp"
+                android:theme="@style/RobotoTextViewStyle"
+                tools:text="bitcoin" />
 
         </RadioGroup>
 
@@ -85,10 +87,10 @@
             android:id="@+id/tvCoinPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tvCoinPrice"
-            android:textColor="@color/Black"
+            android:theme="@style/RobotoTextViewStyle"
             android:textSize="17sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            tools:text="$ 30000.00" />
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -104,8 +106,8 @@
                     android:id="@+id/tvMarketCap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:theme="@style/RobotoTextViewStyle"
                     android:text="@string/MarketCap"
-                    android:textColor="@color/Black"
                     android:textSize="12sp"/>
 
                 <TextView
@@ -113,33 +115,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:theme="@style/RobotoTextViewStyle"
                     android:text="@string/Volume24"
-                    android:textColor="@color/Black"
                     android:textSize="12sp"/>
             </RadioGroup>
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="end">
 
                 <TextView
                     android:id="@+id/tvMarketCapData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cap"
-                    android:textColor="@color/Black"
-                    android:textSize="12sp"/>
+                    android:theme="@style/RobotoTextViewStyle"
+                    android:textSize="12sp"
+                    tools:text="147.77 B $" />
 
                 <TextView
                     android:id="@+id/tvVolume24Data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Vol"
-                    android:textColor="@color/Black"
-                    android:textSize="12sp"/>
+                    android:theme="@style/RobotoTextViewStyle"
+                    android:textSize="12sp"
+                    tools:text="19.82 B $" />
             </RadioGroup>
         </RadioGroup>
     </RadioGroup>
@@ -148,7 +150,7 @@
         android:layout_width="90dp"
         android:layout_height="match_parent"
         android:layout_gravity="end|center_horizontal"
-        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -156,7 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -164,27 +166,27 @@
                 android:id="@+id/tvPercentOneHourData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+ 1.00%"
+                android:theme="@style/RobotoTextViewStyle"
                 android:textSize="12sp"
-                />
+                tools:text="- 5.76%" />
 
             <TextView
                 android:id="@+id/tvPercentTwentyFourHourData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="+ 1.00%"
+                android:theme="@style/RobotoTextViewStyle"
                 android:textSize="12sp"
-                />
+                tools:text="+ 18.37%" />
 
             <TextView
                 android:id="@+id/tvPercentSevenDaysData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="+ 1.00%"
+                android:theme="@style/RobotoTextViewStyle"
                 android:textSize="12sp"
-                />
+                tools:text="+ 152.16%" />
         </RadioGroup>
 
         <RadioGroup
@@ -198,8 +200,8 @@
                 android:id="@+id/tvPercentOneHour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:theme="@style/RobotoTextViewStyle"
                 android:text="@string/PercentOneHour"
-                android:textColor="@color/Black"
                 android:textSize="12sp"/>
 
             <TextView
@@ -207,8 +209,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:theme="@style/RobotoTextViewStyle"
                 android:text="@string/PercentTwentyFourHour"
-                android:textColor="@color/Black"
                 android:textSize="12sp"/>
 
             <TextView
@@ -216,8 +218,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:theme="@style/RobotoTextViewStyle"
                 android:text="@string/PercentSevenDays"
-                android:textColor="@color/Black"
                 android:textSize="12sp"/>
         </RadioGroup>
     </RadioGroup>

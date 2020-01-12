@@ -18,16 +18,16 @@
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="whateverString"
         tools:targetApi="p">
-        <activity android:name=".CoinActivity">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".CoinInfoActivity">
-        </activity>
-        <activity android:name=".AboutActivity">
-        </activity>
+        <activity android:name=".CoinActivity" />
+        <activity android:name=".CoinInfoActivity" />
+        <activity android:name=".AboutActivity" />
     </application>
 
 </manifest>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/colorWhite"
-              android:orientation="vertical"
-              android:scrollbars="horizontal">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:scrollbars="horizontal">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,36 +14,34 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp">
+            android:layout_marginStart="@dimen/about_margin_vertical"
+            android:layout_marginTop="@dimen/about_margin_vertical"
+            android:layout_marginEnd="@dimen/about_margin_vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="About"
-                android:textColor="@color/Black"
-                android:textSize="28sp"
-                />
+                android:text="@string/about"
+                android:textSize="@dimen/about_text_size"
+                android:theme="@style/RobotoTextViewStyle" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/AboutApp"
-                android:textColor="@color/Black"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/about_text_text_size"
+                android:theme="@style/RobotoTextViewStyle" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="Sourses"
-                android:textColor="@color/Black"
-                android:textSize="20sp"
-                />
+                android:text="@string/sources"
+                android:textSize="@dimen/address_currency_text_size"
+                android:theme="@style/RobotoTextViewStyle" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -62,35 +60,40 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Coinlore"
-                        android:textColor="@color/Black"/>
+                        android:textSize="@dimen/about_text_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:text="@string/Coingecko"
-                        android:textColor="@color/Black"/>
+                        android:textSize="@dimen/about_text_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:text="@string/Cryptonator"
-                        android:textColor="@color/Black"/>
+                        android:textSize="@dimen/about_text_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:text="@string/Cryptocompare"
-                        android:textColor="@color/Black"/>
+                        android:textSize="@dimen/about_text_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:text="@string/HitBTC"
-                        android:textColor="@color/Black"/>
+                        android:textSize="@dimen/about_text_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
 
                 </RadioGroup>
 
@@ -104,35 +107,45 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:autoLink="web"
-                        android:text="@string/CoinloreLink"/>
+                        android:fontFamily="@font/custom_font"
+                        android:text="@string/CoinloreLink"
+                        android:textSize="@dimen/about_text_text_size" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:autoLink="web"
-                        android:text="@string/CoingeckoLink"/>
+                        android:fontFamily="@font/custom_font"
+                        android:text="@string/CoingeckoLink"
+                        android:textSize="@dimen/about_text_text_size" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:autoLink="web"
-                        android:text="@string/CryptonatorLink"/>
+                        android:fontFamily="@font/custom_font"
+                        android:text="@string/CryptonatorLink"
+                        android:textSize="@dimen/about_text_text_size" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:autoLink="web"
-                        android:text="@string/CryptocompareLink"/>
+                        android:fontFamily="@font/custom_font"
+                        android:text="@string/CryptocompareLink"
+                        android:textSize="@dimen/about_text_text_size" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:autoLink="web"
-                        android:text="@string/HitBTCLink"/>
+                        android:fontFamily="@font/custom_font"
+                        android:text="@string/HitBTCLink"
+                        android:textSize="@dimen/about_text_text_size" />
                 </RadioGroup>
             </RadioGroup>
 
@@ -142,23 +155,22 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="@string/Donations"
-                android:textColor="@color/Black"
-                android:textSize="20sp"
-                />
+                android:textSize="@dimen/data_sources_text_size"
+                android:theme="@style/RobotoTextViewStyle" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/DonationsDescription"
-                android:textColor="@color/Black"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/about_text_text_size"
+                android:theme="@style/RobotoTextViewStyle" />
 
-            <RadioGroup
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:background="#ffb056"
+                android:layout_height="@dimen/address_height"
+                android:layout_marginTop="@dimen/about_card_margin_vertical"
+                android:background="@drawable/address_background_btc"
                 android:orientation="vertical">
 
                 <RadioGroup
@@ -171,11 +183,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="30"
+                        android:layout_weight="1"
                         android:text="@string/BTC"
                         android:textColor="@android:color/background_light"
-                        android:textSize="20sp"
-                        />
+                        android:textSize="@dimen/address_currency_text_size" />
 
                     <Button
                         android:id="@+id/BTC_COPY"
@@ -183,13 +194,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="70"
-                        android:background="@color/Gray3"
+                        android:layout_weight="4"
+                        android:background="@drawable/button_address_rounded"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        />
+                        android:textSize="@dimen/address_button_text_size" />
                 </RadioGroup>
 
                 <RadioGroup
@@ -203,17 +213,16 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/BTC_Address"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="@dimen/address_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
                 </RadioGroup>
-            </RadioGroup>
+            </LinearLayout>
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:background="#7373e5"
+                android:layout_height="@dimen/address_height"
+                android:layout_marginTop="@dimen/about_card_margin_vertical"
+                android:background="@drawable/address_background_eth"
                 android:orientation="vertical">
 
                 <RadioGroup
@@ -226,11 +235,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="30"
+                        android:layout_weight="1"
                         android:text="@string/ETH"
                         android:textColor="@android:color/background_light"
-                        android:textSize="20sp"
-                        />
+                        android:textSize="@dimen/address_currency_text_size" />
 
                     <Button
                         android:id="@+id/ETH_COPY"
@@ -238,13 +246,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="70"
-                        android:background="@color/Gray3"
+                        android:layout_weight="4"
+                        android:background="@drawable/button_address_rounded"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        />
+                        android:textSize="@dimen/address_button_text_size" />
                 </RadioGroup>
 
                 <RadioGroup
@@ -258,17 +265,16 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/ETH_Address"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="@dimen/address_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
                 </RadioGroup>
             </RadioGroup>
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:background="#be3db796"
+                android:layout_height="@dimen/address_height"
+                android:layout_marginTop="@dimen/about_card_margin_vertical"
+                android:background="@drawable/address_background_usdt"
                 android:orientation="vertical">
 
                 <RadioGroup
@@ -281,11 +287,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="30"
+                        android:layout_weight="1"
                         android:text="@string/USDT"
                         android:textColor="@android:color/background_light"
-                        android:textSize="20sp"
-                        />
+                        android:textSize="@dimen/address_currency_text_size" />
 
                     <Button
                         android:id="@+id/USDT_COPY"
@@ -293,13 +298,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="70"
-                        android:background="@color/Gray3"
+                        android:layout_weight="4"
+                        android:background="@drawable/button_address_rounded"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        />
+                        android:textSize="@dimen/address_button_text_size" />
                 </RadioGroup>
 
                 <RadioGroup
@@ -313,17 +317,16 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/USDT_Address"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="@dimen/address_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
                 </RadioGroup>
             </RadioGroup>
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/darker_gray"
+                android:layout_height="@dimen/address_height"
+                android:layout_marginTop="@dimen/about_card_margin_vertical"
+                android:background="@drawable/address_background_ltc"
                 android:orientation="vertical">
 
                 <RadioGroup
@@ -336,11 +339,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="30"
+                        android:layout_weight="1"
                         android:text="@string/LTC"
                         android:textColor="@android:color/background_light"
-                        android:textSize="20sp"
-                        />
+                        android:textSize="@dimen/address_currency_text_size" />
 
                     <Button
                         android:id="@+id/LTC_COPY"
@@ -348,13 +350,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="70"
-                        android:background="@color/Gray3"
+                        android:layout_weight="4"
+                        android:background="@drawable/button_address_rounded"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="@dimen/address_button_text_size" />
                 </RadioGroup>
 
                 <RadioGroup
@@ -368,17 +369,16 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/LTC_Address"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="@dimen/address_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
                 </RadioGroup>
             </RadioGroup>
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/holo_blue_light"
+                android:layout_height="@dimen/address_height"
+                android:layout_marginTop="@dimen/about_card_margin_vertical"
+                android:background="@drawable/address_background_dash"
                 android:orientation="vertical">
 
                 <RadioGroup
@@ -391,11 +391,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="30"
+                        android:layout_weight="1"
                         android:text="@string/DASH"
                         android:textColor="@android:color/background_light"
-                        android:textSize="20sp"
-                        />
+                        android:textSize="@dimen/address_currency_text_size" />
 
                     <Button
                         android:id="@+id/DASH_COPY"
@@ -403,13 +402,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="70"
-                        android:background="@color/Gray3"
+                        android:layout_weight="4"
+                        android:background="@drawable/button_address_rounded"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        />
+                        android:textSize="@dimen/address_button_text_size" />
                 </RadioGroup>
 
                 <RadioGroup
@@ -423,17 +421,16 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/DASH_Address"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="@dimen/address_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
                 </RadioGroup>
             </RadioGroup>
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:background="#94d01d"
+                android:layout_height="@dimen/address_height"
+                android:layout_marginTop="@dimen/about_card_margin_vertical"
+                android:background="@drawable/address_background_neo"
                 android:orientation="vertical">
 
                 <RadioGroup
@@ -446,11 +443,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="30"
+                        android:layout_weight="1"
                         android:text="@string/NEO"
                         android:textColor="@android:color/background_light"
-                        android:textSize="20sp"
-                        />
+                        android:textSize="@dimen/address_currency_text_size" />
 
                     <Button
                         android:id="@+id/NEO_COPY"
@@ -458,13 +454,12 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="70"
-                        android:background="@color/Gray3"
+                        android:layout_weight="4"
+                        android:background="@drawable/button_address_rounded"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        />
+                        android:textSize="@dimen/address_button_text_size" />
                 </RadioGroup>
 
                 <RadioGroup
@@ -479,17 +474,17 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/NEO_Address"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="@dimen/address_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
                 </RadioGroup>
             </RadioGroup>
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="@dimen/address_height"
                 android:layout_marginTop="8dp"
-                android:background="#e5bb01"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/address_background_zec"
                 android:orientation="vertical">
 
                 <RadioGroup
@@ -502,11 +497,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="30"
+                        android:layout_weight="1"
                         android:text="@string/ZCASH"
                         android:textColor="@android:color/background_light"
-                        android:textSize="20sp"
-                        />
+                        android:textSize="@dimen/address_currency_text_size" />
 
                     <Button
                         android:id="@+id/ZCASH_COPY"
@@ -514,19 +508,18 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="70"
-                        android:background="@color/Gray3"
+                        android:layout_weight="4"
+                        android:background="@drawable/button_address_rounded"
                         android:onClick="onCopyAddress"
                         android:text="@string/Copy"
                         android:textColor="@color/colorWhite"
-                        android:textSize="18sp"
-                        />
+                        android:textSize="@dimen/address_button_text_size" />
                 </RadioGroup>
 
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/about_card_margin_vertical"
                     android:layout_weight="40"
                     android:orientation="horizontal">
 
@@ -536,16 +529,11 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="@string/ZCASH_Address"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="@dimen/address_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
                 </RadioGroup>
             </RadioGroup>
 
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-            </RadioGroup>
         </RadioGroup>
     </ScrollView>
 </LinearLayout>

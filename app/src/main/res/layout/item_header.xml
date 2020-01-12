@@ -11,12 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
         android:gravity="center"
-        android:text="@string/NAME"
+        android:theme="@style/RobotoTextViewStyle"
+        android:text="@string/Asset"
+        android:textStyle="bold"
         android:textColor="@color/colorWhite"
-        android:textSize="14sp"
-        />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvPrice"
@@ -24,20 +25,22 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:gravity="center_vertical"
+        android:theme="@style/RobotoTextViewStyle"
         android:text="@string/PRICE"
+        android:textStyle="bold"
         android:textColor="@color/colorWhite"
-        android:textSize="14sp"
-        />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvChangeOfPrice"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
         android:gravity="center_vertical"
+        android:theme="@style/RobotoTextViewStyle"
         android:text="@string/ChangePrice"
+        android:textStyle="bold"
         android:textColor="@color/colorWhite"
-        android:textSize="14sp"
-        />
+        android:textSize="14sp" />
 </FrameLayout>

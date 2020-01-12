@@ -36,7 +36,7 @@
                     android:id="@+id/btnM15"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="#a5d6a7"
+                    android:background="@drawable/button_graph"
                     android:onClick="getGraph"
                     android:text="@string/M15"
                     android:textSize="14sp"/>
@@ -52,7 +52,7 @@
                     android:id="@+id/btnM30"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="#a5d6a7"
+                    android:background="@drawable/button_graph"
                     android:onClick="getGraph"
                     android:text="@string/M30"
                     android:textSize="14sp"/>
@@ -68,7 +68,7 @@
                     android:id="@+id/btnH1"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="#a5d6a7"
+                    android:background="@drawable/button_graph"
                     android:onClick="getGraph"
                     android:text="@string/H1"
                     android:textSize="14sp"/>
@@ -84,7 +84,7 @@
                     android:id="@+id/btnH4"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="#a5d6a7"
+                    android:background="@drawable/button_graph"
                     android:onClick="getGraph"
                     android:text="@string/H4"
                     android:textSize="14sp"/>
@@ -100,7 +100,7 @@
                     android:id="@+id/btnD1"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="#a5d6a7"
+                    android:background="@drawable/button_graph"
                     android:onClick="getGraph"
                     android:text="@string/D1"
                     android:textSize="14sp"/>

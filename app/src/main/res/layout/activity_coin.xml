@@ -34,8 +34,7 @@
             android:layout_marginStart="5dp"
             android:gravity="center"
             android:textColorLink="#000000"
-            android:textSize="12sp"
-            />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <FrameLayout
@@ -50,14 +49,14 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="84"
-        >
-
+        android:layout_weight="84">
         <LinearLayout
             android:id="@+id/MainContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:divider="@drawable/divider"
+            android:showDividers="middle">
         </LinearLayout>
     </ScrollView>
 

@@ -35,9 +35,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="65"
                         android:gravity="center"
-                        android:textColor="@color/Black"
-                        android:textSize="24sp"
-                        />
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_name"
+                        tools:text="Bitcoin"/>
 
                     <TextView
                         android:id="@+id/tvCoinSymbolData"
@@ -46,9 +46,9 @@
                         android:layout_gravity="center"
                         android:layout_weight="20"
                         android:gravity="center"
-                        android:textColor="@color/Black"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:textSize="14sp"
-                        />
+                        tools:text="BTC" />
 
                     <ImageView
                         android:id="@+id/imageViewCoin"
@@ -68,16 +68,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:divider="@drawable/divider_coin_info">
 
                     <TextView
                         android:id="@+id/tvRank"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:text="@string/Rank"
-                        android:textColor="@color/Black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tvRankData"
@@ -85,9 +86,16 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerHorizontal="false"
-                        android:textColor="@color/Black"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:textSize="14sp"
-                        />
+                        tools:text="1" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvRankData" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -100,8 +108,8 @@
                         android:id="@+id/tvCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:text="@string/Category"
-                        android:textColor="@color/Black"
                         android:textSize="14sp"/>
 
                     <TextView
@@ -109,8 +117,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:textColor="@color/Black"
-                        android:textSize="14sp"/>
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="14sp"
+                        tools:text="Cryptocurrency" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvCategoryData" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -124,7 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Price"
-                        android:textColor="@color/Black"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:textSize="14sp"/>
 
                     <TextView
@@ -132,9 +148,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:textColor="@color/Black"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:textSize="14sp"
-                        />
+                        tools:text="$ 8134.00" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvCoinPRICEData" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -147,8 +170,8 @@
                         android:id="@+id/tvCoinPriceBTC"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:text="@string/PriceBTC"
-                        android:textColor="@color/Black"
                         android:textSize="14sp"/>
 
                     <TextView
@@ -157,19 +180,26 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="30dp"
-                        android:textColor="@color/Black"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:textSize="14sp"
-                        />
+                        tools:text="1.00000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignEnd="@+id/tvCoinPriceBTCData"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginLeft="5dp"
-                        android:text="sat."
-                        android:textColor="@color/Black"
+                        android:layout_marginStart="5dp"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/BTC"
                         android:textSize="14sp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvCoinPriceBTCData" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -182,8 +212,8 @@
                         android:id="@+id/tvPriceChange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:text="@string/PriceChange"
-                        android:textColor="@color/Black"
                         android:textSize="14sp"/>
 
                     <RadioGroup
@@ -196,62 +226,71 @@
                             android:id="@+id/tvPercentOneHour"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:theme="@style/RobotoTextViewStyle"
                             android:text="@string/PercentOneHour"
-                            android:textColor="@color/Black"
                             android:textSize="14sp"/>
 
                         <TextView
                             android:id="@+id/tvPercentOneHourData"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:theme="@style/RobotoTextViewStyle"
                             android:textSize="14sp"
-                            />
+                            tools:text="+ 1.00" />
 
                         <TextView
                             android:id="@+id/tvPercentTwentyFourHour"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:theme="@style/RobotoTextViewStyle"
                             android:text="@string/PercentTwentyFourHour"
-                            android:textColor="@color/Black"
                             android:textSize="14sp"/>
 
                         <TextView
                             android:id="@+id/tvPercentTwentyFourHourData"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:layout_marginStart="5dp"
                             android:textSize="14sp"
-                            />
+                            tools:text="+ 2.00" />
 
                         <TextView
                             android:id="@+id/tvPercentSevenDays"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:theme="@style/RobotoTextViewStyle"
                             android:text="@string/PercentSevenDays"
-                            android:textColor="@color/Black"
                             android:textSize="14sp"/>
 
                         <TextView
                             android:id="@+id/tvPercentSevenDaysData"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:theme="@style/RobotoTextViewStyle"
                             android:textSize="14sp"
-                            />
+                            tools:text="+ 3.00" />
                     </RadioGroup>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvPriceChange" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/block1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
-
 
                     <RadioGroup
                         android:layout_width="wrap_content"
@@ -262,8 +301,8 @@
                             android:id="@+id/tvMarketCap"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:theme="@style/RobotoTextViewStyle"
                             android:text="@string/MarketCapitalization"
-                            android:textColor="@color/Black"
                             android:textSize="14sp"/>
 
                         <TextView
@@ -271,8 +310,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
+                            android:theme="@style/RobotoTextViewStyle"
                             android:text="@string/Volume24Hours"
-                            android:textColor="@color/Black"
                             android:textSize="14sp"/>
                     </RadioGroup>
 
@@ -291,22 +330,23 @@
                                 android:id="@+id/tv1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                />
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/tvUsage"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:textSize="12sp"
-                                />
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="12sp" />
+
                         </RadioGroup>
 
                         <RadioGroup
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:gravity="end"
                             android:orientation="vertical">
 
@@ -314,28 +354,35 @@
                                 android:id="@+id/tvMarketCapData"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/Black"
+                                android:theme="@style/RobotoTextViewStyle"
                                 android:textSize="14sp"
-                                />
+                                tools:text="147.77 B $" />
 
                             <TextView
                                 android:id="@+id/tvVolume24Data"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:textColor="@color/Black"
+                                android:theme="@style/RobotoTextViewStyle"
                                 android:textSize="14sp"
-                                />
+                                tools:text="19.82 B $" />
+
                         </RadioGroup>
                     </RadioGroup>
                 </RelativeLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_alignBottom="@id/block1" />
+
                 <RelativeLayout
+                    android:id="@+id/block2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
-
 
                     <RadioGroup
                         android:layout_width="wrap_content"
@@ -346,8 +393,8 @@
                             android:id="@+id/tvCirculatingSupply"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:theme="@style/RobotoTextViewStyle"
                             android:text="@string/CirculatingSupply"
-                            android:textColor="@color/Black"
                             android:textSize="14sp"/>
 
                         <TextView
@@ -355,8 +402,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
+                            android:theme="@style/RobotoTextViewStyle"
                             android:text="@string/TotalSupply"
-                            android:textColor="@color/Black"
                             android:textSize="14sp"/>
                     </RadioGroup>
 
@@ -377,8 +424,9 @@
                                 android:id="@+id/tvEmission"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                />
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="12sp" />
+
                         </RadioGroup>
 
                         <RadioGroup
@@ -391,21 +439,27 @@
                                 android:id="@+id/tvCirculatingSupplyData"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/Black"
+                                android:theme="@style/RobotoTextViewStyle"
                                 android:textSize="14sp"
-                                />
+                                tools:text="18 107 284" />
 
                             <TextView
                                 android:id="@+id/tvTotalSupplyData"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:textColor="@color/Black"
+                                android:theme="@style/RobotoTextViewStyle"
                                 android:textSize="14sp"
-                                />
+                                tools:text="21 000 000" />
                         </RadioGroup>
                     </RadioGroup>
                 </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_alignBottom="@id/block2" />
 
                 <TextView
                     android:id="@+id/tvMarkets"
@@ -413,7 +467,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
-                    android:textColor="@color/Black"
+                    android:theme="@style/RobotoTextViewStyle"
                     android:textSize="18sp"
                     android:visibility="invisible"/>
 
@@ -428,7 +482,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
-                        android:textColor="@color/Black"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:textSize="15sp"
                         android:visibility="invisible"/>
 
@@ -438,7 +492,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:textColor="@color/Black"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:textSize="15sp"
                         android:visibility="invisible"/>
 
@@ -449,7 +503,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="20dp"
-                        android:textColor="@color/Black"
+                        android:theme="@style/RobotoTextViewStyle"
                         android:textSize="15sp"
                         android:visibility="invisible"/>
                 </RelativeLayout>
@@ -469,8 +523,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center_horizontal"
+                    android:theme="@style/RobotoTextViewStyle"
                     android:text="@string/Description"
-                    android:textColor="@color/Black"
                     android:textSize="18sp"
                     android:visibility="invisible"/>
 
@@ -480,8 +534,8 @@
                     android:layout_height="wrap_content"
                     android:autoLink="web"
                     android:linksClickable="true"
-                    android:textSize="14sp"
-                    />
+                    android:theme="@style/RobotoTextViewStyle"
+                    android:textSize="14sp" />
             </RadioGroup>
         </LinearLayout>
     </ScrollView>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CoinData</string>
 
+    <string name="Asset">ASSET</string>
     <string name="Name">Name</string>
     <string name="NAME">NAME</string>
     <string name="Symbol">Symbol</string>
@@ -12,9 +13,9 @@
     <string name="ChangePrice">PRICE CHANGE</string>
     <string name="Rank">Rank:</string>
 
-    <string name="MarketCap">Market cap.</string>
+    <string name="MarketCap">Cap.</string>
     <string name="MarketCapitalization">Market capitalization:</string>
-    <string name="Volume24">Volume 24 h</string>
+    <string name="Volume24">Vol. 24 h</string>
     <string name="Volume24Hours">Volume in 24 hours:</string>
 
     <string name="CirculatingSupply">Circulating supply:</string>
@@ -35,10 +36,13 @@
     <string name="D1">D1</string>
 
     <string name="About">ABOUT</string>
-    <string name="AboutApp">CoinData gives you whole list of cryptocurrencies (2000+, which sorted by its market capitalization), prices on a few markets and description about choosed coin. All data updates online and provides by very good services (see below).</string>
+    <string name="AboutApp">CoinData gives you whole list of cryptocurrencies
+        (2000+, which sorted by its market capitalization), prices on a few markets
+        and description about choosed coin. All data updates online and provides by very
+        good services (see below).</string>
     <string name="Donations">Support the developer</string>
     <string name="DonationsDescription">By using cryptocurrencies
-        you bring our decentralized future closer :)  </string>
+        you bring our decentralized future closer :)</string>
     <string name="BTC">BTC</string>
     <string name="ETH">ETH</string>
     <string name="USDT">USDT</string>
@@ -66,8 +70,9 @@
     <string name="space">&#032;</string>
 
     <string name="data_not_found">No data found</string>
-    <string name="internet_error">Oh no! Something went wrong. Please, check your internet connection</string>
-    <string name="loading">loading...</string>
+    <string name="internet_error">Something went wrong. Please, check your internet
+        connection</string>
+    <string name="loading">loading…</string>
 
     <string name="Coinlore">Coinlore</string>
     <string name="CoinloreLink">www.coinlore.com</string>
@@ -83,4 +88,9 @@
 
     <string name="HitBTC">HitBTC</string>
     <string name="HitBTCLink">www.hitbtc.com</string>
+    <string name="sources">Data sources</string>
+    <string name="about">About</string>
+    <string name="about_button">ABOUT</string>
+    <string name="coin_logo">This is a logo of selected coin</string>
+    <string name="sat">BTC</string>
 </resources>

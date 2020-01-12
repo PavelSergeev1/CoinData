@@ -11,9 +11,9 @@
         android:layout_height="25dp"
         android:layout_gravity="start"
         android:layout_marginStart="15dp"
-        android:background="#338a3e"
+        android:background="@drawable/button_rounded"
         android:onClick="onClickAbout"
-        android:text="about"
+        android:text="@string/about_button"
         android:textColor="@color/colorWhite"
         android:textSize="15sp"/>
 
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_gravity="center"
-        android:background="#338a3e"
+        android:background="@drawable/button_rounded"
         android:onClick="onClickUpdate"
         android:text="@string/Update"
         android:textColor="@color/colorWhite"
