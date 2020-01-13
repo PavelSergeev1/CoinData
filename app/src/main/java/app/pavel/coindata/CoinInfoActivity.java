@@ -2,13 +2,20 @@ package app.pavel.coindata;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -27,49 +34,52 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 public class CoinInfoActivity extends AppCompatActivity {
 
+    Typeface roboto_light;
+
     DecimalFormat df3 = new DecimalFormat("#.##");
 
-    String categories = "categories";
-    String description = "description";
-    String ticker = "ticker";
-    String en = "en";
-    String markets = "markets";
-    String market = "market";
-    String price = "price";
-    String volume = "volume";
+    private static final String categories = "categories";
+    private static final String description = "description";
+    private static final String ticker = "ticker";
+    private static final String en = "en";
+    private static final String markets = "markets";
+    private static final String market = "market";
+    private static final String price = "price";
+    private static final String volume = "volume";
 
-    String CoinId = "";
-    String CoinName = "";
-    String CoinSymbol = "";
-    String CoinRank = "";
-    String CoinPrice = "";
-    String CoinPriceBTC = "";
-    String CoinP1H = "";
-    String CoinP24H = "";
-    String CoinP7D = "";
-    String CoinMCAP = "";
-    String CoinV24H = "";
-    String CoinCS = "";
-    String CoinMS = "";
-    String CoinUsage = "";
+    private String CoinId = "";
+    private String CoinName = "";
+    private String CoinSymbol = "";
+    private String CoinRank = "";
+    private String CoinPrice = "";
+    private String CoinPriceBTC = "";
+    private String CoinP1H = "";
+    private String CoinP24H = "";
+    private String CoinP7D = "";
+    private String CoinMCAP = "";
+    private String CoinV24H = "";
+    private String CoinCS = "";
+    private String CoinMS = "";
+    private String CoinUsage = "";
 
-    String RAW = "RAW";
-    String USD = "USD";
+    private static final String RAW = "RAW";
+    private static final String USD = "USD";
     String IMAGEURL = "IMAGEURL";
 
-    String M15 = "M15";
-    String M30 = "M30";
-    String H1 = "H1";
-    String H4 = "H4";
-    String D1 = "D1";
+    private static final String M15 = "M15";
+    private static final String M30 = "M30";
+    private static final String H1 = "H1";
+    private static final String H4 = "H4";
+    private static final String D1 = "D1";
 
-    String graph_title = "price $ on hitbtc.com";
+    private static final String graph_title = "price $ on hitbtc.com";
 
     Handler handler;
 
@@ -81,8 +91,6 @@ public class CoinInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info);
-
-        // overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -103,29 +111,23 @@ public class CoinInfoActivity extends AppCompatActivity {
         CoinMS = intent.getStringExtra("COIN_MS");
         CoinUsage = intent.getStringExtra("COIN_USAGE");
 
-        setInformationAboutCoin();
-        getCoinInfo();
-        getCoinInfoTicker();
         getCoinImage();
 
         getPriceInfo(CoinSymbol, M15, false, false);
+
+        setInformationAboutCoin();
+        getCoinInfo();
+        getCoinInfoTicker();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            roboto_light = getResources().getFont(R.font.roboto_light);
+        } else {
+            roboto_light = ResourcesCompat.getFont(getApplicationContext(), R.font.roboto_light);
+        }
     }
 
-    public void setInformationAboutCoin() {
+    private void setInformationAboutCoin() {
         LinearLayout MainContainer = findViewById(R.id.CoinContainer);
-
-        TextView tvRank = MainContainer.findViewById(R.id.tvRank);
-        TextView tvCategory = MainContainer.findViewById(R.id.tvCategory);
-        TextView tvCoinPRICE = MainContainer.findViewById(R.id.tvCoinPRICE);
-        TextView tvCoinPriceBTC = MainContainer.findViewById(R.id.tvCoinPriceBTC);
-        TextView tvPriceChange = MainContainer.findViewById(R.id.tvPriceChange);
-        TextView tvPercentOneHour = MainContainer.findViewById(R.id.tvPercentOneHour);
-        TextView tvPercentTwentyFourHour = MainContainer.findViewById(R.id.tvPercentTwentyFourHour);
-        TextView tvPercentSevenDays = MainContainer.findViewById(R.id.tvPercentSevenDays);
-        TextView tvMarketCap = MainContainer.findViewById(R.id.tvMarketCap);
-        TextView tvVolume24 = MainContainer.findViewById(R.id.tvVolume24);
-        TextView tvCirculatingSupply = MainContainer.findViewById(R.id.tvCirculatingSupply);
-        TextView tvTotalSupply = MainContainer.findViewById(R.id.tvTotalSupply);
 
         TextView tvMarketNumber = MainContainer.findViewById(R.id.tvRankData);
         TextView tvCoin = MainContainer.findViewById(R.id.tvCoinSymbolData);
@@ -141,19 +143,6 @@ public class CoinInfoActivity extends AppCompatActivity {
         TextView tvTotalSupplyData = findViewById(R.id.tvTotalSupplyData);
         TextView tvUsage = findViewById(R.id.tvUsage);
         TextView tvEmission = findViewById(R.id.tvEmission);
-
-        tvRank.setText(getResources().getString(R.string.Rank));
-        tvCategory.setText(getResources().getString(R.string.Category));
-        tvCoinPRICE.setText(getResources().getString(R.string.Price));
-        tvCoinPriceBTC.setText(getResources().getString(R.string.PriceBTC));
-        tvPriceChange.setText(getResources().getString(R.string.PriceChange));
-        tvPercentOneHour.setText(getResources().getString(R.string.PercentOneHour));
-        tvPercentTwentyFourHour.setText(getResources().getString(R.string.PercentTwentyFourHour));
-        tvPercentSevenDays.setText(getResources().getString(R.string.PercentSevenDays));
-        tvMarketCap.setText(getResources().getString(R.string.MarketCapitalization));
-        tvVolume24.setText(getResources().getString(R.string.Volume24Hours));
-        tvCirculatingSupply.setText(getResources().getString(R.string.CirculatingSupply));
-        tvTotalSupply.setText(getResources().getString(R.string.TotalSupply));
 
         tvPercentOneHourData.setText(CoinP1H);
         tvPercentTwentyFourHourData.setText(CoinP24H);
@@ -180,9 +169,9 @@ public class CoinInfoActivity extends AppCompatActivity {
         tvCoinName.setText(CoinName);
         tvCoinPrice.setText(CoinPrice);
 
-        Float coinpricebtc = Float.parseFloat(CoinPriceBTC);
+        Float coin_price_in_btc = Float.parseFloat(CoinPriceBTC);
         DecimalFormat form = new DecimalFormat("#0.00000000");
-        tvCoinPriceBTCData.setText(form.format(coinpricebtc));
+        tvCoinPriceBTCData.setText(form.format(coin_price_in_btc));
 
         tvMarketCapData.setText(CoinMCAP);
         tvVolume24Data.setText(CoinV24H);
@@ -329,34 +318,30 @@ public class CoinInfoActivity extends AppCompatActivity {
             if (!arr.toString().equals("[]") && !arr.toString().equals("")
                     && !arr.toString().equals("{\"success\":false,\"error\":\"Pair not found\"}")) {
 
-                if (arr.length() != 0) {
-                    TextView tvMarkets = MainContainer.findViewById(R.id.tvMarkets);
-                    tvMarkets.setText(getResources().getString(R.string.Markets));
-                    tvMarkets.setVisibility(View.VISIBLE);
-
-                    TextView tvCol1 = MainContainer.findViewById(R.id.tvColumn1);
-                    TextView tvCol2 = MainContainer.findViewById(R.id.tvColumn2);
-                    TextView tvCol3 = MainContainer.findViewById(R.id.tvColumn3);
-                    tvCol1.setText(getResources().getString(R.string.Exchange));
-                    tvCol2.setText(getResources().getString(R.string.PriceDollar));
-                    tvCol3.setText(getResources().getString(R.string.Volume24));
-                    tvCol1.setVisibility(View.VISIBLE);
-                    tvCol2.setVisibility(View.VISIBLE);
-                    tvCol3.setVisibility(View.VISIBLE);
-                }
-
                 for (int i = -1; i < arr.length(); i++) {
                     TableRow tableRow = new TableRow(this);
+                    if (i < 0) {
+                        TextView tvCol1 = new TextView(this);
+                        TextView tvCol2 = new TextView(this);
+                        TextView tvCol3 = new TextView(this);
+                        tvCol1.setText(getResources().getString(R.string.Exchange));
+                        tvCol2.setText(getResources().getString(R.string.PriceDollar));
+                        tvCol3.setText(getResources().getString(R.string.Volume24));
+                        setTableTextView(tvCol1);
+                        setTableTextView(tvCol2);
+                        setTableTextView(tvCol3);
+
+                        tableRow.addView(tvCol1, 0);
+                        tableRow.addView(tvCol2, 1);
+                        tableRow.addView(tvCol3, 2);
+                    }
                     if (i >= 0) {
                         TextView tv1 = new TextView(this);
                         TextView tv2 = new TextView(this);
                         TextView tv3 = new TextView(this);
-                        tv1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                                TableRow.LayoutParams.WRAP_CONTENT));
-                        tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                                TableRow.LayoutParams.WRAP_CONTENT));
-                        tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                                TableRow.LayoutParams.WRAP_CONTENT));
+                        setTableTextView(tv1);
+                        setTableTextView(tv2);
+                        setTableTextView(tv3);
 
                         tv1.setText(arr.getJSONObject(i).getString(market));
                         String p = arr.getJSONObject(i).getString(price);
@@ -380,10 +365,6 @@ public class CoinInfoActivity extends AppCompatActivity {
                         String vol = arr.getJSONObject(i).getString(volume);
                         vol = df3.format(Double.valueOf(vol));
                         tv3.setText(vol);
-
-                        tv1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        tv2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        tv3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                         tableRow.addView(tv1, 0);
                         tableRow.addView(tv2, 1);
@@ -452,6 +433,7 @@ public class CoinInfoActivity extends AppCompatActivity {
 
         GraphView graph = item.findViewById(R.id.graph);
         graph.removeAllSeries();
+
         graph.setVisibility(View.INVISIBLE);
 
         switch (view.getId()) {
@@ -474,6 +456,9 @@ public class CoinInfoActivity extends AppCompatActivity {
     }
 
     private void getPriceInfo(final String CoinSymbol, final String period, final boolean h4, final boolean d1){
+
+        startLoadingAnimation();
+
         new Thread() {
             public void run() {
                 final JSONArray json = RemoteFetchGraph.getJSON(CoinSymbol, period);
@@ -481,12 +466,14 @@ public class CoinInfoActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
+                            stopLoadingAnimation();
                         }
                     });
                 } else {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
+                            //startLoadingAnimation();
                             onDrawGraph(json, h4, d1, period);
                         }
                     });
@@ -495,7 +482,7 @@ public class CoinInfoActivity extends AppCompatActivity {
         }.start();
     }
 
-    public void onDrawGraph(JSONArray json, boolean h4, boolean d1, String period){
+    private void onDrawGraph(JSONArray json, boolean h4, boolean d1, String period){
 
         LinearLayout graph_linear_layout = findViewById(R.id.graph_linear_layout);
         graph_linear_layout.removeAllViews();
@@ -597,6 +584,8 @@ public class CoinInfoActivity extends AppCompatActivity {
         graph.setTitle(graph_title);
         graph.setTitleTextSize(40);
 
+        graph.getGridLabelRenderer().setNumHorizontalLabels(3);
+
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
         staticLabelsFormatter.setHorizontalLabels(dates);
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
@@ -609,37 +598,74 @@ public class CoinInfoActivity extends AppCompatActivity {
         Button h44 = findViewById(R.id.btnH4);
         Button d11 = findViewById(R.id.btnD1);
 
-        if (period.equals(M15)) {
-            m15.setBackgroundColor(Color.parseColor("#75a478"));
-            m30.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            h1.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            h44.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            d11.setBackgroundColor(Color.parseColor("#a5d6a7"));
-        } else if (period.equals(M30)) {
-            m15.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            m30.setBackgroundColor(Color.parseColor("#75a478"));
-            h1.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            h44.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            d11.setBackgroundColor(Color.parseColor("#a5d6a7"));
-        } else if (period.equals(H1)) {
-            m15.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            m30.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            h1.setBackgroundColor(Color.parseColor("#75a478"));
-            h44.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            d11.setBackgroundColor(Color.parseColor("#a5d6a7"));
-        } else if (period.equals(H4)) {
-            m15.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            m30.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            h1.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            h44.setBackgroundColor(Color.parseColor("#75a478"));
-            d11.setBackgroundColor(Color.parseColor("#a5d6a7"));
-        } else if (period.equals(D1)) {
-            m15.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            m30.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            h1.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            h44.setBackgroundColor(Color.parseColor("#a5d6a7"));
-            d11.setBackgroundColor(Color.parseColor("#75a478"));
+        //m15.setTextColor();
+
+        switch (period) {
+            case M15:
+                m15.setTextColor(getResources().getColor(R.color.Black));
+                m30.setTextColor(getResources().getColor(R.color.colorWhite));
+                h1.setTextColor(getResources().getColor(R.color.colorWhite));
+                h44.setTextColor(getResources().getColor(R.color.colorWhite));
+                d11.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case M30:
+                m15.setTextColor(getResources().getColor(R.color.colorWhite));
+                m30.setTextColor(getResources().getColor(R.color.Black));
+                h1.setTextColor(getResources().getColor(R.color.colorWhite));
+                h44.setTextColor(getResources().getColor(R.color.colorWhite));
+                d11.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case H1:
+                m15.setTextColor(getResources().getColor(R.color.colorWhite));
+                m30.setTextColor(getResources().getColor(R.color.colorWhite));
+                h1.setTextColor(getResources().getColor(R.color.Black));
+                h44.setTextColor(getResources().getColor(R.color.colorWhite));
+                d11.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case H4:
+                m15.setTextColor(getResources().getColor(R.color.colorWhite));
+                m30.setTextColor(getResources().getColor(R.color.colorWhite));
+                h1.setTextColor(getResources().getColor(R.color.colorWhite));
+                h44.setTextColor(getResources().getColor(R.color.Black));
+                d11.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case D1:
+                m15.setTextColor(getResources().getColor(R.color.colorWhite));
+                m30.setTextColor(getResources().getColor(R.color.colorWhite));
+                h1.setTextColor(getResources().getColor(R.color.colorWhite));
+                h44.setTextColor(getResources().getColor(R.color.colorWhite));
+                d11.setTextColor(getResources().getColor(R.color.Black));
+                break;
         }
+
+        graph.getViewport().setScrollable(true); // enables horizontal scrolling
+        graph.getViewport().setScrollableY(true); // enables vertical scrolling
+        graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
+        graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
+
+        stopLoadingAnimation();
+    }
+
+    private void startLoadingAnimation() {
+        LinearLayout graphContainer = findViewById(R.id.graph_linear_layout);
+        LayoutInflater inflater = getLayoutInflater();
+        View item = inflater.inflate(R.layout.progress_bar, graphContainer, false);
+        item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+        graphContainer.addView(item);
+    }
+
+    private void stopLoadingAnimation() {
+        LinearLayout graphContainer = findViewById(R.id.graph_linear_layout);
+        View loading = graphContainer.findViewById(R.id.progress_bar_linear_layout);
+        graphContainer.removeView(loading);
+    }
+
+    private void setTableTextView(TextView tv) {
+        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
+        tv.setTypeface(roboto_light);
+        tv.setTextColor(getResources().getColor(android.R.color.black));
+        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
     }
 
     @Override
@@ -647,5 +673,7 @@ public class CoinInfoActivity extends AppCompatActivity {
         super.onBackPressed();
 
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+        finish();
     }
 }

@@ -7,8 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class RemoteFetchCoinImage {
-    static String[] array;
+class RemoteFetchCoinImage {
 
     private static String OPEN_COIN_API;
 
@@ -17,7 +16,7 @@ public class RemoteFetchCoinImage {
                 + CoinId + "&tsyms=USD";
     }
 
-    public static JSONObject getJSONinfo(String CoinId) {
+    static JSONObject getJSONinfo(String CoinId) {
         try {
             setString(CoinId);
 
@@ -33,9 +32,7 @@ public class RemoteFetchCoinImage {
                 json.append(tmp).append("\n");
             reader.close();
 
-            JSONObject data = new JSONObject(json.toString());
-
-            return data;
+            return new JSONObject(json.toString());
         } catch (Exception e) {
             return null;
         }

@@ -17,7 +17,9 @@
             android:id="@+id/graph"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:focusable="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,9 +38,10 @@
                     android:id="@+id/btnM15"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/button_graph"
+                    android:background="@drawable/graph_button_background"
                     android:onClick="getGraph"
                     android:text="@string/M15"
+                    android:textColor="@color/colorWhite"
                     android:textSize="14sp"/>
             </RadioGroup>
 
@@ -52,9 +55,10 @@
                     android:id="@+id/btnM30"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/button_graph"
+                    android:background="@drawable/graph_button_background"
                     android:onClick="getGraph"
                     android:text="@string/M30"
+                    android:textColor="@color/colorWhite"
                     android:textSize="14sp"/>
             </RadioGroup>
 
@@ -68,9 +72,10 @@
                     android:id="@+id/btnH1"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/button_graph"
+                    android:background="@drawable/graph_button_background"
                     android:onClick="getGraph"
                     android:text="@string/H1"
+                    android:textColor="@color/colorWhite"
                     android:textSize="14sp"/>
             </RadioGroup>
 
@@ -84,9 +89,10 @@
                     android:id="@+id/btnH4"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/button_graph"
+                    android:background="@drawable/graph_button_background"
                     android:onClick="getGraph"
                     android:text="@string/H4"
+                    android:textColor="@color/colorWhite"
                     android:textSize="14sp"/>
             </RadioGroup>
 
@@ -100,20 +106,12 @@
                     android:id="@+id/btnD1"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/button_graph"
+                    android:background="@drawable/graph_button_background"
                     android:onClick="getGraph"
                     android:text="@string/D1"
+                    android:textColor="@color/colorWhite"
                     android:textSize="14sp"/>
             </RadioGroup>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="*one point per selected period"
-            android:textColor="@color/Gray2"
-            android:textSize="12sp"/>
     </LinearLayout>
 </FrameLayout>

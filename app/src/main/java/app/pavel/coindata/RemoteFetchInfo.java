@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class RemoteFetchInfo {
+class RemoteFetchInfo {
 
     private static String OPEN_COIN_API;
 
@@ -15,7 +15,7 @@ public class RemoteFetchInfo {
         OPEN_COIN_API = "https://api.coingecko.com/api/v3/coins/" + CoinId;
     }
 
-    public static JSONObject getJSONinfo(String CoinId) {
+    static JSONObject getJSONinfo(String CoinId) {
         try {
             setString(CoinId);
 

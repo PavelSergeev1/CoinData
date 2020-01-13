@@ -10,11 +10,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-public class RemoteFetchGraph {
+class RemoteFetchGraph {
 
-    static String OPEN_PRICE_API = "https://api.hitbtc.com/api/2/public/candles/";
+    private static String OPEN_PRICE_API = "https://api.hitbtc.com/api/2/public/candles/";
 
-    public static JSONArray getJSON(String CoinSymbol, String period) {
+    static JSONArray getJSON(String CoinSymbol, String period) {
         try {
 
             OPEN_PRICE_API += CoinSymbol;
@@ -39,14 +39,12 @@ public class RemoteFetchGraph {
             reader.close();
 
             Scanner scan = new Scanner(url.openStream());
-            String str = new String();
+            StringBuilder str = new StringBuilder();
             while (scan.hasNext())
-                str += scan.nextLine();
+                str.append(scan.nextLine());
             scan.close();
 
-            JSONArray data = new JSONArray(str);
-
-            return data;
+            return new JSONArray(str.toString());
         } catch (Exception e) {
             return null;
         }

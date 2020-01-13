@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class RemoteFetch {
+class RemoteFetch {
 
     private static String OPEN_PRICE_API = "https://api.coinlore.com/api/tickers/";
 
-    public static JSONObject getJSON(int startpoint) {
+    static JSONObject getJSON(int startpoint) {
         try {
             OPEN_PRICE_API += "?start=" + String.valueOf(startpoint - 50) + "&limit=50";
 

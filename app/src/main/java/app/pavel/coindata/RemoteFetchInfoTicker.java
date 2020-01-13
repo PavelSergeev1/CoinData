@@ -7,15 +7,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class RemoteFetchInfoTicker {
-    static String[] array;
+class RemoteFetchInfoTicker {
     private static String OPEN_COIN_API;
 
     static void setString(String CoinId) {
         OPEN_COIN_API = "https://api.cryptonator.com/api/full/" + CoinId + "-usd";
     }
 
-    public static JSONObject getJSONinfo(String CoinId) {
+    static JSONObject getJSONinfo(String CoinId) {
         try {
             setString(CoinId);
 

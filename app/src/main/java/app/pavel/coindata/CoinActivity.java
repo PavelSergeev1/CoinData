@@ -1,6 +1,7 @@
 package app.pavel.coindata;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,8 +28,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class CoinActivity extends AppCompatActivity {
-
-    // AnimationDrawable animation;
 
     private int array_coin_len = 0;
     private int start = 50;
@@ -159,29 +158,19 @@ public class CoinActivity extends AppCompatActivity {
         HeaderContainer.addView(item);
     }
 
-    private void startAnimation(int i) {
-        if (i == 1) {
-            LinearLayout MainContainer = findViewById(R.id.MainContainer);
-            LayoutInflater inflater = getLayoutInflater();
-            // View item = inflater.inflate(R.layout.loading_circle, MainContainer, false);
-            View item = inflater.inflate(R.layout.progress_bar, MainContainer, false);
-            item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
-            MainContainer.addView(item);
-
-            // ImageView loading = MainContainer.findViewById(R.id.imageView);
-            // animation = (AnimationDrawable)loading.getDrawable();
-            // animation.start();
-        }
+    private void startAnimation() {
+        LinearLayout MainContainer = findViewById(R.id.MainContainer);
+        LayoutInflater inflater = getLayoutInflater();
+        View item = inflater.inflate(R.layout.progress_bar, MainContainer, false);
+        item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+        item.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+        MainContainer.addView(item);
     }
 
-    private void stopAnimation(int i) {
-        if (i == 0) {
-            // animation.stop();
-            LinearLayout MainContainer = findViewById(R.id.MainContainer);
-            // View loading = MainContainer.findViewById(R.id.Loading_Layout);
-            View loading = MainContainer.findViewById(R.id.progress_bar_linear_layout);
-            MainContainer.removeView(loading);
-        }
+    private void stopAnimation() {
+        LinearLayout MainContainer = findViewById(R.id.MainContainer);
+        View loading = MainContainer.findViewById(R.id.progress_bar_linear_layout);
+        MainContainer.removeView(loading);
     }
 
     private void setButton() {
@@ -203,7 +192,8 @@ public class CoinActivity extends AppCompatActivity {
     }
 
     private void updatePrice(){
-        if (update == 1) startAnimation(1);
+        if (update == 1)
+            startAnimation();
         new Thread() {
             public void run() {
                 final JSONObject json = RemoteFetch.getJSON(start);
@@ -214,7 +204,7 @@ public class CoinActivity extends AppCompatActivity {
                             Toast.makeText(CoinActivity.this,
                                     getString(R.string.internet_error),
                                     Toast.LENGTH_LONG).show();
-                            stopAnimation(0);
+                            stopAnimation();
                         }
                     });
                 } else {
@@ -391,7 +381,8 @@ public class CoinActivity extends AppCompatActivity {
         });
 
         if (end) {
-            if (update == 1) stopAnimation(0);
+            if (update == 1)
+                stopAnimation();
             showMoreCoins();
             showCurrentTime();
             end_of_list = false;
