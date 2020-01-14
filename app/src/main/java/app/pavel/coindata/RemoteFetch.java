@@ -13,16 +13,16 @@ class RemoteFetch {
 
     static JSONObject getJSON(int startpoint) {
         try {
-            OPEN_PRICE_API += "?start=" + String.valueOf(startpoint - 50) + "&limit=50";
+            OPEN_PRICE_API += "?start=" + (startpoint - 50) + "&limit=50";
 
-            URL url = new URL(String.format(OPEN_PRICE_API));
+            URL url = new URL(OPEN_PRICE_API);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
 
             StringBuffer json = new StringBuffer(4096);
-            String tmp = "";
+            String tmp;
             while ((tmp = reader.readLine()) != null)
                 json.append(tmp).append("\n");
             reader.close();

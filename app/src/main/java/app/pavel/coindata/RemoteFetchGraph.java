@@ -24,7 +24,7 @@ class RemoteFetchGraph {
 
             Log.i("url url url", OPEN_PRICE_API);
 
-            URL url = new URL(String.format(OPEN_PRICE_API));
+            URL url = new URL(OPEN_PRICE_API);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
             OPEN_PRICE_API = "https://api.hitbtc.com/api/2/public/candles/";
@@ -33,7 +33,7 @@ class RemoteFetchGraph {
                     new InputStreamReader(connection.getInputStream()));
 
             StringBuffer json = new StringBuffer(1096);
-            String tmp = "";
+            String tmp;
             while ((tmp = reader.readLine()) != null)
                 json.append(tmp).append("\n");
             reader.close();

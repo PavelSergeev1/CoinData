@@ -1,6 +1,7 @@
 package app.pavel.coindata;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -9,22 +10,17 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
@@ -34,16 +30,17 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
+import app.pavel.coindata.CoinActivity;
+
 public class CoinInfoActivity extends AppCompatActivity {
 
-    Typeface roboto_light;
+    private Typeface roboto_light;
 
-    DecimalFormat df3 = new DecimalFormat("#.##");
+    private final DecimalFormat df3 = new DecimalFormat("#.##");
 
     private static final String categories = "categories";
     private static final String description = "description";
@@ -69,10 +66,6 @@ public class CoinInfoActivity extends AppCompatActivity {
     private String CoinMS = "";
     private String CoinUsage = "";
 
-    private static final String RAW = "RAW";
-    private static final String USD = "USD";
-    String IMAGEURL = "IMAGEURL";
-
     private static final String M15 = "M15";
     private static final String M30 = "M30";
     private static final String H1 = "H1";
@@ -81,7 +74,7 @@ public class CoinInfoActivity extends AppCompatActivity {
 
     private static final String graph_title = "price $ on hitbtc.com";
 
-    Handler handler;
+    private final Handler handler;
 
     public CoinInfoActivity() {
         handler = new Handler();
@@ -111,7 +104,10 @@ public class CoinInfoActivity extends AppCompatActivity {
         CoinMS = intent.getStringExtra("COIN_MS");
         CoinUsage = intent.getStringExtra("COIN_USAGE");
 
-        getCoinImage();
+        ImageView imageViewCoin = findViewById(R.id.imageViewCoin);
+        ProgressBar progressBar = findViewById(R.id.progressBarImageCoin);
+
+        CoinActivity.setCoinListImage(CoinId, imageViewCoin, progressBar,this, 80);
 
         getPriceInfo(CoinSymbol, M15, false, false);
 
@@ -176,14 +172,14 @@ public class CoinInfoActivity extends AppCompatActivity {
         tvMarketCapData.setText(CoinMCAP);
         tvVolume24Data.setText(CoinV24H);
 
-        if (!CoinCS.equals("") && CoinCS != null && !CoinCS.equals("0") && !CoinCS.equals("null")) {
+        if (!CoinCS.equals("") && !CoinCS.equals("0") && !CoinCS.equals("null")) {
             BigDecimal BD = new BigDecimal(CoinCS);
             BD = new BigDecimal(BD.toPlainString());
             String cs = BD.setScale(0, BigDecimal.ROUND_HALF_DOWN).toString();
             String CS = String.format("%,d", Long.parseLong(cs.replace(".0", "")));
             tvCirculatingSupplyData.setText(CS.replaceAll(",", " "));
 
-            if (!CoinMS.equals("") && CoinMS != null && !CoinMS.equals("0") && !CoinMS.equals("null")) {
+            if (!CoinMS.equals("") && !CoinMS.equals("0") && !CoinMS.equals("null")) {
                 BigDecimal B = new BigDecimal(CoinMS.replaceAll(" ", ""));
                 B = new BigDecimal(B.toPlainString());
                 String ms = B.setScale(0, BigDecimal.ROUND_HALF_DOWN).toString();
@@ -202,8 +198,8 @@ public class CoinInfoActivity extends AppCompatActivity {
 
 
 
-        if (!CoinCS.equals("") && CoinCS != null && !CoinCS.equals("0") && !CoinCS.equals("null") &&
-                !CoinMS.equals("") && CoinMS != null && !CoinMS.equals("0") &&
+        if (!CoinCS.equals("") && !CoinCS.equals("0") && !CoinCS.equals("null") &&
+                !CoinMS.equals("") && !CoinMS.equals("0") &&
                 !CoinMS.equals("null")) {
             String emission = df3.format(Double.valueOf(Double.valueOf(CoinCS) /
                     Double.valueOf(CoinMS) * 100)) + getResources().getString(R.string.percent) +
@@ -279,6 +275,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                         .replaceAll("‘", "'")
                         .replaceAll("–", "-");
                 text+= "</p></body></html>";
+
                 tvDescriptionData.loadData(text, "text/html", "utf-8");
             }
         } catch (Exception e) {
@@ -379,80 +376,64 @@ public class CoinInfoActivity extends AppCompatActivity {
         }
     }
 
-    private void getCoinImage(){
-        new Thread() {
-            public void run() {
-                final JSONObject json = RemoteFetchCoinImage.getJSONinfo(CoinSymbol);
-                if (json == null) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                        }
-                    });
-                } else {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            setCoinImage(json);
-                        }
-                    });
-                }
-            }
-        }.start();
-    }
-
-    private void setCoinImage(JSONObject js) {
-        try {
-            String IMAGE_URL = "https://www.cryptocompare.com";
-
-            JSONObject Obj1 = js.getJSONObject(RAW);
-            JSONObject Obj2 = Obj1.getJSONObject(CoinSymbol);
-            JSONObject Obj3 = Obj2.getJSONObject(USD);
-            String Obj4 = Obj3.getString(IMAGEURL);
-
-            IMAGE_URL += Obj4;
-
-            ImageView imageViewCoin = findViewById(R.id.imageViewCoin);
-            Glide.with(this)
-                    .load(IMAGE_URL)
-                    .apply(new RequestOptions()
-                            .diskCacheStrategy(DiskCacheStrategy.ALL))
-                    .into(imageViewCoin);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void getGraph(View view) {
-        LinearLayout graph_linear_layout = findViewById(R.id.graph_linear_layout);
-        graph_linear_layout.removeAllViews();
-        LayoutInflater inflater = getLayoutInflater();
-        final View item = inflater.inflate(R.layout.item_graph, graph_linear_layout, false);
 
-        graph_linear_layout.addView(item);
-
-        GraphView graph = item.findViewById(R.id.graph);
-        graph.removeAllSeries();
-
-        graph.setVisibility(View.INVISIBLE);
+        Button m15 = findViewById(R.id.btnM15);
+        Button m30 = findViewById(R.id.btnM30);
+        Button h1 = findViewById(R.id.btnH1);
+        Button h4 = findViewById(R.id.btnH4);
+        Button d1 = findViewById(R.id.btnD1);
 
         switch (view.getId()) {
             case R.id.btnM15:
-                getPriceInfo(CoinSymbol, M15, false, false);
+                ColorStateList m15List = m15.getTextColors();
+                int m15color = m15List.getDefaultColor();
+                if (m15color == Color.WHITE) {
+                    disableButtons(m15, m30, h1, h4, d1);
+                    getPriceInfo(CoinSymbol, M15, false, false);
+                }
                 break;
             case R.id.btnM30:
-                getPriceInfo(CoinSymbol, M30, false, false);
+                ColorStateList m30List = m30.getTextColors();
+                int m30color = m30List.getDefaultColor();
+                if (m30color == Color.WHITE) {
+                    disableButtons(m15, m30, h1, h4, d1);
+                    getPriceInfo(CoinSymbol, M30, false, false);
+                }
                 break;
             case R.id.btnH1:
-                getPriceInfo(CoinSymbol, H1, false, false);
+                ColorStateList h1List = h1.getTextColors();
+                int h1color = h1List.getDefaultColor();
+                if (h1color == Color.WHITE) {
+                    disableButtons(m15, m30, h1, h4, d1);
+                    getPriceInfo(CoinSymbol, H1, false, false);
+                }
                 break;
             case R.id.btnH4:
-                getPriceInfo(CoinSymbol, H4, true, false);
+                ColorStateList h4List = h4.getTextColors();
+                int h4color = h4List.getDefaultColor();
+                if (h4color == Color.WHITE) {
+                    disableButtons(m15, m30, h1, h4, d1);
+                    getPriceInfo(CoinSymbol, H4, true, false);
+                }
                 break;
             case R.id.btnD1:
-                getPriceInfo(CoinSymbol, D1, false, true);
+                ColorStateList d1List = d1.getTextColors();
+                int d1color = d1List.getDefaultColor();
+                if (d1color == Color.WHITE) {
+                    disableButtons(m15, m30, h1, h4, d1);
+                    getPriceInfo(CoinSymbol, D1, false, true);
+                }
                 break;
         }
+    }
+
+    private void disableButtons(Button m15, Button m30, Button h1, Button h4, Button d1) {
+        m15.setEnabled(false);
+        m30.setEnabled(false);
+        h1.setEnabled(false);
+        h4.setEnabled(false);
+        d1.setEnabled(false);
     }
 
     private void getPriceInfo(final String CoinSymbol, final String period, final boolean h4, final boolean d1){
@@ -493,9 +474,7 @@ public class CoinInfoActivity extends AppCompatActivity {
 
         GraphView graph = item.findViewById(R.id.graph);
         graph.removeAllSeries();
-        graph.setVisibility(View.INVISIBLE);
 
-        graph.removeAllSeries();
         graph.setVisibility(View.INVISIBLE);
 
         int i = json.length();
@@ -598,8 +577,6 @@ public class CoinInfoActivity extends AppCompatActivity {
         Button h44 = findViewById(R.id.btnH4);
         Button d11 = findViewById(R.id.btnD1);
 
-        //m15.setTextColor();
-
         switch (period) {
             case M15:
                 m15.setTextColor(getResources().getColor(R.color.Black));
@@ -637,6 +614,12 @@ public class CoinInfoActivity extends AppCompatActivity {
                 d11.setTextColor(getResources().getColor(R.color.Black));
                 break;
         }
+
+        m15.setEnabled(true);
+        m30.setEnabled(true);
+        h1.setEnabled(true);
+        h44.setEnabled(true);
+        d11.setEnabled(true);
 
         graph.getViewport().setScrollable(true); // enables horizontal scrolling
         graph.getViewport().setScrollableY(true); // enables vertical scrolling

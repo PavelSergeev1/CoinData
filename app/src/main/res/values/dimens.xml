@@ -12,6 +12,5 @@
 
     <dimen name="address_height">70dp</dimen>
 
-    <dimen name="radio_group_address">35dp</dimen>
     <dimen name="coin_info_name">24sp</dimen>
 </resources>

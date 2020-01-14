@@ -29,7 +29,7 @@
         android:layout_marginStart="10dp"
         android:orientation="horizontal">
 
-        <RadioGroup
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -43,7 +43,15 @@
                 android:layout_gravity="center"
                 android:contentDescription="@string/coin_logo" />
 
-        </RadioGroup>
+            <ProgressBar
+                android:id="@+id/progressBarListImage"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="visible" />
+
+        </RelativeLayout>
 
         <RadioGroup
             android:layout_width="match_parent"

@@ -10,7 +10,7 @@ import java.net.URL;
 class RemoteFetchInfoTicker {
     private static String OPEN_COIN_API;
 
-    static void setString(String CoinId) {
+    private static void setString(String CoinId) {
         OPEN_COIN_API = "https://api.cryptonator.com/api/full/" + CoinId + "-usd";
     }
 
@@ -18,21 +18,19 @@ class RemoteFetchInfoTicker {
         try {
             setString(CoinId);
 
-            URL url = new URL(String.format(OPEN_COIN_API));
+            URL url = new URL(OPEN_COIN_API);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
 
             StringBuffer json = new StringBuffer(1024);
-            String tmp = "";
+            String tmp;
             while ((tmp = reader.readLine()) != null)
                 json.append(tmp).append("\n");
             reader.close();
 
-            JSONObject data = new JSONObject(json.toString());
-
-            return data;
+            return new JSONObject(json.toString());
         } catch (Exception e) {
             return null;
         }

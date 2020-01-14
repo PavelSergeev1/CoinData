@@ -1,23 +1,34 @@
 package app.pavel.coindata;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.signature.ObjectKey;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +40,6 @@ import java.util.Objects;
 
 public class CoinActivity extends AppCompatActivity {
 
-    private int array_coin_len = 0;
     private int start = 50;
     private static final int billion = Integer.parseInt("1000000000");
     private static final int million = Integer.parseInt("1000000");
@@ -40,35 +50,15 @@ public class CoinActivity extends AppCompatActivity {
 
     private boolean end_of_list = false;
 
-    DecimalFormat df2 = new DecimalFormat("#.##");
+    private final DecimalFormat df2 = new DecimalFormat("#.##");
 
-    String data = "data";
-    String symbol = "symbol";
-    String nameid = "nameid";
-    String name = "name";
-    String id = "id";
-    String rank = "rank";
-    String price_usd = "price_usd";
-    String price_btc = "price_btc";
-    String percent_change_1h = "percent_change_1h";
-    String percent_change_24h = "percent_change_24h";
-    String percent_change_7d = "percent_change_7d";
-    String market_cap_usd = "market_cap_usd";
-    String volume24 = "volume24";
-    String csupply = "csupply";
-    String msupply = "msupply";
-    String usage;
-    String time;
+    private String time;
 
-    String RAW = "RAW";
-    String USD = "USD";
-    String IMAGEURL = "IMAGEURL";
+    private String CoinId = "";
 
-    String CoinId = "";
+    private final String[][] COIN = new String[2100][15];
 
-    String[][] COIN = new String[2100][15];
-
-    Handler handler;
+    private final Handler handler;
 
     public CoinActivity() {
         handler = new Handler();
@@ -116,8 +106,7 @@ public class CoinActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         int len = start;
-        array_coin_len = len;
-        outState.putInt("array_coin_len", array_coin_len);
+        outState.putInt("array_coin_len", len);
         TextView updateTime = findViewById(R.id.updateTime);
         outState.putString("time", updateTime.getText().toString());
 
@@ -240,19 +229,27 @@ public class CoinActivity extends AppCompatActivity {
         TextView tvVolume24Data = item.findViewById(R.id.tvVolume24Data);
 
         try {
+            String data = "data";
             JSONArray DataArray = json.getJSONArray(data);
             JSONObject obj = DataArray.getJSONObject(i);
 
+            String rank = "rank";
             int r = Integer.valueOf(obj.getString(rank));
 
+            String nameid = "nameid";
             CoinId = obj.getString(nameid).toLowerCase();
 
+            String percent_change_1h = "percent_change_1h";
             String p1h = obj.getString(percent_change_1h) + getResources().getString(R.string.percent);
+            String percent_change_24h = "percent_change_24h";
             String p24h = obj.getString(percent_change_24h) + getResources().getString(R.string.percent);
+            String percent_change_7d = "percent_change_7d";
             String p7d = obj.getString(percent_change_7d) + getResources().getString(R.string.percent);
+
             tvPercentOneHourData.setText(p1h);
             tvPercentTwentyFourHourData.setText(p24h);
             tvPercentSevenDaysData.setText(p7d);
+
             COIN[r][6] = p1h;
             COIN[r][7] = p24h;
             COIN[r][8] = p7d;
@@ -276,23 +273,34 @@ public class CoinActivity extends AppCompatActivity {
             tvMarketNumber.setText(obj.getString(rank));
             COIN[r][3] = obj.getString(rank);
 
+            String symbol = "symbol";
             tvCoin.setText(obj.getString(symbol));
             COIN[r][2] = obj.getString(symbol);
+
+            String name = "name";
             tvCoinName.setText(obj.getString(name));
             COIN[r][1] = obj.getString(name);
 
-            String coinprice = getResources().getString(R.string.dollar) + " " + obj.getString(price_usd);
-            tvCoinPrice.setText(coinprice);
-            COIN[r][4] = coinprice;
+            String price_usd = "price_usd";
+            String coin_price = getResources().getString(R.string.dollar) + " " + obj.getString(price_usd);
+            tvCoinPrice.setText(coin_price);
+            COIN[r][4] = coin_price;
+
+            String price_btc = "price_btc";
             COIN[r][5] = obj.getString(price_btc);
 
             COIN[r][13] = obj.getString(nameid);
-            COIN[r][12] = obj.getString(msupply);
-            COIN[r][11] = obj.getString(csupply);
 
+            String m_supply = "msupply";
+            COIN[r][12] = obj.getString(m_supply);
+
+            String c_supply = "csupply";
+            COIN[r][11] = obj.getString(c_supply);
+
+            String market_cap_usd = "market_cap_usd";
             String qwerty = obj.getString(market_cap_usd);
             double mcap = Double.parseDouble(qwerty);
-            usage = String.valueOf(1 / mcap);
+            String usage = String.valueOf(1 / mcap);
             if (mcap > billion) {
                 String marketcap;
                 mcap = mcap / billion;
@@ -314,6 +322,7 @@ public class CoinActivity extends AppCompatActivity {
                 COIN[r][9] = marketcap;
             }
 
+            String volume24 = "volume24";
             String qwerty1 = obj.getString(volume24);
             double mcap1 = Double.parseDouble(qwerty1);
             usage = String.valueOf(Double.valueOf(usage)*mcap1);
@@ -342,12 +351,14 @@ public class CoinActivity extends AppCompatActivity {
 
             COIN[r][14] = usage;
 
-            getCoinListImage(COIN[r][2], item);
+            ImageView imageView = item.findViewById(R.id.imageViewList);
+            ProgressBar progressBar = item.findViewById(R.id.progressBarListImage);
+
+            setCoinListImage(CoinId, imageView, progressBar, this, 50);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
         item.setTag(CoinId);
@@ -389,56 +400,60 @@ public class CoinActivity extends AppCompatActivity {
         }
     }
 
-    private void getCoinListImage(final String symbol, final View item){
-        new Thread() {
-            public void run() {
-                final JSONObject json = RemoteFetchCoinImage.getJSONinfo(symbol);
-                if (json == null) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                        }
-                    });
-                } else {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            setCoinListImage(json, item, symbol);
-                        }
-                    });
-                }
-            }
-        }.start();
-    }
-
-    private void setCoinListImage(JSONObject js, View item, String symbol) {
+    public static void setCoinListImage(final String coin_id, final ImageView imageView,
+                                        final ProgressBar progressBar, Activity activity,
+                                        int size) {
         try {
-            String IMAGE_URL = "https://www.cryptocompare.com";
 
-            JSONObject Obj1 = js.getJSONObject(RAW);
-            JSONObject Obj2 = Obj1.getJSONObject(symbol);
-            JSONObject Obj3 = Obj2.getJSONObject(USD);
-            String Obj4 = Obj3.getString(IMAGEURL);
+            String IMAGE_URL = "https://www.coinlore.com/img/" + coin_id + ".png";
 
-            IMAGE_URL += Obj4;
+            RequestOptions requestOptions = new RequestOptions()
+                    .override(size)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .signature(new ObjectKey(IMAGE_URL));
 
-            ImageView imageViewList = item.findViewById(R.id.imageViewList);
-            Glide.with(this)
+            Glide.with(activity)
                     .load(IMAGE_URL)
-                    .apply(new RequestOptions()
-                            .override(100, 100)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL))
-                    .into(imageViewList);
+                    .apply(requestOptions)
+                    .error(R.drawable.ic_launcher_foreground)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model,
+                                                    Target<Drawable> target,
+                                                    boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model,
+                                                       Target<Drawable> target,
+                                                       DataSource dataSource,
+                                                       boolean isFirstResource) {
+                            progressBar.setVisibility(View.GONE);
+
+                            return false;
+                        }
+                    })
+                    .into(imageView);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void onClickUpdate(View view) {
+        Button updateButton = findViewById(R.id.btnUpdate);
+        updateButton.setEnabled(false);
+
         clearPrice();
         start = 50;
         update = 1;
         updatePrice();
+
+        updateButton.setEnabled(true);
     }
 
     private void showMoreCoins() {
@@ -496,21 +511,21 @@ public class CoinActivity extends AppCompatActivity {
         COIN[i][8] = ARRAY_COIN[8];
 
         try {
-            if (!ARRAY_COIN[6].equals("") && ARRAY_COIN[6] != null && !ARRAY_COIN[6].equals("null")) {
+            if (!ARRAY_COIN[6].equals("") && !ARRAY_COIN[6].equals("null")) {
                 if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1).replaceAll("%", "")) > 0) {
                     tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorGreen));
                 } else if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1).replaceAll("%", "")) < 0) {
                     tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorRed));
                 }
             }
-            if (!ARRAY_COIN[7].equals("") && ARRAY_COIN[7] != null && !ARRAY_COIN[7].equals("null")) {
+            if (!ARRAY_COIN[7].equals("") && !ARRAY_COIN[7].equals("null")) {
                 if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1).replaceAll("%", "")) > 0) {
                     tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorGreen));
                 } else if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1).replaceAll("%", "")) < 0) {
                     tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorRed));
                 }
             }
-            if (!ARRAY_COIN[8].equals("") && ARRAY_COIN[8] != null && !ARRAY_COIN[8].equals("null")) {
+            if (!ARRAY_COIN[8].equals("") && !ARRAY_COIN[8].equals("null")) {
                 if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1).replaceAll("%", "")) > 0) {
                     tvPercentSevenDaysData.setTextColor(getResources().getColor(R.color.colorGreen));
                 } else if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1).replaceAll("%", "")) < 0) {
@@ -551,7 +566,10 @@ public class CoinActivity extends AppCompatActivity {
         item.setTag(CoinId);
         MainContainer.addView(item);
 
-        getCoinListImage(COIN[i][2], item);
+        ImageView imageView = item.findViewById(R.id.imageViewList);
+        ProgressBar progressBar = item.findViewById(R.id.progressBarListImage);
+
+        setCoinListImage(CoinId, imageView, progressBar, this, 50);
 
         item.setOnClickListener(new View.OnClickListener() {
             @Override

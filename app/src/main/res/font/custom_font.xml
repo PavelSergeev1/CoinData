@@ -8,6 +8,6 @@
         android:font="@font/roboto_light"
         app:font="@font/roboto_light"
         app:fontStyle="normal"
-        app:fontWeight="100" />
+        app:fontWeight="400" />
 
 </font-family>
