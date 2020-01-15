@@ -24,11 +24,11 @@
     <string name="PercentTwentyFourHour">24 h</string>
     <string name="PercentSevenDays">7 d</string>
 
-    <string name="M15">M15</string>
-    <string name="M30">M30</string>
-    <string name="H1">H1</string>
-    <string name="H4">H4</string>
-    <string name="D1">D1</string>
+    <string name="H1">1H</string>
+    <string name="D1">1D</string>
+    <string name="M3">3M</string>
+    <string name="Y1">1Y</string>
+    <string name="MAX">MAX</string>
 
     <string name="AboutApp">CoinData gives you whole list of cryptocurrencies
         (2000+, which sorted by its market capitalization), prices on a few markets
@@ -58,6 +58,9 @@
     <string name="UPDATE_TIME">UPDATE TIME</string>
 
     <string name="Category">Category:</string>
+    <string name="HashingAlgorithm">Hashing algorithm:</string>
+    <string name="Homepage">Homepage:</string>
+    <string name="GenesisDate">Genesis date:</string>
 
     <string name="percent">%</string>
     <string name="dollar">$</string>

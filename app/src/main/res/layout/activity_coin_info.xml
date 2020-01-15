@@ -154,6 +154,101 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvHashingAlgorithm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/HashingAlgorithm"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tvHashingAlgorithmData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="14sp"
+                        tools:text="SHA-256" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvHashingAlgorithmData" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvHomepage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/Homepage"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tvHomepageData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:autoLink="web"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="14sp"
+                        tools:text="www.bitcoin.com" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvHomepageData" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvGenesisDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/GenesisDate"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tvGenesisDateData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:autoLink="web"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="14sp"
+                        tools:text="01.01.2008" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvGenesisDateData" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
                         android:id="@+id/tvCoinPRICE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -16,7 +16,7 @@
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="230dp"
             android:layout_gravity="center"
             android:clickable="true"
             android:focusable="true" />
@@ -35,41 +35,7 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/btnM15"
-                    android:layout_width="55dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/graph_button_background"
-                    android:onClick="getGraph"
-                    android:text="@string/M15"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="14sp"/>
-            </RadioGroup>
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/btnM30"
-                    android:layout_width="55dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/graph_button_background"
-                    android:onClick="getGraph"
-                    android:text="@string/M30"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="14sp"/>
-            </RadioGroup>
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/btnH1"
+                    android:id="@+id/btn1H"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
                     android:background="@drawable/graph_button_background"
@@ -86,12 +52,12 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/btnH4"
+                    android:id="@+id/btn1D"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
                     android:background="@drawable/graph_button_background"
                     android:onClick="getGraph"
-                    android:text="@string/H4"
+                    android:text="@string/D1"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"/>
             </RadioGroup>
@@ -103,12 +69,46 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/btnD1"
+                    android:id="@+id/btn3M"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
                     android:background="@drawable/graph_button_background"
                     android:onClick="getGraph"
-                    android:text="@string/D1"
+                    android:text="@string/M3"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14sp"/>
+            </RadioGroup>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn1Y"
+                    android:layout_width="55dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/graph_button_background"
+                    android:onClick="getGraph"
+                    android:text="@string/Y1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14sp"/>
+            </RadioGroup>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn6Y"
+                    android:layout_width="55dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/graph_button_background"
+                    android:onClick="getGraph"
+                    android:text="@string/MAX"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"/>
             </RadioGroup>

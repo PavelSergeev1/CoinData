@@ -15,7 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/about_margin_vertical"
             android:layout_marginTop="@dimen/about_margin_vertical"
-            android:layout_marginEnd="@dimen/about_margin_vertical">
+            android:layout_marginEnd="@dimen/about_margin_vertical"
+            android:layout_marginBottom="@dimen/about_margin_vertical">
 
             <TextView
                 android:layout_width="match_parent"

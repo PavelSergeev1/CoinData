@@ -18,11 +18,10 @@ class RemoteFetchGraph {
         try {
 
             OPEN_PRICE_API += CoinSymbol;
-            if (CoinSymbol.equals("XRP")) OPEN_PRICE_API += "USDT?period=";
+            if (CoinSymbol.equals("XRP"))
+                OPEN_PRICE_API += "USDT?period=";
             else OPEN_PRICE_API += "USD?period=";
-            OPEN_PRICE_API += period;
-
-            Log.i("url url url", OPEN_PRICE_API);
+                OPEN_PRICE_API += period;
 
             URL url = new URL(OPEN_PRICE_API);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();

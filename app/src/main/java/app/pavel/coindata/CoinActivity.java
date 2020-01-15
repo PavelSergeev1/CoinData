@@ -354,7 +354,7 @@ public class CoinActivity extends AppCompatActivity {
             ImageView imageView = item.findViewById(R.id.imageViewList);
             ProgressBar progressBar = item.findViewById(R.id.progressBarListImage);
 
-            setCoinListImage(CoinId, imageView, progressBar, this, 50);
+            setCoinListImage(CoinId, imageView, progressBar, this, 100);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -512,23 +512,32 @@ public class CoinActivity extends AppCompatActivity {
 
         try {
             if (!ARRAY_COIN[6].equals("") && !ARRAY_COIN[6].equals("null")) {
-                if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1).replaceAll("%", "")) > 0) {
+                if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1)
+                        .replaceAll("%", "")) > 0) {
                     tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorGreen));
-                } else if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1).replaceAll("%", "")) < 0) {
+                } else if (Float.valueOf(ARRAY_COIN[6].substring(0, ARRAY_COIN[6].length() - 1)
+                        .replaceAll("%", "")) < 0) {
                     tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorRed));
                 }
             }
             if (!ARRAY_COIN[7].equals("") && !ARRAY_COIN[7].equals("null")) {
-                if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1).replaceAll("%", "")) > 0) {
-                    tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorGreen));
-                } else if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1).replaceAll("%", "")) < 0) {
-                    tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorRed));
+                if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1)
+                        .replaceAll("%", "")) > 0) {
+                    tvPercentTwentyFourHourData.setTextColor(
+                            getResources().getColor(R.color.colorGreen));
+                } else if (Float.valueOf(ARRAY_COIN[7].substring(0, ARRAY_COIN[7].length() - 1)
+                        .replaceAll("%", "")) < 0) {
+                    tvPercentTwentyFourHourData.setTextColor(
+                            getResources().getColor(R.color.colorRed));
                 }
             }
             if (!ARRAY_COIN[8].equals("") && !ARRAY_COIN[8].equals("null")) {
-                if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1).replaceAll("%", "")) > 0) {
-                    tvPercentSevenDaysData.setTextColor(getResources().getColor(R.color.colorGreen));
-                } else if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1).replaceAll("%", "")) < 0) {
+                if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1)
+                        .replaceAll("%", "")) > 0) {
+                    tvPercentSevenDaysData.setTextColor(
+                            getResources().getColor(R.color.colorGreen));
+                } else if (Float.valueOf(ARRAY_COIN[8].substring(0, ARRAY_COIN[8].length() - 1)
+                        .replaceAll("%", "")) < 0) {
                     tvPercentSevenDaysData.setTextColor(getResources().getColor(R.color.colorRed));
                 }
             }
@@ -569,7 +578,7 @@ public class CoinActivity extends AppCompatActivity {
         ImageView imageView = item.findViewById(R.id.imageViewList);
         ProgressBar progressBar = item.findViewById(R.id.progressBarListImage);
 
-        setCoinListImage(CoinId, imageView, progressBar, this, 50);
+        setCoinListImage(CoinId, imageView, progressBar, this, 100);
 
         item.setOnClickListener(new View.OnClickListener() {
             @Override

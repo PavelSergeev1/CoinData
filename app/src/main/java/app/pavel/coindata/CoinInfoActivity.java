@@ -13,6 +13,7 @@ import androidx.core.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,18 +24,16 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-
-import app.pavel.coindata.CoinActivity;
 
 public class CoinInfoActivity extends AppCompatActivity {
 
@@ -44,6 +43,10 @@ public class CoinInfoActivity extends AppCompatActivity {
 
     private static final String categories = "categories";
     private static final String description = "description";
+    private static final String hashing_algorithm = "hashing_algorithm";
+    private static final String links = "links";
+    private static final String homepage = "homepage";
+    private static final String genesis_date = "genesis_date";
     private static final String ticker = "ticker";
     private static final String en = "en";
     private static final String markets = "markets";
@@ -66,13 +69,19 @@ public class CoinInfoActivity extends AppCompatActivity {
     private String CoinMS = "";
     private String CoinUsage = "";
 
-    private static final String M15 = "M15";
-    private static final String M30 = "M30";
-    private static final String H1 = "H1";
-    private static final String H4 = "H4";
-    private static final String D1 = "D1";
+    private static final String H1 = "M1";
+    private static final String D1 = "M15";
+    private static final String M3 = "D1";
+    private static final String Y1 = "D7";
+    private static final String Y6 = "1M";
 
     private static final String graph_title = "price $ on hitbtc.com";
+
+    private Button button1H;
+    private Button button1D;
+    private Button button3M;
+    private Button button1Y;
+    private Button button6Y;
 
     private final Handler handler;
 
@@ -104,12 +113,18 @@ public class CoinInfoActivity extends AppCompatActivity {
         CoinMS = intent.getStringExtra("COIN_MS");
         CoinUsage = intent.getStringExtra("COIN_USAGE");
 
+        button1H = findViewById(R.id.btn1H);
+        button1D = findViewById(R.id.btn1D);
+        button3M = findViewById(R.id.btn3M);
+        button1Y = findViewById(R.id.btn1Y);
+        button6Y = findViewById(R.id.btn6Y);
+
         ImageView imageViewCoin = findViewById(R.id.imageViewCoin);
         ProgressBar progressBar = findViewById(R.id.progressBarImageCoin);
 
-        CoinActivity.setCoinListImage(CoinId, imageViewCoin, progressBar,this, 80);
+        CoinActivity.setCoinListImage(CoinId, imageViewCoin, progressBar,this, 150);
 
-        getPriceInfo(CoinSymbol, M15, false, false);
+        getPriceInfo(CoinSymbol, H1, false, false);
 
         setInformationAboutCoin();
         getCoinInfo();
@@ -217,13 +232,7 @@ public class CoinInfoActivity extends AppCompatActivity {
         new Thread() {
             public void run() {
                 final JSONObject json = RemoteFetchInfo.getJSONinfo(CoinId.toLowerCase());
-                if (json == null) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                        }
-                    });
-                } else {
+                if (json != null) {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -239,6 +248,63 @@ public class CoinInfoActivity extends AppCompatActivity {
         LinearLayout MainContainer = findViewById(R.id.CoinContainer);
 
         try {
+            try {
+                String hash_alg = json.getString(hashing_algorithm);
+
+                TextView tvHashingAlgorithmData =
+                        MainContainer.findViewById(R.id.tvHashingAlgorithmData);
+
+                if (!hash_alg.equals("null")) {
+                    tvHashingAlgorithmData.setText(hash_alg);
+                } else {
+                    tvHashingAlgorithmData.setTextColor(getResources().getColor(R.color.Gray1));
+                    tvHashingAlgorithmData.setText(R.string.data_not_found);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                JSONObject links_obj = json.getJSONObject(links);
+                String homepage_str = links_obj.getString(homepage);
+
+                TextView tvHomepageData =
+                        MainContainer.findViewById(R.id.tvHomepageData);
+
+                if (!homepage_str.equals("null")) {
+
+                    homepage_str = homepage_str.replaceAll(",,", "");
+
+                    tvHomepageData.setText(homepage_str
+                            .replaceAll("\\p{Ps}", "")
+                            .replaceAll("\\p{Pe}", "")
+                            .replaceAll("\\\\","")
+                            .replaceAll(",", "\n")
+                            .replaceAll("\"",""));
+                } else {
+                    tvHomepageData.setTextColor(getResources().getColor(R.color.Gray1));
+                    tvHomepageData.setText(R.string.data_not_found);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            try {
+                String gen_date = json.getString(genesis_date);
+
+                TextView tvGenesisDateData =
+                        MainContainer.findViewById(R.id.tvGenesisDateData);
+
+                if (!gen_date.equals("null")) {
+                    tvGenesisDateData.setText(gen_date);
+                } else {
+                    tvGenesisDateData.setTextColor(getResources().getColor(R.color.Gray1));
+                    tvGenesisDateData.setText(R.string.data_not_found);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             JSONArray DataArray = json.getJSONArray(categories);
             String obj = DataArray.toString();
 
@@ -266,7 +332,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                         .replaceAll("\"", "")
                         .replaceAll("\",\"", "\", \""));
 
-                text = "<html><body><p align=\"justify\">";
+                text = "<html><body style=\"color:black;font-size:15px;\"><p align=\"justify\">";
                 text += obj1.replaceAll("\\r\\n", " ")
                         .replaceAll("—", "-")
                         .replaceAll("”", "\"")
@@ -277,6 +343,9 @@ public class CoinInfoActivity extends AppCompatActivity {
                 text+= "</p></body></html>";
 
                 tvDescriptionData.loadData(text, "text/html", "utf-8");
+
+                //tvDescriptionData.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+                tvDescriptionData.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -287,13 +356,7 @@ public class CoinInfoActivity extends AppCompatActivity {
         new Thread() {
             public void run() {
                 final JSONObject json = RemoteFetchInfoTicker.getJSONinfo(CoinSymbol.toLowerCase());
-                if (json == null) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                        }
-                    });
-                } else {
+                if (json != null) {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -378,62 +441,64 @@ public class CoinInfoActivity extends AppCompatActivity {
 
     public void getGraph(View view) {
 
-        Button m15 = findViewById(R.id.btnM15);
-        Button m30 = findViewById(R.id.btnM30);
-        Button h1 = findViewById(R.id.btnH1);
-        Button h4 = findViewById(R.id.btnH4);
-        Button d1 = findViewById(R.id.btnD1);
-
         switch (view.getId()) {
-            case R.id.btnM15:
-                ColorStateList m15List = m15.getTextColors();
+            case R.id.btn1H:
+                ColorStateList m15List = button1H.getTextColors();
                 int m15color = m15List.getDefaultColor();
                 if (m15color == Color.WHITE) {
-                    disableButtons(m15, m30, h1, h4, d1);
-                    getPriceInfo(CoinSymbol, M15, false, false);
-                }
-                break;
-            case R.id.btnM30:
-                ColorStateList m30List = m30.getTextColors();
-                int m30color = m30List.getDefaultColor();
-                if (m30color == Color.WHITE) {
-                    disableButtons(m15, m30, h1, h4, d1);
-                    getPriceInfo(CoinSymbol, M30, false, false);
-                }
-                break;
-            case R.id.btnH1:
-                ColorStateList h1List = h1.getTextColors();
-                int h1color = h1List.getDefaultColor();
-                if (h1color == Color.WHITE) {
-                    disableButtons(m15, m30, h1, h4, d1);
+                    disableButtons(button1H, button1D, button3M, button1Y, button6Y);
                     getPriceInfo(CoinSymbol, H1, false, false);
                 }
                 break;
-            case R.id.btnH4:
-                ColorStateList h4List = h4.getTextColors();
-                int h4color = h4List.getDefaultColor();
-                if (h4color == Color.WHITE) {
-                    disableButtons(m15, m30, h1, h4, d1);
-                    getPriceInfo(CoinSymbol, H4, true, false);
+            case R.id.btn1D:
+                ColorStateList m30List = button1D.getTextColors();
+                int m30color = m30List.getDefaultColor();
+                if (m30color == Color.WHITE) {
+                    disableButtons(button1H, button1D, button3M, button1Y, button6Y);
+                    getPriceInfo(CoinSymbol, D1, false, false);
                 }
                 break;
-            case R.id.btnD1:
-                ColorStateList d1List = d1.getTextColors();
+            case R.id.btn3M:
+                ColorStateList h1List = button3M.getTextColors();
+                int h1color = h1List.getDefaultColor();
+                if (h1color == Color.WHITE) {
+                    disableButtons(button1H, button1D, button3M, button1Y, button6Y);
+                    getPriceInfo(CoinSymbol, M3, false, false);
+                }
+                break;
+            case R.id.btn1Y:
+                ColorStateList h4List = button1Y.getTextColors();
+                int h4color = h4List.getDefaultColor();
+                if (h4color == Color.WHITE) {
+                    disableButtons(button1H, button1D, button3M, button1Y, button6Y);
+                    getPriceInfo(CoinSymbol, Y1, true, false);
+                }
+                break;
+            case R.id.btn6Y:
+                ColorStateList d1List = button6Y.getTextColors();
                 int d1color = d1List.getDefaultColor();
                 if (d1color == Color.WHITE) {
-                    disableButtons(m15, m30, h1, h4, d1);
-                    getPriceInfo(CoinSymbol, D1, false, true);
+                    disableButtons(button1H, button1D, button3M, button1Y, button6Y);
+                    getPriceInfo(CoinSymbol, Y6, false, true);
                 }
                 break;
         }
     }
 
-    private void disableButtons(Button m15, Button m30, Button h1, Button h4, Button d1) {
-        m15.setEnabled(false);
-        m30.setEnabled(false);
-        h1.setEnabled(false);
-        h4.setEnabled(false);
-        d1.setEnabled(false);
+    private void disableButtons(Button btn1, Button btn2, Button btn3, Button btn4, Button btn5) {
+        btn1.setEnabled(false);
+        btn2.setEnabled(false);
+        btn3.setEnabled(false);
+        btn4.setEnabled(false);
+        btn5.setEnabled(false);
+    }
+
+    private void enableButtons(Button btn1, Button btn2, Button btn3, Button btn4, Button btn5) {
+        btn1.setEnabled(true);
+        btn2.setEnabled(true);
+        btn3.setEnabled(true);
+        btn4.setEnabled(true);
+        btn5.setEnabled(true);
     }
 
     private void getPriceInfo(final String CoinSymbol, final String period, final boolean h4, final boolean d1){
@@ -454,7 +519,6 @@ public class CoinInfoActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            //startLoadingAnimation();
                             onDrawGraph(json, h4, d1, period);
                         }
                     });
@@ -480,78 +544,17 @@ public class CoinInfoActivity extends AppCompatActivity {
         int i = json.length();
         DataPoint[] dp = new DataPoint[i];
 
+        String[] dates = new String[i];
+
         String dt = "";
         int data_num = 0;
 
-        for (int o = 0; o < i; o++){
+        for (int j = 0; j < i; j++) {
             try {
-                String a = json.getJSONObject(o).getString("timestamp");
-                a = a.substring(5, 10);
-                if (o == 0 && !h4 && !d1) {
-                    dt = a;
-                    data_num += 1;
-                }
-                if(!dt.equals(a) && !h4 && !d1) {
-                    data_num += 1;
-                    dt = a;
-                }
-                if(!dt.equals(a) && h4 && !d1 && ( o % 25 == 0) ) {
-                    data_num += 1;
-                    dt = a;
-                }
-                if(!dt.equals(a) && !h4 && d1 && ( o % 25 == 0) ) {
-                    data_num += 1;
-                    dt = a;
-                }
-                if (o == i - 1 && ( h4 || d1 )) {
-                    dt = a;
-                    data_num += 1;
-                }
-            } catch (JSONException er) {
-                er.printStackTrace();
-            }
-        }
-
-        if (data_num > 5) data_num = 5;
-
-        String[] dates = new String[data_num];
-        int e = 0;
-        String a_curr = "";
-        for (int x = 0; x < i; x++) {
-            try {
-                String a = json.getJSONObject(x).getString("timestamp");
-                a = a.substring(5, 10);
-                if (x == 0 && !h4 && !d1) {
-                    a_curr = a;
-                    dates[e] = a;
-                    e++;
-                }
-                if (!a_curr.equals(a) && !h4 && !d1 && e <= data_num - 1) {
-                    a_curr = a;
-                    dates[e] = a;
-                    e++;
-                }
-                if (!a_curr.equals(a) && h4 && !d1 && (x % 25 == 0) && e < data_num - 1) {
-                    a_curr = a;
-                    dates[e] = a;
-                    e++;
-                }
-                if (!a_curr.equals(a) && !h4 && d1 && (x % 25 == 0) && e < data_num - 1) {
-                    a_curr = a;
-                    dates[e] = a;
-                    e++;
-                }
-                if (x == i - 1 && ( h4 || d1 )) {
-                    a_curr = a;
-                    dates[e] = a;
-                    e++;
-                }
-                String b = json.getJSONObject(x).getString("close");
-                dp[x] = new DataPoint(x, Double.parseDouble(b));
-
-            } catch (JSONException er) {
-                er.printStackTrace();
-                dp[x] = new DataPoint(x, 1);
+                String close_price = json.getJSONObject(j).getString("close");
+                dp[j] = new DataPoint(j, Double.parseDouble(close_price));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -563,63 +566,61 @@ public class CoinInfoActivity extends AppCompatActivity {
         graph.setTitle(graph_title);
         graph.setTitleTextSize(40);
 
-        graph.getGridLabelRenderer().setNumHorizontalLabels(3);
+        //graph.getGridLabelRenderer().setNumHorizontalLabels(3);
 
-        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-        staticLabelsFormatter.setHorizontalLabels(dates);
-        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+        //StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        //staticLabelsFormatter.setHorizontalLabels(dates);
+        //graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
 
         graph.setVisibility(View.VISIBLE);
 
-        Button m15 = findViewById(R.id.btnM15);
-        Button m30 = findViewById(R.id.btnM30);
-        Button h1 = findViewById(R.id.btnH1);
-        Button h44 = findViewById(R.id.btnH4);
-        Button d11 = findViewById(R.id.btnD1);
+        button1H = findViewById(R.id.btn1H);
+        button1D = findViewById(R.id.btn1D);
+        button3M = findViewById(R.id.btn3M);
+        button1Y = findViewById(R.id.btn1Y);
+        button6Y = findViewById(R.id.btn6Y);
 
         switch (period) {
-            case M15:
-                m15.setTextColor(getResources().getColor(R.color.Black));
-                m30.setTextColor(getResources().getColor(R.color.colorWhite));
-                h1.setTextColor(getResources().getColor(R.color.colorWhite));
-                h44.setTextColor(getResources().getColor(R.color.colorWhite));
-                d11.setTextColor(getResources().getColor(R.color.colorWhite));
-                break;
-            case M30:
-                m15.setTextColor(getResources().getColor(R.color.colorWhite));
-                m30.setTextColor(getResources().getColor(R.color.Black));
-                h1.setTextColor(getResources().getColor(R.color.colorWhite));
-                h44.setTextColor(getResources().getColor(R.color.colorWhite));
-                d11.setTextColor(getResources().getColor(R.color.colorWhite));
-                break;
             case H1:
-                m15.setTextColor(getResources().getColor(R.color.colorWhite));
-                m30.setTextColor(getResources().getColor(R.color.colorWhite));
-                h1.setTextColor(getResources().getColor(R.color.Black));
-                h44.setTextColor(getResources().getColor(R.color.colorWhite));
-                d11.setTextColor(getResources().getColor(R.color.colorWhite));
-                break;
-            case H4:
-                m15.setTextColor(getResources().getColor(R.color.colorWhite));
-                m30.setTextColor(getResources().getColor(R.color.colorWhite));
-                h1.setTextColor(getResources().getColor(R.color.colorWhite));
-                h44.setTextColor(getResources().getColor(R.color.Black));
-                d11.setTextColor(getResources().getColor(R.color.colorWhite));
+                button1H.setTextColor(getResources().getColor(R.color.Black));
+                button1D.setTextColor(getResources().getColor(R.color.colorWhite));
+                button3M.setTextColor(getResources().getColor(R.color.colorWhite));
+                button1Y.setTextColor(getResources().getColor(R.color.colorWhite));
+                button6Y.setTextColor(getResources().getColor(R.color.colorWhite));
                 break;
             case D1:
-                m15.setTextColor(getResources().getColor(R.color.colorWhite));
-                m30.setTextColor(getResources().getColor(R.color.colorWhite));
-                h1.setTextColor(getResources().getColor(R.color.colorWhite));
-                h44.setTextColor(getResources().getColor(R.color.colorWhite));
-                d11.setTextColor(getResources().getColor(R.color.Black));
+                button1H.setTextColor(getResources().getColor(R.color.colorWhite));
+                button1D.setTextColor(getResources().getColor(R.color.Black));
+                button3M.setTextColor(getResources().getColor(R.color.colorWhite));
+                button1Y.setTextColor(getResources().getColor(R.color.colorWhite));
+                button6Y.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case M3:
+                button1H.setTextColor(getResources().getColor(R.color.colorWhite));
+                button1D.setTextColor(getResources().getColor(R.color.colorWhite));
+                button3M.setTextColor(getResources().getColor(R.color.Black));
+                button1Y.setTextColor(getResources().getColor(R.color.colorWhite));
+                button6Y.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case Y1:
+                button1H.setTextColor(getResources().getColor(R.color.colorWhite));
+                button1D.setTextColor(getResources().getColor(R.color.colorWhite));
+                button3M.setTextColor(getResources().getColor(R.color.colorWhite));
+                button1Y.setTextColor(getResources().getColor(R.color.Black));
+                button6Y.setTextColor(getResources().getColor(R.color.colorWhite));
+                break;
+            case Y6:
+                button1H.setTextColor(getResources().getColor(R.color.colorWhite));
+                button1D.setTextColor(getResources().getColor(R.color.colorWhite));
+                button3M.setTextColor(getResources().getColor(R.color.colorWhite));
+                button1Y.setTextColor(getResources().getColor(R.color.colorWhite));
+                button6Y.setTextColor(getResources().getColor(R.color.Black));
                 break;
         }
 
-        m15.setEnabled(true);
-        m30.setEnabled(true);
-        h1.setEnabled(true);
-        h44.setEnabled(true);
-        d11.setEnabled(true);
+        enableButtons(button1H, button1D, button3M, button1Y, button6Y);
 
         graph.getViewport().setScrollable(true); // enables horizontal scrolling
         graph.getViewport().setScrollableY(true); // enables vertical scrolling

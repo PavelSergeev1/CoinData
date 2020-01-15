@@ -1,5 +1,7 @@
 package app.pavel.coindata;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -17,7 +19,11 @@ class RemoteFetchInfo {
 
     static JSONObject getJSONinfo(String CoinId) {
         try {
-            setString(CoinId);
+
+            if (CoinId.equals("binance-coin"))
+                setString("binancecoin");
+            else
+                setString(CoinId);
 
             URL url = new URL(OPEN_COIN_API);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
