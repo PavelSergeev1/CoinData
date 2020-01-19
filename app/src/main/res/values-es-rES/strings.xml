@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="CryptocurrencyABCData">Una criptomoneda es un activo digital diseñado para funcionar como medio de intercambio que utiliza una criptografía sólida para asegurar transacciones financieras, controlar la creación de unidades adicionales y verificar la transferencia de activos. Las criptomonedas utilizan el control descentralizado en lugar de la moneda digital centralizada y los sistemas de banca central. El control descentralizado de cada criptomoneda funciona a través de la tecnología de contabilidad distribuida, generalmente una cadena de bloques, que sirve como una base de datos de transacciones financieras públicas. Bitcoin, lanzado por primera vez como software de código abierto en 2009, generalmente se considera la primera criptomoneda descentralizada. Desde el lanzamiento de bitcoin, se han creado más de 6,000 altcoins (variantes alternativas de bitcoin u otras criptomonedas). Fuente: wikipedia.org/wiki/Cryptocurrency</string>
+    <string name="Asset">ACTIVO</string>
+    <string name="Category">Categoría:</string>
+    <string name="ChangePrice">CAMBIO DE PRECIO</string>
+    <string name="CirculatingSupply">Suministro circulante:</string>
+    <string name="CryptocurrencyABC">¿Qué es la criptomoneda?</string>
+    <string name="D1">1 D</string>
+    <string name="Description">Descripción</string>
+    <string name="Exchange">Intercambiar</string>
+    <string name="GenesisDate">Fecha de Génesis:</string>
+    <string name="H1">1 H</string>
+    <string name="HashingAlgorithm">Algoritmo de hash:</string>
+    <string name="Homepage">Página principal:</string>
+    <string name="M3">3 M</string>
+    <string name="MAX">MAX</string>
+    <string name="MarketCapitalization">Capitalización de mercado:</string>
+    <string name="MarketCap">Cap.</string>
+    <string name="PRICE">PRECIO</string>
+    <string name="PercentOneHour">1 h</string>
+    <string name="PercentSevenDays">7 d</string>
+    <string name="PercentTwentyFourHour">24 h</string>
+    <string name="Price">Precio</string>
+    <string name="PriceBTC">Precio en BTC:</string>
+    <string name="PriceChange">Cambio de precio:</string>
+    <string name="PriceDollar">Precio $</string>
+    <string name="Rank">Rango:</string>
+    <string name="TotalSupply">Suministro total:</string>
+    <string name="UPDATE_TIME">TIEMPO DE ACTUALIZACION</string>
+    <string name="Update">ACTUALIZAR</string>
+    <string name="Volume24Hours">Volumen en 24 horas:</string>
+    <string name="Volume24">Vol. 24 h</string>
+    <string name="Y1">1 A</string>
+    <string name="about">Acerca de la aplicación</string>
+    <string name="about_button">ACERCA DE</string>
+    <string name="coin_logo">Este es un logotipo de moneda seleccionada</string>
+    <string name="data_not_found">Datos no encontrados</string>
+    <string name="internet_error">Algo salió mal. Por favor revise su conexion a internet</string>
+    <string name="loading">cargando…</string>
+    <string name="sources">Fuentes de datos</string>
+    <string name="AboutApp">CoinData le brinda una lista de criptomonedas (2000+, que se ordenó por su capitalización de mercado), precios en algunos mercados y una descripción de la moneda elegida. Todos los datos se actualizan en línea y se brindan con muy buenos servicios (ver más abajo). Tenga en cuenta que la información gráfica proporcionada por crypto exchange www.hitbtc.com y el rango máximo es igual al historial de negociación en este intercambio.</string>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="AboutApp">CoinData vous donne la liste des crypto-monnaies (2000+, triées selon leur capitalisation boursière), les prix sur quelques marchés et la description de la pièce choisie. Toutes les données sont mises à jour en ligne et fournies par de très bons services (voir ci-dessous). Veuillez noter que les informations graphiques fournies par crypto exchange www.hitbtc.com et la plage maximale correspondent à l\'historique des transactions sur cet échange.</string>
+    <string name="Asset">ATOUT</string>
+    <string name="Category">Catégorie:</string>
+    <string name="ChangePrice">CHANGEMENT DE PRIX</string>
+    <string name="CirculatingSupply">Alimentation en circulation:</string>
+    <string name="CryptocurrencyABC">Qu\'est-ce que la crypto-monnaie?</string>
+    <string name="D1">1 J</string>
+    <string name="Description">La description</string>
+    <string name="Exchange">Échange</string>
+    <string name="GenesisDate">Date de la genèse:</string>
+    <string name="H1">1 H</string>
+    <string name="HashingAlgorithm">Algorithme de hachage:</string>
+    <string name="Homepage">Page d\'accueil:</string>
+    <string name="M3">3 M</string>
+    <string name="MAX">MAX</string>
+    <string name="MarketCapitalization">Capitalisation boursière:</string>
+    <string name="MarketCap">Cap.</string>
+    <string name="PRICE">PRIX</string>
+    <string name="PercentOneHour">1 h</string>
+    <string name="PercentSevenDays">7 j</string>
+    <string name="PercentTwentyFourHour">24 h</string>
+    <string name="Price">Prix</string>
+    <string name="PriceBTC">Prix en BTC:</string>
+    <string name="PriceChange">Changement de prix:</string>
+    <string name="PriceDollar">Prix $</string>
+    <string name="Rank">Rang:</string>
+    <string name="TotalSupply">Approvisionnement total:</string>
+    <string name="UPDATE_TIME">TEMPS DE MISE À JOUR</string>
+    <string name="Update">Réactualiser</string>
+    <string name="Volume24Hours">Volume en 24 heures:</string>
+    <string name="Y1">1 A</string>
+    <string name="about">À propos de l\'application</string>
+    <string name="about_button">SUR</string>
+    <string name="coin_logo">Ceci est un logo de pièce sélectionnée</string>
+    <string name="data_not_found">Aucune donnée disponible</string>
+    <string name="internet_error">Quelque chose a mal tourné. S\'il vous plait, vérifiez votre connexion internet</string>
+    <string name="loading">chargement…</string>
+    <string name="sources">Source d\'information</string>
+    <string name="Volume24">Vol. 24 h</string>
+    <string name="CryptocurrencyABCData">Une crypto-monnaie est un actif numérique conçu pour fonctionner comme un moyen d\'échange qui utilise une cryptographie forte pour sécuriser les transactions financières, contrôler la création d\'unités supplémentaires et vérifier le transfert d\'actifs. Les crypto-monnaies utilisent un contrôle décentralisé par opposition à la monnaie numérique centralisée et aux systèmes de banque centrale. Le contrôle décentralisé de chaque crypto-monnaie fonctionne grâce à la technologie du grand livre distribué, généralement une blockchain, qui sert de base de données de transactions financières publiques. Bitcoin, sorti pour la première fois en tant que logiciel open source en 2009, est généralement considéré comme la première crypto-monnaie décentralisée. Depuis la sortie du bitcoin, plus de 6 000 altcoins (variantes alternatives de bitcoin ou d\'autres crypto-monnaies) ont été créés. Source: wikipedia.org/wiki/Cryptocurrency</string>
+</resources>

@@ -21,7 +21,7 @@ class RemoteFetch {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
 
-            StringBuffer json = new StringBuffer(4096);
+            StringBuilder json = new StringBuilder(4096);
             String tmp;
             while ((tmp = reader.readLine()) != null)
                 json.append(tmp).append("\n");

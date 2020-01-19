@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="about_margin_vertical">15dp</dimen>
-    <dimen name="about_card_margin_vertical">10dp</dimen>
 
-    <dimen name="about_text_size">28sp</dimen>
     <dimen name="data_sources_text_size">20sp</dimen>
     <dimen name="about_text_text_size">14sp</dimen>
-    <dimen name="address_currency_text_size">20sp</dimen>
-    <dimen name="address_button_text_size">15sp</dimen>
-    <dimen name="address_text_size">13sp</dimen>
-
-    <dimen name="address_height">70dp</dimen>
 
     <dimen name="coin_info_name">24sp</dimen>
+    <dimen name="aboutMarginBottom">35dp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="coin_image_text_margin_vertical">15dp</dimen>
+    <dimen name="item_coin_height_vertical">70dp</dimen>
+    <dimen name="coin_image_text_horizontal_margin">30dp</dimen>
 </resources>

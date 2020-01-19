@@ -24,8 +24,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GridLabelRenderer;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -124,7 +122,7 @@ public class CoinInfoActivity extends AppCompatActivity {
 
         CoinActivity.setCoinListImage(CoinId, imageViewCoin, progressBar,this, 150);
 
-        getPriceInfo(CoinSymbol, H1, false, false);
+        getPriceInfo(CoinSymbol, H1);
 
         setInformationAboutCoin();
         getCoinInfo();
@@ -316,37 +314,48 @@ public class CoinInfoActivity extends AppCompatActivity {
             WebView tvDescriptionData = MainContainer.findViewById(R.id.tvDescriptionData);
             String text;
 
-            if (obj.equals("[]") && obj1.equals("[]")) {
-                tvCategoryData.setText(R.string.data_not_found);
-                tvCategoryData.setTextColor(getResources().getColor(R.color.Gray1));
-                text = "<html><body><p align=\"justify\">";
-                text += getResources().getString(R.string.data_not_found);
-                text+= "</p></body></html>";
-                tvDescriptionData.loadData(text, "text/html", "utf-8");
-            } else {
-                TextView tvDescription = MainContainer.findViewById(R.id.tvDescription);
-                tvDescription.setVisibility(View.VISIBLE);
-
-                tvCategoryData.setText(obj.substring(1, obj.length() - 1)
-                        .replaceAll(",",", ")
-                        .replaceAll("\"", "")
-                        .replaceAll("\",\"", "\", \""));
-
-                text = "<html><body style=\"color:black;font-size:15px;\"><p align=\"justify\">";
-                text += obj1.replaceAll("\\r\\n", " ")
-                        .replaceAll("—", "-")
-                        .replaceAll("”", "\"")
-                        .replaceAll("“", "\"")
-                        .replaceAll("’", "'")
-                        .replaceAll("‘", "'")
-                        .replaceAll("–", "-");
-                text+= "</p></body></html>";
-
-                tvDescriptionData.loadData(text, "text/html", "utf-8");
-
-                //tvDescriptionData.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-                tvDescriptionData.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+            try {
+                if (obj.equals("[]") ) {
+                    tvCategoryData.setText(R.string.data_not_found);
+                    tvCategoryData.setTextColor(getResources().getColor(R.color.Gray1));
+                } else {
+                    tvCategoryData.setText(obj.substring(1, obj.length() - 1)
+                            .replaceAll(",",", ")
+                            .replaceAll("\"", "")
+                            .replaceAll("\",\"", "\", \""));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+            try {
+                if (obj1.equals("[]")) {
+                    text = "<html><body><p align=\"justify\">";
+                    text += getResources().getString(R.string.data_not_found);
+                    text+= "</p></body></html>";
+                    tvDescriptionData.loadData(text, "text/html", "utf-8");
+                } else {
+                    TextView tvDescription = MainContainer.findViewById(R.id.tvDescription);
+                    tvDescription.setVisibility(View.VISIBLE);
+
+                    text = "<html><body style=\"color:black;font-size:15px;\"><p align=\"justify\">";
+                    text += obj1.replaceAll("\\r\\n", " ")
+                            .replaceAll("—", "-")
+                            .replaceAll("”", "\"")
+                            .replaceAll("“", "\"")
+                            .replaceAll("’", "'")
+                            .replaceAll("‘", "'")
+                            .replaceAll("–", "-");
+                    text+= "</p></body></html>";
+
+                    tvDescriptionData.loadData(text, "text/html", "utf-8");
+
+                    tvDescriptionData.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -405,22 +414,7 @@ public class CoinInfoActivity extends AppCompatActivity {
 
                         tv1.setText(arr.getJSONObject(i).getString(market));
                         String p = arr.getJSONObject(i).getString(price);
-                        String pr = p;
-                        boolean scale = false;
-                        while (scale) {
-                            if (Double.valueOf(p) > 1) {
-                                p = df3.format(Double.valueOf(p));
-                                scale = true;
-                            } else {
-                                for (int j = 0; j < 10; j++) {
-                                    pr = pr.substring(0, pr.length() - j);
-                                    if (Double.valueOf(pr) == 0) {
-                                        p = p.substring(0, p.length() - j + 2);
-                                        scale = true;
-                                    }
-                                }
-                            }
-                        }
+
                         tv2.setText(p);
                         String vol = arr.getJSONObject(i).getString(volume);
                         vol = df3.format(Double.valueOf(vol));
@@ -447,7 +441,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                 int m15color = m15List.getDefaultColor();
                 if (m15color == Color.WHITE) {
                     disableButtons(button1H, button1D, button3M, button1Y, button6Y);
-                    getPriceInfo(CoinSymbol, H1, false, false);
+                    getPriceInfo(CoinSymbol, H1);
                 }
                 break;
             case R.id.btn1D:
@@ -455,7 +449,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                 int m30color = m30List.getDefaultColor();
                 if (m30color == Color.WHITE) {
                     disableButtons(button1H, button1D, button3M, button1Y, button6Y);
-                    getPriceInfo(CoinSymbol, D1, false, false);
+                    getPriceInfo(CoinSymbol, D1);
                 }
                 break;
             case R.id.btn3M:
@@ -463,7 +457,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                 int h1color = h1List.getDefaultColor();
                 if (h1color == Color.WHITE) {
                     disableButtons(button1H, button1D, button3M, button1Y, button6Y);
-                    getPriceInfo(CoinSymbol, M3, false, false);
+                    getPriceInfo(CoinSymbol, M3);
                 }
                 break;
             case R.id.btn1Y:
@@ -471,7 +465,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                 int h4color = h4List.getDefaultColor();
                 if (h4color == Color.WHITE) {
                     disableButtons(button1H, button1D, button3M, button1Y, button6Y);
-                    getPriceInfo(CoinSymbol, Y1, true, false);
+                    getPriceInfo(CoinSymbol, Y1);
                 }
                 break;
             case R.id.btn6Y:
@@ -479,7 +473,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                 int d1color = d1List.getDefaultColor();
                 if (d1color == Color.WHITE) {
                     disableButtons(button1H, button1D, button3M, button1Y, button6Y);
-                    getPriceInfo(CoinSymbol, Y6, false, true);
+                    getPriceInfo(CoinSymbol, Y6);
                 }
                 break;
         }
@@ -501,7 +495,7 @@ public class CoinInfoActivity extends AppCompatActivity {
         btn5.setEnabled(true);
     }
 
-    private void getPriceInfo(final String CoinSymbol, final String period, final boolean h4, final boolean d1){
+    private void getPriceInfo(final String CoinSymbol, final String period){
 
         startLoadingAnimation();
 
@@ -519,7 +513,7 @@ public class CoinInfoActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            onDrawGraph(json, h4, d1, period);
+                            onDrawGraph(json, period);
                         }
                     });
                 }
@@ -527,7 +521,7 @@ public class CoinInfoActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void onDrawGraph(JSONArray json, boolean h4, boolean d1, String period){
+    private void onDrawGraph(JSONArray json, String period){
 
         LinearLayout graph_linear_layout = findViewById(R.id.graph_linear_layout);
         graph_linear_layout.removeAllViews();
@@ -543,11 +537,6 @@ public class CoinInfoActivity extends AppCompatActivity {
 
         int i = json.length();
         DataPoint[] dp = new DataPoint[i];
-
-        String[] dates = new String[i];
-
-        String dt = "";
-        int data_num = 0;
 
         for (int j = 0; j < i; j++) {
             try {

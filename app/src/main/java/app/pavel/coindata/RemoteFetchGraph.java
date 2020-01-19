@@ -1,7 +1,5 @@
 package app.pavel.coindata;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 
 import java.io.BufferedReader;
@@ -31,7 +29,7 @@ class RemoteFetchGraph {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
 
-            StringBuffer json = new StringBuffer(1096);
+            StringBuilder json = new StringBuilder(1096);
             String tmp;
             while ((tmp = reader.readLine()) != null)
                 json.append(tmp).append("\n");

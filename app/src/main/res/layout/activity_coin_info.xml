@@ -304,7 +304,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginStart="5dp"
                         android:theme="@style/RobotoTextViewStyle"
-                        android:text="@string/BTC"
+                        android:text="@string/"
                         android:textSize="14sp"/>
 
                     <View
@@ -605,10 +605,11 @@
                     android:id="@+id/tvDescriptionData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/aboutMarginBottom"
                     android:autoLink="web"
                     android:linksClickable="true"
-                    android:theme="@style/WebViewText"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:theme="@style/WebViewText" />
             </RadioGroup>
         </LinearLayout>
     </ScrollView>

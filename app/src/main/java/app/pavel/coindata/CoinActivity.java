@@ -368,23 +368,23 @@ public class CoinActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String COIN_ID = String.valueOf(item.getTag());
                 int len = COIN.length;
-                for (int i = 0; i < len; i++) {
-                    if (COIN_ID.equals(COIN[i][13])) {
+                for (String[] strings : COIN) {
+                    if (COIN_ID.equals(strings[13])) {
                         Intent intent = new Intent(CoinActivity.this, CoinInfoActivity.class);
                         intent.putExtra("COIN_ID", COIN_ID);
-                        intent.putExtra("COIN_NAME", COIN[i][1]);
-                        intent.putExtra("COIN_SYMBOL", COIN[i][2]);
-                        intent.putExtra("COIN_RANK", COIN[i][3]);
-                        intent.putExtra("COIN_PRICE", COIN[i][4]);
-                        intent.putExtra("COIN_PRICEBTC", COIN[i][5]);
-                        intent.putExtra("COIN_P1H", COIN[i][6]);
-                        intent.putExtra("COIN_P24H", COIN[i][7]);
-                        intent.putExtra("COIN_P7D", COIN[i][8]);
-                        intent.putExtra("COIN_MCAP", COIN[i][9]);
-                        intent.putExtra("COIN_V24H", COIN[i][10]);
-                        intent.putExtra("COIN_CS", COIN[i][11].substring(0, COIN[i][11].length() - 3));
-                        intent.putExtra("COIN_MS", COIN[i][12]);
-                        intent.putExtra("COIN_USAGE", COIN[i][14]);
+                        intent.putExtra("COIN_NAME", strings[1]);
+                        intent.putExtra("COIN_SYMBOL", strings[2]);
+                        intent.putExtra("COIN_RANK", strings[3]);
+                        intent.putExtra("COIN_PRICE", strings[4]);
+                        intent.putExtra("COIN_PRICEBTC", strings[5]);
+                        intent.putExtra("COIN_P1H", strings[6]);
+                        intent.putExtra("COIN_P24H", strings[7]);
+                        intent.putExtra("COIN_P7D", strings[8]);
+                        intent.putExtra("COIN_MCAP", strings[9]);
+                        intent.putExtra("COIN_V24H", strings[10]);
+                        intent.putExtra("COIN_CS", strings[11].substring(0, strings[11].length() - 3));
+                        intent.putExtra("COIN_MS", strings[12]);
+                        intent.putExtra("COIN_USAGE", strings[14]);
                         startActivity(intent);
                     }
                 }
@@ -585,23 +585,23 @@ public class CoinActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String COIN_ID = String.valueOf(item.getTag());
                 int len = COIN.length;
-                for (int i = 0; i < len; i++) {
-                    if (COIN_ID.equals(COIN[i][13])) {
+                for (String[] strings : COIN) {
+                    if (COIN_ID.equals(strings[13])) {
                         Intent intent = new Intent(CoinActivity.this, CoinInfoActivity.class);
-                        intent.putExtra("COIN_NAME", COIN[i][1]);
-                        intent.putExtra("COIN_SYMBOL", COIN[i][2]);
-                        intent.putExtra("COIN_RANK", COIN[i][3]);
-                        intent.putExtra("COIN_PRICE", COIN[i][4]);
-                        intent.putExtra("COIN_PRICEBTC", COIN[i][5]);
-                        intent.putExtra("COIN_P1H", COIN[i][6]);
-                        intent.putExtra("COIN_P24H", COIN[i][7]);
-                        intent.putExtra("COIN_P7D", COIN[i][8]);
-                        intent.putExtra("COIN_MCAP", COIN[i][9]);
-                        intent.putExtra("COIN_V24H", COIN[i][10]);
-                        intent.putExtra("COIN_CS", COIN[i][11]);
-                        intent.putExtra("COIN_MS", COIN[i][12]);
-                        intent.putExtra("COIN_ID", COIN[i][13]);
-                        intent.putExtra("COIN_USAGE", COIN[i][14]);
+                        intent.putExtra("COIN_NAME", strings[1]);
+                        intent.putExtra("COIN_SYMBOL", strings[2]);
+                        intent.putExtra("COIN_RANK", strings[3]);
+                        intent.putExtra("COIN_PRICE", strings[4]);
+                        intent.putExtra("COIN_PRICEBTC", strings[5]);
+                        intent.putExtra("COIN_P1H", strings[6]);
+                        intent.putExtra("COIN_P24H", strings[7]);
+                        intent.putExtra("COIN_P7D", strings[8]);
+                        intent.putExtra("COIN_MCAP", strings[9]);
+                        intent.putExtra("COIN_V24H", strings[10]);
+                        intent.putExtra("COIN_CS", strings[11]);
+                        intent.putExtra("COIN_MS", strings[12]);
+                        intent.putExtra("COIN_ID", strings[13]);
+                        intent.putExtra("COIN_USAGE", strings[14]);
                         startActivity(intent);
                     }
                 }

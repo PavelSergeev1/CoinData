@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">CoinData</string>
 
     <string name="Asset">ASSET</string>
     <string name="Price">Price</string>
@@ -30,8 +29,6 @@
     <string name="Y1">1Y</string>
     <string name="MAX">MAX</string>
 
-    <string name="BTC" translatable="false">BTC</string>
-
     <string name="AboutApp">"\t" CoinData gives you list of cryptocurrencies (2000+, which
         sorted by its market capitalization), prices on a few markets and description about
         choosed coin. All data updates online and provides by very good services (see below).
@@ -60,26 +57,12 @@
     <string name="Homepage">Homepage:</string>
     <string name="GenesisDate">Genesis date:</string>
 
-    <string name="dollar" translatable="false">$</string>
-
     <string name="data_not_found">No data found</string>
     <string name="internet_error">Something went wrong. Please, check your internet connection</string>
     <string name="loading">loading…</string>
 
-    <string name="Coinlore" translatable="false">Coinlore</string>
-    <string name="CoinloreLink" translatable="false">www.coinlore.com</string>
-
-    <string name="Coingecko" translatable="false">Coingecko</string>
-    <string name="CoingeckoLink" translatable="false">www.coingecko.com</string>
-
-    <string name="Cryptonator" translatable="false">Cryptonator</string>
-    <string name="CryptonatorLink" translatable="false">www.cryptonator.com</string>
-
-    <string name="HitBTC" translatable="false">HitBTC</string>
-    <string name="HitBTCLink" translatable="false">www.hitbtc.com</string>
     <string name="sources">Data sources</string>
     <string name="about">About app</string>
     <string name="about_button">ABOUT</string>
     <string name="coin_logo">This is a logo of selected coin</string>
-    <string name="percent" translatable="false">%</string>
 </resources>
