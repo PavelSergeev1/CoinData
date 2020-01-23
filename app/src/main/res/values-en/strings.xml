@@ -65,4 +65,5 @@
     <string name="about">About app</string>
     <string name="about_button">ABOUT</string>
     <string name="coin_logo">This is a logo of selected coin</string>
+    <string name="connection_error">Connection error</string>
 </resources>

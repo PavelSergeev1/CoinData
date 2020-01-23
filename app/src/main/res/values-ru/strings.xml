@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Asset">АКТИВ</string>
+    <string name="Category">Категория:</string>
+    <string name="ChangePrice">ИЗМЕНЕНИЕ ЦЕН</string>
+    <string name="CirculatingSupply">Текущее предложение:</string>
+    <string name="CryptocurrencyABC">Что такое криптовалюта?</string>
+    <string name="D1">1Д</string>
+    <string name="Description">Описание</string>
+    <string name="Exchange">Курс обмена</string>
+    <string name="GenesisDate">Дата создания:</string>
+    <string name="H1">1Ч</string>
+    <string name="HashingAlgorithm">Алгоритм хеширования:</string>
+    <string name="Homepage">Домашняя страница:</string>
+    <string name="M3">3М</string>
+    <string name="MAX">МАКС</string>
+    <string name="MarketCap">Кап.</string>
+    <string name="MarketCapitalization">Рыночная капитализация:</string>
+    <string name="PRICE">ЦЕНА</string>
+    <string name="PercentOneHour">1 ч</string>
+    <string name="PercentSevenDays">7 д</string>
+    <string name="PercentTwentyFourHour">24 ч</string>
+    <string name="Price">Цена</string>
+    <string name="PriceBTC">Цена в BTC:</string>
+    <string name="PriceChange">Изм. цены:</string>
+    <string name="PriceDollar">Цена в $</string>
+    <string name="Rank">Ранг:</string>
+    <string name="TotalSupply">Конечное предложение:</string>
+    <string name="UPDATE_TIME">ВРЕМЯ ОБНОВЛЕНИЯ</string>
+    <string name="Update">ОБНОВИТЬ</string>
+    <string name="Volume24">Об. 24 ч</string>
+    <string name="Volume24Hours">Оборот за 24 часа:</string>
+    <string name="Y1">1Г</string>
+    <string name="about">О приложении</string>
+    <string name="about_button">ИНФО</string>
+    <string name="coin_logo">Это логотип выбранной монеты</string>
+    <string name="connection_error">Ошибка подключения</string>
+    <string name="data_not_found">Данные не найдены</string>
+    <string name="internet_error">Что-то пошло не так. Пожалуйста, проверьте ваше интернет-соединение</string>
+    <string name="loading">загрузка...</string>
+    <string name="sources">Источники данных</string>
+    <string name="AboutApp">CoinData предоставляет вам список криптовалют (более 2000, которые отсортированы по рыночной капитализации), цены на нескольких рынках и описание выбранной монеты. Все данные обновляются онлайн и предоставляются очень хорошими сервисами (см. ниже). Обратите внимание, что информация для графиков цен предоставлена криптобиржой www.hitbtc.com и максимальный диапазон цены равен истории торгов на этой бирже.</string>
+    <string name="CryptocurrencyABCData">Криптовалюта - это цифровой актив, предназначенный для работы в качестве средства обмена, использующего надежную криптографию для защиты финансовых транзакций, контроля создания дополнительных единиц и проверки передачи активов. Криптовалюты используют децентрализованное управление, в отличие от централизованной цифровой валюты и центральных банковских систем. Децентрализованное управление каждой криптовалютой осуществляется с помощью технологии распределенного регистра, обычно блокчейна, которая служит базой данных публичных финансовых транзакций. Биткойн, выпущенный как программное обеспечение с открытым исходным кодом в 2009 году, считается первой децентрализованной криптовалютой. Со времени запуска биткойна было создано более 6000 альткойнов (альтернативных вариантов биткойнов или других криптовалют). Источник: https://ru.wikipedia.org/wiki/Криптовалюта</string>
+</resources>

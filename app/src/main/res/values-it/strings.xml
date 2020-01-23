@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="CryptocurrencyABCData">Una criptovaluta è una risorsa digitale progettata per funzionare come mezzo di scambio che utilizza una crittografia avanzata per proteggere le transazioni finanziarie, controllare la creazione di unità aggiuntive e verificare il trasferimento di attività. Le criptovalute usano un controllo decentralizzato rispetto alla valuta digitale centralizzata e ai sistemi bancari centrali. Il controllo decentralizzato di ciascuna criptovaluta funziona attraverso la tecnologia di contabilità distribuita, in genere una blockchain, che funge da database di transazioni finanziarie pubbliche. Bitcoin, rilasciato per la prima volta come software open source nel 2009, è generalmente considerato la prima criptovaluta decentralizzata. Dal rilascio di bitcoin, sono state create oltre 6.000 altcoin (varianti alternative di bitcoin o altre criptovalute). Fonte: wikipedia.org/wiki/Cryptocurrency</string>
+    <string name="CryptocurrencyABCData">Una criptovaluta è una risorsa digitale progettata per funzionare come mezzo di scambio che utilizza una crittografia avanzata per proteggere le transazioni finanziarie, controllare la creazione di unità aggiuntive e verificare il trasferimento di attività. Le criptovalute usano un controllo decentralizzato rispetto alla valuta digitale centralizzata e ai sistemi bancari centrali. Il controllo decentralizzato di ciascuna criptovaluta funziona attraverso la tecnologia di contabilità distribuita, in genere una blockchain, che funge da database di transazioni finanziarie pubbliche. Bitcoin, rilasciato per la prima volta come software open source nel 2009, è generalmente considerato la prima criptovaluta decentralizzata. Dal rilascio di bitcoin, sono state create oltre 6.000 altcoin (varianti alternative di bitcoin o altre criptovalute). Fonte: https://it.wikipedia.org/wiki/Criptovaluta</string>
     <string name="coin_logo">Questo è un logo della moneta selezionata</string>
     <string name="CirculatingSupply">Fornitura circolante:</string>
     <string name="Y1">1 A</string>
@@ -40,4 +40,5 @@
     <string name="about_button">DI</string>
     <string name="about">Informazioni sull\'app</string>
     <string name="AboutApp">CoinData ti fornisce un elenco di criptovalute (2000+, ordinate per capitalizzazione di mercato), prezzi su alcuni mercati e descrizione della moneta scelta. Tutti i dati vengono aggiornati online e forniti da ottimi servizi (vedi sotto). Si prega di notare che le informazioni grafiche fornite dallo scambio di criptovalute www.hitbtc.com e un intervallo massimo pari alla cronologia degli scambi su questo scambio.</string>
+    <string name="connection_error">Errore di connessione</string>
 </resources>

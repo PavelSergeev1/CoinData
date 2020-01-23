@@ -1,8 +1,11 @@
 package app.pavel.coindata;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Bundle;
 
@@ -50,6 +53,8 @@ public class CoinActivity extends AppCompatActivity {
 
     private boolean end_of_list = false;
 
+    private boolean contentIsShown = false;
+
     private final DecimalFormat df2 = new DecimalFormat("#.##");
 
     private String time;
@@ -74,68 +79,132 @@ public class CoinActivity extends AppCompatActivity {
         setHeader();
         setButton();
 
-        if (savedInstanceState != null) {
-            int array_coin_len = savedInstanceState.getInt("array_coin_len");
-            start = array_coin_len;
-            boolean end = false;
-            for (int i = 1; i <= array_coin_len; i++) {
-                String ARRAY_NAME = "COIN_" + i;
-                String[] ARRAY_COIN;
-                ARRAY_COIN = savedInstanceState.getStringArray(ARRAY_NAME);
-                if (i == array_coin_len) end = true;
-                setCoinInList(ARRAY_COIN != null ? ARRAY_COIN : new String[0], i, end);
-            }
-            String t = savedInstanceState.getString("time");
-            time = t;
-            LinearLayout TimeUpdateContainer = findViewById(R.id.TimeUpdateContainer);
-            TextView updateTime = TimeUpdateContainer.findViewById(R.id.updateTime);
-            if (!Objects.equals(t, null)) {
-                updateTime.setText(t);
+        if (isNetworkAvailable()) {
+            clearConnectionErrorImage();
+            if (savedInstanceState != null) {
+                int array_coin_len = savedInstanceState.getInt("array_coin_len");
+                start = array_coin_len;
+                boolean end = false;
+                for (int i = 1; i <= array_coin_len; i++) {
+                    String ARRAY_NAME = "COIN_" + i;
+                    String[] ARRAY_COIN;
+                    ARRAY_COIN = savedInstanceState.getStringArray(ARRAY_NAME);
+                    if (i == array_coin_len) end = true;
+                    setCoinInList(ARRAY_COIN != null ? ARRAY_COIN : new String[0], i, end);
+                }
+                String t = savedInstanceState.getString("time");
+                time = t;
+                LinearLayout TimeUpdateContainer = findViewById(R.id.TimeUpdateContainer);
+                TextView updateTime = TimeUpdateContainer.findViewById(R.id.updateTime);
+                if (!Objects.equals(t, null)) {
+                    updateTime.setText(t);
+                } else {
+                    updateTime.setText("");
+                }
             } else {
-                updateTime.setText("");
+                updatePrice();
             }
+        } else {
+            showConnectionError();
+            showConnectionErrorImage();
         }
 
-        if (savedInstanceState == null) {
-            updatePrice();
-        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        int len = start;
-        outState.putInt("array_coin_len", len);
-        TextView updateTime = findViewById(R.id.updateTime);
-        outState.putString("time", updateTime.getText().toString());
+        if (isNetworkAvailable() && contentIsShown) {
+            int len = start;
+            outState.putInt("array_coin_len", len);
+            TextView updateTime = findViewById(R.id.updateTime);
+            outState.putString("time", updateTime.getText().toString());
 
-        String COIN_NAME, COIN_SYMBOL, COIN_RANK, COIN_PRICE, COIN_PRICEBTC, COIN_P1H, COIN_P24H,
-                COIN_P7D, COIN_MCAP, COIN_V24H, COIN_CS, COIN_MS, COIN_ID, COIN_USAGE;
+            String COIN_NAME, COIN_SYMBOL, COIN_RANK, COIN_PRICE, COIN_PRICEBTC, COIN_P1H, COIN_P24H,
+                    COIN_P7D, COIN_MCAP, COIN_V24H, COIN_CS, COIN_MS, COIN_ID, COIN_USAGE;
 
-        for (int i = 1; i <= len; i++) {
-            if (COIN[i][1] != null) { COIN_NAME = COIN[i][1]; }  else COIN_NAME = "";
-            if (COIN[i][2] != null) { COIN_SYMBOL = COIN[i][2]; }  else COIN_SYMBOL = "";
-            if (COIN[i][3] != null) { COIN_RANK = COIN[i][3]; }  else COIN_RANK = "";
-            if (COIN[i][4] != null) { COIN_PRICE = COIN[i][4]; }  else COIN_PRICE = "";
-            if (COIN[i][5] != null) { COIN_PRICEBTC = COIN[i][5]; }  else COIN_PRICEBTC = "";
-            if (COIN[i][6] != null) { COIN_P1H = COIN[i][6]; }  else COIN_P1H = "";
-            if (COIN[i][7] != null) { COIN_P24H = COIN[i][7]; }  else COIN_P24H = "";
-            if (COIN[i][8] != null) { COIN_P7D = COIN[i][8]; }  else COIN_P7D = "";
-            if (COIN[i][9] != null) { COIN_MCAP = COIN[i][9]; }  else COIN_MCAP = "";
-            if (COIN[i][10] != null) { COIN_V24H = COIN[i][10]; }  else COIN_V24H = "";
-            if (COIN[i][11] != null) { COIN_CS = COIN[i][11].replace(".00", ""); }  else COIN_CS = "";
-            if (COIN[i][12] != null) { COIN_MS = COIN[i][12].replace(".00", ""); }  else COIN_MS = "";
-            if (COIN[i][13] != null) { COIN_ID = COIN[i][13]; }  else COIN_ID = "";
-            if (COIN[i][14] != null) { COIN_USAGE = COIN[i][14]; }  else COIN_USAGE = "";
+            for (int i = 1; i <= len; i++) {
+                if (COIN[i][1] != null)
+                    COIN_NAME = COIN[i][1];
+                else COIN_NAME = "";
+                if (COIN[i][2] != null)
+                    COIN_SYMBOL = COIN[i][2];
+                else COIN_SYMBOL = "";
+                if (COIN[i][3] != null)
+                    COIN_RANK = COIN[i][3];
+                else COIN_RANK = "";
+                if (COIN[i][4] != null)
+                    COIN_PRICE = COIN[i][4];
+                else COIN_PRICE = "";
+                if (COIN[i][5] != null)
+                    COIN_PRICEBTC = COIN[i][5];
+                else COIN_PRICEBTC = "";
+                if (COIN[i][6] != null)
+                    COIN_P1H = COIN[i][6];
+                else COIN_P1H = "";
+                if (COIN[i][7] != null)
+                    COIN_P24H = COIN[i][7];
+                else COIN_P24H = "";
+                if (COIN[i][8] != null)
+                    COIN_P7D = COIN[i][8];
+                else COIN_P7D = "";
+                if (COIN[i][9] != null)
+                    COIN_MCAP = COIN[i][9];
+                else COIN_MCAP = "";
+                if (COIN[i][10] != null)
+                    COIN_V24H = COIN[i][10];
+                else COIN_V24H = "";
+                if (COIN[i][11] != null)
+                    COIN_CS = COIN[i][11].replace(".00", "");
+                else COIN_CS = "";
+                if (COIN[i][12] != null)
+                    COIN_MS = COIN[i][12].replace(".00", "");
+                else COIN_MS = "";
+                if (COIN[i][13] != null)
+                    COIN_ID = COIN[i][13];
+                else COIN_ID = "";
+                if (COIN[i][14] != null)
+                    COIN_USAGE = COIN[i][14];
+                else COIN_USAGE = "";
 
-            String[] ARRAY_COIN = new String[]{ "",
-                    COIN_NAME, COIN_SYMBOL, COIN_RANK, COIN_PRICE, COIN_PRICEBTC, COIN_P1H,
-                    COIN_P24H, COIN_P7D, COIN_MCAP, COIN_V24H, COIN_CS, COIN_MS, COIN_ID,
-                    COIN_USAGE
-            };
-            String ARRAY_NAME = "COIN_" + i;
-            outState.putStringArray(ARRAY_NAME, ARRAY_COIN);
+                String[] ARRAY_COIN = new String[]{"",
+                        COIN_NAME, COIN_SYMBOL, COIN_RANK, COIN_PRICE, COIN_PRICEBTC, COIN_P1H,
+                        COIN_P24H, COIN_P7D, COIN_MCAP, COIN_V24H, COIN_CS, COIN_MS, COIN_ID,
+                        COIN_USAGE
+                };
+                String ARRAY_NAME = "COIN_" + i;
+                outState.putStringArray(ARRAY_NAME, ARRAY_COIN);
+            }
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = null;
+        if (connectivityManager != null) {
+            activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        }
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void showConnectionErrorImage() {
+        LinearLayout MainContainer = findViewById(R.id.MainContainer);
+        LayoutInflater inflater = getLayoutInflater();
+        View item = inflater.inflate(R.layout.connection_error_image, MainContainer, false);
+        item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+        item.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+        MainContainer.addView(item);
+    }
+
+    private void clearConnectionErrorImage() {
+        LinearLayout MainContainer = findViewById(R.id.MainContainer);
+        try {
+            View loading = MainContainer.findViewById(R.id.connectionErrorLayout);
+            MainContainer.removeView(loading);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -181,8 +250,11 @@ public class CoinActivity extends AppCompatActivity {
     }
 
     private void updatePrice(){
-        if (update == 1)
+        if (update == 1) {
             startAnimation();
+            if (isNetworkAvailable())
+                clearConnectionErrorImage();
+        }
         new Thread() {
             public void run() {
                 final JSONObject json = RemoteFetch.getJSON(start);
@@ -190,10 +262,9 @@ public class CoinActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(CoinActivity.this,
-                                    getString(R.string.internet_error),
-                                    Toast.LENGTH_LONG).show();
                             stopAnimation();
+                            showConnectionError();
+                            showConnectionErrorImage();
                         }
                     });
                 } else {
@@ -205,11 +276,19 @@ public class CoinActivity extends AppCompatActivity {
                                     setPrise(json, i, true);
                                 } else setPrise(json, i, false);
                             }
+
+                            contentIsShown = true;
                         }
                     });
                 }
             }
         }.start();
+    }
+
+    private void showConnectionError() {
+        Toast.makeText(CoinActivity.this,
+                getString(R.string.internet_error),
+                Toast.LENGTH_SHORT).show();
     }
 
     private void setPrise(JSONObject json, int i, boolean end){

@@ -11,4 +11,5 @@
     <dimen name="coin_image_text_margin_vertical">15dp</dimen>
     <dimen name="item_coin_height_vertical">70dp</dimen>
     <dimen name="coin_image_text_horizontal_margin">30dp</dimen>
+    <dimen name="about_margin_top">5dp</dimen>
 </resources>
