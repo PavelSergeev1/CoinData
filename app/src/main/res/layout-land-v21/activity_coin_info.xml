@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CoinInfoActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarCoinInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="@dimen/toolbar_image_size"
+            android:layout_height="@dimen/toolbar_image_size"
+            android:layout_marginEnd="@dimen/toolbar_image_margin_end"
+            android:layout_gravity="center_horizontal|end"
+            android:orientation="horizontal">
+            <ProgressBar
+                android:id="@+id/progressBarToolbarImage"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/toolbarImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/coin_logo"
+                tools:src="@drawable/ic_launcher_foreground" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/CoinContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/coin_info_item_margin_very_big"
+            android:layout_marginEnd="@dimen/coin_info_item_margin_very_big"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/graph_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin_big"
+                    android:layout_marginBottom="@dimen/coin_info_item_margin_big"
+                    android:orientation="vertical">
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="vertical"
+                    android:divider="@drawable/divider_coin_info">
+
+                    <TextView
+                        android:id="@+id/tvRank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="@string/Rank"
+                        android:textSize="@dimen/coin_info_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
+
+                    <TextView
+                        android:id="@+id/tvRankData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="false"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size"
+                        tools:text="1" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/coin_info_divider_height"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvRankData" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="vertical"
+                    android:divider="@drawable/divider_coin_info">
+
+                    <TextView
+                        android:id="@+id/tvSymbol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="@string/symbol"
+                        android:textSize="@dimen/coin_info_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
+
+                    <TextView
+                        android:id="@+id/tvSymbolData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="false"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size"
+                        tools:text="@string/BTC" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/coin_info_divider_height"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvSymbolData" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvCoinPRICE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Price"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size" />
+
+                    <TextView
+                        android:id="@+id/tvCoinPRICEData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size"
+                        tools:text="$ 8134.00" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/coin_info_divider_height"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvCoinPRICEData" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvCoinPriceBTC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/PriceBTC"
+                        android:textSize="@dimen/coin_info_text_size" />
+
+                    <TextView
+                        android:id="@+id/tvCoinPriceBTCData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="30dp"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size"
+                        tools:text="1.00000000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/tvCoinPriceBTCData"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/BTC"
+                        android:textSize="@dimen/coin_info_text_size"
+                        android:theme="@style/RobotoTextViewStyle" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/coin_info_divider_height"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvCoinPriceBTCData" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPriceChange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/PriceChange"
+                        android:textSize="@dimen/coin_info_text_size" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvPercentOneHour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:text="@string/PercentOneHour"
+                            android:textSize="@dimen/coin_info_text_size" />
+
+                        <TextView
+                            android:id="@+id/tvPercentOneHourData"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/coin_info_item_margin"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:textSize="@dimen/coin_info_text_size"
+                            tools:text="+ 1.00" />
+
+                        <TextView
+                            android:id="@+id/tvPercentTwentyFourHour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/coin_info_item_margin_big"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:text="@string/PercentTwentyFourHour"
+                            android:textSize="@dimen/coin_info_text_size" />
+
+                        <TextView
+                            android:id="@+id/tvPercentTwentyFourHourData"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:layout_marginStart="@dimen/coin_info_item_margin"
+                            android:textSize="@dimen/coin_info_text_size"
+                            tools:text="+ 2.00" />
+
+                        <TextView
+                            android:id="@+id/tvPercentSevenDays"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/coin_info_item_margin_big"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:text="@string/PercentSevenDays"
+                            android:textSize="@dimen/coin_info_text_size" />
+
+                        <TextView
+                            android:id="@+id/tvPercentSevenDaysData"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/coin_info_item_margin"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:textSize="@dimen/coin_info_text_size"
+                            tools:text="+ 3.00" />
+                    </RadioGroup>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/coin_info_divider_height"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvPriceChange" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/Category"
+                        android:textSize="@dimen/coin_info_text_size" />
+
+                    <TextView
+                        android:id="@+id/tvCategoryData"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_marginStart="@dimen/coin_info_item_margin"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size"
+                        tools:text="Cryptocurrency" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/coin_info_divider_height"
+                    android:background="@android:color/darker_gray" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvHashingAlgorithm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/HashingAlgorithm"
+                        android:textSize="@dimen/coin_info_text_size" />
+
+                    <TextView
+                        android:id="@+id/tvHashingAlgorithmData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size"
+                        tools:text="SHA-256" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/coin_info_divider_height"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvHashingAlgorithmData" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvGenesisDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/GenesisDate"
+                        android:textSize="@dimen/coin_info_text_size" />
+
+                    <TextView
+                        android:id="@+id/tvGenesisDateData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:autoLink="web"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size"
+                        tools:text="01.01.2008" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/coin_info_divider_height"
+                        android:background="@android:color/darker_gray"
+                        android:layout_alignBottom="@id/tvGenesisDateData" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvHomepage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/Homepage"
+                        android:textSize="@dimen/coin_info_text_size" />
+
+                    <TextView
+                        android:id="@+id/tvHomepageData"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_marginStart="@dimen/coin_info_item_margin"
+                        android:autoLink="web"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size"
+                        tools:text="www.bitcoin.com" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/coin_info_divider_height"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvBlockchainSite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:text="@string/blockchainSite"
+                        android:textSize="@dimen/coin_info_text_size" />
+
+                    <TextView
+                        android:id="@+id/tvBlockchainSiteData"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_marginStart="@dimen/coin_info_item_margin"
+                        android:autoLink="web"
+                        android:theme="@style/RobotoTextViewStyle"
+                        android:textSize="@dimen/coin_info_text_size"
+                        tools:text="https://btc.com/" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/coin_info_divider_height"
+                    android:background="@android:color/darker_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/block1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvMarketCap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:text="@string/MarketCapitalization"
+                            android:textSize="@dimen/coin_info_text_size" />
+
+                        <TextView
+                            android:id="@+id/tvVolume24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/coin_info_item_margin"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:text="@string/Volume24Hours"
+                            android:textSize="@dimen/coin_info_text_size" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="@dimen/coin_info_text_size" />
+
+                            <TextView
+                                android:id="@+id/tvUsage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/coin_info_item_margin"
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="@dimen/coin_info_text_size_small" />
+
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/coin_info_item_margin_big"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvMarketCapData"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="@dimen/coin_info_text_size"
+                                tools:text="147.77 B $" />
+
+                            <TextView
+                                android:id="@+id/tvVolume24Data"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/coin_info_item_margin"
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="@dimen/coin_info_text_size"
+                                tools:text="19.82 B $" />
+
+                        </RadioGroup>
+                    </RadioGroup>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/coin_info_divider_height"
+                    android:background="@android:color/darker_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/block2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvCirculatingSupply"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:text="@string/CirculatingSupply"
+                            android:textSize="@dimen/coin_info_text_size" />
+
+                        <TextView
+                            android:id="@+id/tvTotalSupply"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/coin_info_item_margin"
+                            android:theme="@style/RobotoTextViewStyle"
+                            android:text="@string/TotalSupply"
+                            android:textSize="@dimen/coin_info_text_size" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/coin_info_item_margin_big"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvEmission"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="@dimen/coin_info_text_size_small" />
+
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvCirculatingSupplyData"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="@dimen/coin_info_text_size"
+                                tools:text="18 107 284" />
+
+                            <TextView
+                                android:id="@+id/tvTotalSupplyData"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/coin_info_item_margin"
+                                android:theme="@style/RobotoTextViewStyle"
+                                android:textSize="@dimen/coin_info_text_size"
+                                tools:text="21 000 000" />
+                        </RadioGroup>
+                    </RadioGroup>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/coin_info_divider_height"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:id="@+id/tableContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+
+                    <TableLayout
+                        android:id="@+id/tlMarkets"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/coin_info_item_margin_big"
+                        android:layout_marginTop="@dimen/coin_info_item_margin"
+                        android:layout_marginEnd="@dimen/coin_info_item_margin_big"
+                        android:showDividers="middle" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:gravity="center_horizontal"
+                    android:theme="@style/RobotoTextViewStyle"
+                    android:text="@string/Description"
+                    android:textSize="@dimen/coin_info_text_size_big"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:id="@+id/tvDescriptionData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/coin_info_item_margin"
+                    android:autoLink="web"
+                    android:lineSpacingMultiplier="1.1"
+                    android:theme="@style/RobotoTextViewStyle"
+                    android:textSize="@dimen/coin_info_text_size"
+                    tools:text="@string/AboutApp"/>
+
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

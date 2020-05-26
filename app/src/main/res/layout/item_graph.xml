@@ -17,6 +17,8 @@
             android:id="@+id/graph"
             android:layout_width="match_parent"
             android:layout_height="230dp"
+            android:layout_marginTop="@dimen/coin_info_item_margin"
+            android:layout_marginBottom="@dimen/coin_info_item_margin"
             android:layout_gravity="center"
             android:clickable="true"
             android:focusable="true" />

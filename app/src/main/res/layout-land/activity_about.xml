@@ -5,6 +5,13 @@
     android:orientation="vertical"
     android:scrollbars="horizontal">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+    </androidx.appcompat.widget.Toolbar>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -20,18 +27,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/about"
-                android:textSize="28sp"
-                android:theme="@style/RobotoTextViewStyle" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:autoLink="web"
                 android:text="@string/AboutApp"
                 android:textSize="@dimen/about_text_text_size"
+                android:lineSpacingMultiplier="1.1"
                 android:theme="@style/RobotoTextViewStyle" />
 
             <TextView
@@ -151,6 +151,7 @@
                 android:autoLink="web"
                 android:text="@string/CryptocurrencyABCData"
                 android:textSize="@dimen/about_text_text_size"
+                android:lineSpacingMultiplier="1.1"
                 android:theme="@style/RobotoTextViewStyle" />
 
         </RadioGroup>

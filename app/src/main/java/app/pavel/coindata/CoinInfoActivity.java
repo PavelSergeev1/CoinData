@@ -8,8 +8,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -44,6 +47,8 @@ public class CoinInfoActivity extends AppCompatActivity {
     private static final String hashing_algorithm = "hashing_algorithm";
     private static final String links = "links";
     private static final String homepage = "homepage";
+    private static final String blockchain_site = "blockchain_site";
+    private static final String official_forum_url = "official_forum_url";
     private static final String genesis_date = "genesis_date";
     private static final String ticker = "ticker";
     private static final String en = "en";
@@ -51,6 +56,14 @@ public class CoinInfoActivity extends AppCompatActivity {
     private static final String market = "market";
     private static final String price = "price";
     private static final String volume = "volume";
+
+    private static final String H1 = "H1";
+    private static final String D1 = "D1";
+    private static final String M3 = "M3";
+    private static final String Y1 = "Y1";
+    private static final String Y6 = "Y6";
+
+    private static final String graph_title = "price $ on hitbtc.com";
 
     private String CoinId = "";
     private String CoinName = "";
@@ -66,14 +79,6 @@ public class CoinInfoActivity extends AppCompatActivity {
     private String CoinCS = "";
     private String CoinMS = "";
     private String CoinUsage = "";
-
-    private static final String H1 = "M1";
-    private static final String D1 = "M15";
-    private static final String M3 = "D1";
-    private static final String Y1 = "D7";
-    private static final String Y6 = "1M";
-
-    private static final String graph_title = "price $ on hitbtc.com";
 
     private Button button1H;
     private Button button1D;
@@ -92,8 +97,6 @@ public class CoinInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info);
 
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
         Intent intent = getIntent();
 
         CoinId = intent.getStringExtra("COIN_ID");
@@ -111,16 +114,24 @@ public class CoinInfoActivity extends AppCompatActivity {
         CoinMS = intent.getStringExtra("COIN_MS");
         CoinUsage = intent.getStringExtra("COIN_USAGE");
 
+        Toolbar toolbar = findViewById(R.id.toolbarCoinInfo);
+        toolbar.setTitle(CoinName);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(view -> finish());
+
         button1H = findViewById(R.id.btn1H);
         button1D = findViewById(R.id.btn1D);
         button3M = findViewById(R.id.btn3M);
         button1Y = findViewById(R.id.btn1Y);
         button6Y = findViewById(R.id.btn6Y);
 
-        ImageView imageViewCoin = findViewById(R.id.imageViewCoin);
-        ProgressBar progressBar = findViewById(R.id.progressBarImageCoin);
+        ImageView toolbarImageView = findViewById(R.id.toolbarImageView);
+        ProgressBar progressBarToolbarImage = findViewById(R.id.progressBarToolbarImage);
 
-        CoinActivity.setCoinListImage(CoinId, imageViewCoin, progressBar,this, 150);
+        CoinActivity.setCoinListImage(CoinId, toolbarImageView, progressBarToolbarImage,
+                this, 150);
 
         getPriceInfo(CoinSymbol, H1);
 
@@ -139,8 +150,7 @@ public class CoinInfoActivity extends AppCompatActivity {
         LinearLayout MainContainer = findViewById(R.id.CoinContainer);
 
         TextView tvMarketNumber = MainContainer.findViewById(R.id.tvRankData);
-        TextView tvCoin = MainContainer.findViewById(R.id.tvCoinSymbolData);
-        TextView tvCoinName = MainContainer.findViewById(R.id.tvCoinNAMEData);
+        TextView tvSymbolData = MainContainer.findViewById(R.id.tvSymbolData);
         TextView tvCoinPrice = findViewById(R.id.tvCoinPRICEData);
         TextView tvCoinPriceBTCData = findViewById(R.id.tvCoinPriceBTCData);
         TextView tvPercentOneHourData = findViewById(R.id.tvPercentOneHourData);
@@ -174,8 +184,7 @@ public class CoinInfoActivity extends AppCompatActivity {
         }
 
         tvMarketNumber.setText(CoinRank);
-        tvCoin.setText(CoinSymbol);
-        tvCoinName.setText(CoinName);
+        tvSymbolData.setText(CoinSymbol);
         tvCoinPrice.setText(CoinPrice);
 
         Float coin_price_in_btc = Float.parseFloat(CoinPriceBTC);
@@ -209,18 +218,16 @@ public class CoinInfoActivity extends AppCompatActivity {
             tvCirculatingSupplyData.setTextColor(getResources().getColor(R.color.Gray1));
         }
 
-
-
         if (!CoinCS.equals("") && !CoinCS.equals("0") && !CoinCS.equals("null") &&
                 !CoinMS.equals("") && !CoinMS.equals("0") &&
                 !CoinMS.equals("null")) {
-            String emission = df3.format(Double.valueOf(Double.valueOf(CoinCS) /
-                    Double.valueOf(CoinMS) * 100)) + getResources().getString(R.string.percent) +
+            String emission = df3.format(Double.valueOf(Double.parseDouble(CoinCS) /
+                    Double.parseDouble(CoinMS) * 100)) + getResources().getString(R.string.percent) +
                     " emission";
             tvEmission.setText(emission);
         }
 
-        CoinUsage = Double.valueOf(Double.valueOf(CoinUsage) * 100).toString();
+        CoinUsage = Double.valueOf(Double.parseDouble(CoinUsage) * 100).toString();
         CoinUsage = df3.format(Double.valueOf(CoinUsage));
         CoinUsage += getResources().getString(R.string.percent) + " of cap.";
         tvUsage.setText(CoinUsage);
@@ -269,20 +276,21 @@ public class CoinInfoActivity extends AppCompatActivity {
                 TextView tvHomepageData =
                         MainContainer.findViewById(R.id.tvHomepageData);
 
-                if (!homepage_str.equals("null")) {
+                setUrlData(homepage_str, tvHomepageData);
 
-                    homepage_str = homepage_str.replaceAll(",,", "");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-                    tvHomepageData.setText(homepage_str
-                            .replaceAll("\\p{Ps}", "")
-                            .replaceAll("\\p{Pe}", "")
-                            .replaceAll("\\\\","")
-                            .replaceAll(",", "\n")
-                            .replaceAll("\"",""));
-                } else {
-                    tvHomepageData.setTextColor(getResources().getColor(R.color.Gray1));
-                    tvHomepageData.setText(R.string.data_not_found);
-                }
+            try {
+                JSONObject links_obj = json.getJSONObject(links);
+                String blockchain_site_str = links_obj.getString(blockchain_site);
+
+                TextView tvBlockchainSiteData =
+                        MainContainer.findViewById(R.id.tvBlockchainSiteData);
+
+                setUrlData(blockchain_site_str, tvBlockchainSiteData);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -311,7 +319,9 @@ public class CoinInfoActivity extends AppCompatActivity {
 
             TextView tvCategoryData = MainContainer.findViewById(R.id.tvCategoryData);
 
-            WebView tvDescriptionData = MainContainer.findViewById(R.id.tvDescriptionData);
+            //WebView tvDescriptionData = MainContainer.findViewById(R.id.tvDescriptionData);
+            TextView tvDescriptionData2 = findViewById(R.id.tvDescriptionData);
+
             String text;
 
             try {
@@ -333,7 +343,12 @@ public class CoinInfoActivity extends AppCompatActivity {
                     text = "<html><body><p align=\"justify\">";
                     text += getResources().getString(R.string.data_not_found);
                     text+= "</p></body></html>";
-                    tvDescriptionData.loadData(text, "text/html", "utf-8");
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        tvDescriptionData2.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT));
+                    } else {
+                        tvDescriptionData2.setText(Html.fromHtml(text));
+                    }
                 } else {
                     TextView tvDescription = MainContainer.findViewById(R.id.tvDescription);
                     tvDescription.setVisibility(View.VISIBLE);
@@ -348,9 +363,11 @@ public class CoinInfoActivity extends AppCompatActivity {
                             .replaceAll("–", "-");
                     text+= "</p></body></html>";
 
-                    tvDescriptionData.loadData(text, "text/html", "utf-8");
-
-                    tvDescriptionData.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        tvDescriptionData2.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT));
+                    } else {
+                        tvDescriptionData2.setText(Html.fromHtml(text));
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -358,6 +375,23 @@ public class CoinInfoActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setUrlData(String data, TextView textView) {
+        if (!data.equals("null")) {
+
+            data = data.replaceAll(",,", "");
+
+            textView.setText(data
+                    .replaceAll("\\p{Ps}", "")
+                    .replaceAll("\\p{Pe}", "")
+                    .replaceAll("\\\\","")
+                    .replaceAll(",", "\n")
+                    .replaceAll("\"",""));
+        } else {
+            textView.setTextColor(getResources().getColor(R.color.Gray1));
+            textView.setText(R.string.data_not_found);
         }
     }
 
@@ -555,12 +589,6 @@ public class CoinInfoActivity extends AppCompatActivity {
         graph.setTitle(graph_title);
         graph.setTitleTextSize(40);
 
-        //graph.getGridLabelRenderer().setNumHorizontalLabels(3);
-
-        //StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-        //staticLabelsFormatter.setHorizontalLabels(dates);
-        //graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
-
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
 
         graph.setVisibility(View.VISIBLE);
@@ -623,7 +651,13 @@ public class CoinInfoActivity extends AppCompatActivity {
         LinearLayout graphContainer = findViewById(R.id.graph_linear_layout);
         LayoutInflater inflater = getLayoutInflater();
         View item = inflater.inflate(R.layout.progress_bar, graphContainer, false);
-        item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+
+        try {
+            item.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         graphContainer.addView(item);
     }
 
@@ -637,15 +671,12 @@ public class CoinInfoActivity extends AppCompatActivity {
         tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT));
         tv.setTypeface(roboto_light);
-        tv.setTextColor(getResources().getColor(android.R.color.black));
         tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
         finish();
     }

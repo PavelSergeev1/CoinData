@@ -9,9 +9,9 @@
     <string name="ChangePrice">PRICE CHANGE</string>
     <string name="Rank">Rank:</string>
 
-    <string name="MarketCap">Cap.</string>
+    <string name="MarketCap">Cap</string>
     <string name="MarketCapitalization">Market capitalization:</string>
-    <string name="Volume24">Vol. 24 h</string>
+    <string name="Volume24">Vol</string>
     <string name="Volume24Hours">Volume in 24 hours:</string>
 
     <string name="CirculatingSupply">Circulating supply:</string>
@@ -20,12 +20,13 @@
     <string name="Exchange">Exchange</string>
 
     <string name="PriceChange">Price change:</string>
-    <string name="PercentOneHour">1 h</string>
-    <string name="PercentTwentyFourHour">24 h</string>
-    <string name="PercentSevenDays">7 d</string>
+    <string name="PercentOneHour">1H</string>
+    <string name="PercentOneDay">1D</string>
+    <string name="PercentSevenDays">7D</string>
 
     <string name="H1">1H</string>
     <string name="D1">1D</string>
+    <string name="D7">7D</string>
     <string name="M3">3M</string>
     <string name="Y1">1Y</string>
     <string name="MAX">MAX</string>
@@ -53,7 +54,7 @@
         "\n \t" Source: wikipedia.org/wiki/Cryptocurrency</string>
 
     <string name="Update">UPDATE</string>
-    <string name="UPDATE_TIME">UPDATE TIME</string>
+    <string name="UPDATE_TIME">Update time - </string>
 
     <string name="Category">Category:</string>
     <string name="HashingAlgorithm">Hashing algorithm:</string>
@@ -83,4 +84,32 @@
     <string name="coin_logo">This is a logo of selected coin</string>
     <string name="percent" translatable="false">%</string>
     <string name="connection_error">Connection error</string>
+    <string name="PercentTwentyFourHour">24H</string>
+    <string name="item_coin_rank" translatable="false">rank</string>
+    <string name="item_coin_symbol" translatable="false">symbol</string>
+    <string name="item_coin_name" translatable="false">name</string>
+    <string name="item_coin_price_usd" translatable="false">price_usd</string>
+    <string name="item_coin_percent_change_1h" translatable="false">percent_change_1h</string>
+    <string name="item_coin_percent_change_24h" translatable="false">percent_change_24h</string>
+    <string name="item_coin_percent_change_7d" translatable="false">percent_change_7d</string>
+    <string name="item_coin_market_cap_usd" translatable="false">market_cap_usd</string>
+    <string name="item_coin_volume24" translatable="false">volume24</string>
+    <string name="settings">Settings</string>
+    <string name="symbol">Symbol:</string>
+    <string name="blockchainSite">Blockchain site:</string>
+    <string name="theme_description">Chose app theme</string>
+    <string name="settings_theme_title">Theme</string>
+    <string name="settings_theme_title_item">App theme</string>
+    <string name="button_cancel_text">Cancel</string>
+    <string name="about_version" translatable="false">1.4.4</string>
+    <string name="about_version_text">App version</string>
+    <string name="feedback">Feedback</string>
+    <string name="feedback_rate">Rate this app on GooglePlay</string>
+    <string name="feedback_rate_summary">Share your opinion</string>
+    <string name="feedback_rate_url" translatable="false">https://play.google.com/store/apps/details?id=app.pavel.coindata</string>
+    <string name="title_activity_settings2">Settings</string>
+
+    <string name="exit">Exit</string>
+    <string name="settings_theme_key" translatable="false">pref_theme</string>
+
 </resources>

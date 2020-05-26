@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="coin_position_text_size">11sp</dimen>
+    <dimen name="coin_short_name_text_size">15sp</dimen>
+    <dimen name="coin_full_name_text_size">10sp</dimen>
+    <dimen name="coin_price_text_size">18sp</dimen>
+    <dimen name="coin_percent_change_text_size">10sp</dimen>
+    <dimen name="coin_price_graph_margin">5sp</dimen>
+
+    <dimen name="item_height_vertical">85dp</dimen>
+
     <dimen name="about_margin_vertical">15dp</dimen>
 
     <dimen name="data_sources_text_size">20sp</dimen>
     <dimen name="about_text_text_size">14sp</dimen>
 
+    <dimen name="toolbar_image_size">45dp</dimen>
+    <dimen name="toolbar_image_margin_end">5dp</dimen>
+
     <dimen name="coin_info_name">24sp</dimen>
     <dimen name="aboutMarginBottom">35dp</dimen>
-    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="small_text_size">11sp</dimen>
     <dimen name="coin_image_text_margin_vertical">15dp</dimen>
     <dimen name="item_coin_height_vertical">70dp</dimen>
     <dimen name="coin_image_text_horizontal_margin">30dp</dimen>
     <dimen name="about_margin_top">5dp</dimen>
+    <dimen name="change_price_margin_dimen">2dp</dimen>
+    <dimen name="coin_item_graph_layout_width">100dp</dimen>
+    <dimen name="coin_image_graph_layout_height">50dp</dimen>
+    <dimen name="graph_layout_margin">10dp</dimen>
+    <dimen name="coin_info_item_margin">5dp</dimen>
+    <dimen name="coin_info_text_size">14sp</dimen>
+    <dimen name="coin_info_text_size_big">18sp</dimen>
+    <dimen name="coin_info_text_size_small">12sp</dimen>
+    <dimen name="coin_info_divider_height">1dp</dimen>
+    <dimen name="coin_info_item_margin_big">10dp</dimen>
+    <dimen name="coin_info_item_margin_very_big">15dp</dimen>
+    <dimen name="coin_info_text_size_medium">16sp</dimen>
 </resources>

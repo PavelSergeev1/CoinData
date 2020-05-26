@@ -1,5 +1,7 @@
 package app.pavel.coindata;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -35,5 +37,10 @@ class RemoteFetch {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public void setCoinItem(JSONObject data, int i) throws JSONException {
+        JSONArray DataArray = data.getJSONArray("data");
+        JSONObject obj = DataArray.getJSONObject(i);
     }
 }

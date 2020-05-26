@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/settings_theme_title">
+
+        <ListPreference
+            android:defaultValue="dark"
+            android:entries="@array/list_of_themes_for_settings"
+            android:entryValues="@array/list_of_themes"
+            android:key="@string/settings_theme_key"
+            android:persistent="true"
+            android:icon="@drawable/ic_brush"
+            android:summary="@string/theme_description"
+            android:title="@string/settings_theme_title_item"
+            android:negativeButtonText="@string/button_cancel_text" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/about">
+
+        <Preference
+            android:title="@string/about_version_text"
+            android:summary="@string/about_version"
+            android:icon="@drawable/ic_build">
+        </Preference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/feedback">
+
+        <Preference
+            android:title="@string/feedback_rate"
+            android:summary="@string/feedback_rate_summary"
+            android:icon="@drawable/ic_star_half">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/feedback_rate_url" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -12,10 +12,9 @@
         android:layout_gravity="start"
         android:layout_marginStart="55dp"
         android:background="@drawable/button_rounded"
-        android:onClick="onClickAbout"
         android:text="@string/about_button"
         android:textColor="@color/colorWhite"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/btnUpdate"
@@ -23,9 +22,8 @@
         android:layout_height="25dp"
         android:layout_gravity="center"
         android:background="@drawable/button_rounded"
-        android:onClick="onClickUpdate"
         android:text="@string/Update"
         android:textColor="@color/colorWhite"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
 
 </FrameLayout>
