@@ -483,7 +483,8 @@ public class CoinActivity extends AppCompatActivity
             RequestOptions requestOptions = new RequestOptions()
                     .override(size)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .signature(new ObjectKey(IMAGE_URL));
+                    .dontAnimate()
+                    .signature(new ObjectKey(coin_id));
 
             Glide.with(activity)
                     .load(IMAGE_URL)
@@ -657,19 +658,24 @@ public class CoinActivity extends AppCompatActivity
         tvMarketNumber.setText(ARRAY_COIN[3]);
         tvCoinPrice.setText(ARRAY_COIN[4]);
 
-        tvPercentOneHourData.setText(ARRAY_COIN[6]);
+        String p1h, p24h, p7d;
+        p1h = ARRAY_COIN[6] + percent_symbol;
+        p24h = ARRAY_COIN[7] + percent_symbol;
+        p7d = ARRAY_COIN[8] + percent_symbol;
+
+        tvPercentOneHourData.setText(p1h);
         formatPercentValuesRestored(6, ARRAY_COIN, tvPercentOneHourData);
 
-        tvPercentTwentyFourHourData.setText(ARRAY_COIN[7]);
+        tvPercentTwentyFourHourData.setText(p24h);
         formatPercentValuesRestored(7, ARRAY_COIN, tvPercentTwentyFourHourData);
 
-        tvPercentSevenDaysData.setText(ARRAY_COIN[8]);
+        tvPercentSevenDaysData.setText(p7d);
         formatPercentValuesRestored(8, ARRAY_COIN, tvPercentSevenDaysData);
 
         tvMarketCapData.setText(ARRAY_COIN[9]);
         tvVolume24Data.setText(ARRAY_COIN[10]);
 
-        String CoinId = ARRAY_COIN[13];
+        CoinId = ARRAY_COIN[13];
 
         findCoinImage(item);
         findCoinGraph(item, i);
@@ -683,6 +689,7 @@ public class CoinActivity extends AppCompatActivity
         if (end) {
             end_of_list = false;
             showMoreCoins();
+            contentIsShown = true;
         }
     }
 

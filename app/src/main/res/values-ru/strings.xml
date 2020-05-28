@@ -46,13 +46,13 @@
     <string name="settings">Настройки</string>
     <string name="symbol">Символ:</string>
     <string name="blockchainSite">Сайт блокчейна:</string>
-    <string name="theme_description">Chose app theme</string>
-    <string name="settings_theme_title">Theme</string>
-    <string name="settings_theme_title_item">App theme</string>
-    <string name="button_cancel_text">Cancel</string>
-    <string name="about_version_text">App version</string>
-    <string name="feedback">Feedback</string>
-    <string name="feedback_rate">Rate this app on GooglePlay</string>
-    <string name="feedback_rate_summary">Share your opinion</string>
-    <string name="exit">Exit</string>
+    <string name="theme_description">Выбор темы приложения</string>
+    <string name="settings_theme_title">Тема</string>
+    <string name="settings_theme_title_item">Тема приложения</string>
+    <string name="button_cancel_text">Отмена</string>
+    <string name="about_version_text">Версия приложения</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="feedback_rate">Оцените приложение в GooglePlay</string>
+    <string name="feedback_rate_summary">Поделитесь своим мнением</string>
+    <string name="exit">Выход</string>
 </resources>

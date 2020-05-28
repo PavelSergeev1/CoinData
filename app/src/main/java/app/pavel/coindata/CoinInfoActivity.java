@@ -15,8 +15,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,7 +29,6 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -163,25 +160,13 @@ public class CoinInfoActivity extends AppCompatActivity {
         TextView tvUsage = findViewById(R.id.tvUsage);
         TextView tvEmission = findViewById(R.id.tvEmission);
 
-        tvPercentOneHourData.setText(CoinP1H);
-        tvPercentTwentyFourHourData.setText(CoinP24H);
-        tvPercentSevenDaysData.setText(CoinP7D);
+        //tvPercentOneHourData.setText(CoinP1H);
+        //tvPercentTwentyFourHourData.setText(CoinP24H);
+        //tvPercentSevenDaysData.setText(CoinP7D);
 
-        if (Float.valueOf(CoinP1H.substring(0, CoinP1H.length() - 1).replaceAll("%", "")) > 0) {
-            tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorGreen));
-        } else if (Float.valueOf(CoinP1H.substring(0, CoinP1H.length() - 1).replaceAll("%", "")) < 0) {
-            tvPercentOneHourData.setTextColor(getResources().getColor(R.color.colorRed));
-        }
-        if (Float.valueOf(CoinP24H.substring(0, CoinP24H.length() - 1).replaceAll("%", "")) > 0) {
-            tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorGreen));
-        } else if (Float.valueOf(CoinP24H.substring(0, CoinP24H.length() - 1).replaceAll("%", "")) < 0) {
-            tvPercentTwentyFourHourData.setTextColor(getResources().getColor(R.color.colorRed));
-        }
-        if (Float.valueOf(CoinP7D.substring(0, CoinP7D.length() - 1).replaceAll("%", "")) > 0) {
-            tvPercentSevenDaysData.setTextColor(getResources().getColor(R.color.colorGreen));
-        } else if (Float.valueOf(CoinP7D.substring(0, CoinP7D.length() - 1).replaceAll("%", "")) < 0) {
-            tvPercentSevenDaysData.setTextColor(getResources().getColor(R.color.colorRed));
-        }
+        formatPercentValues(Float.parseFloat(CoinP1H), tvPercentOneHourData);
+        formatPercentValues(Float.parseFloat(CoinP24H), tvPercentTwentyFourHourData);
+        formatPercentValues(Float.parseFloat(CoinP7D), tvPercentSevenDaysData);
 
         tvMarketNumber.setText(CoinRank);
         tvSymbolData.setText(CoinSymbol);
@@ -231,6 +216,17 @@ public class CoinInfoActivity extends AppCompatActivity {
         CoinUsage = df3.format(Double.valueOf(CoinUsage));
         CoinUsage += getResources().getString(R.string.percent) + " of cap.";
         tvUsage.setText(CoinUsage);
+    }
+
+    private void formatPercentValues(float number, TextView textViewPercent) {
+        if (number > 0) {
+            textViewPercent.append("+");
+            textViewPercent.setTextColor(getResources().getColor(R.color.colorGreen));
+        } else if (number < 0) {
+            textViewPercent.setTextColor(getResources().getColor(R.color.colorRed));
+        }
+
+        textViewPercent.append(number + "%");
     }
 
     private void getCoinInfo(){

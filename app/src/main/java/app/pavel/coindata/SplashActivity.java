@@ -19,19 +19,22 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intentStart = getIntent();
-
-        boolean isFirstLaunch = intentStart.getBooleanExtra("first_run", false);
+        boolean isFirstLaunch = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
 
         if (isFirstLaunch) {
-            //currentTheme = "dark";
-            PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putBoolean("isFirstRun", false).apply();
+
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
         }
         else {
-            Log.i("Is first launch? - ", String.valueOf(isFirstLaunch));
             PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             currentTheme = prefs.getString(THEME, null);
+
+            assert currentTheme != null;
             if (currentTheme.equals("dark")) {
                 AppCompatDelegate.setDefaultNightMode(
                         AppCompatDelegate.MODE_NIGHT_YES);

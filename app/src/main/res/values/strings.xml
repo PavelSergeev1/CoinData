@@ -107,7 +107,6 @@
     <string name="feedback_rate">Rate this app on GooglePlay</string>
     <string name="feedback_rate_summary">Share your opinion</string>
     <string name="feedback_rate_url" translatable="false">https://play.google.com/store/apps/details?id=app.pavel.coindata</string>
-    <string name="title_activity_settings2">Settings</string>
 
     <string name="exit">Exit</string>
     <string name="settings_theme_key" translatable="false">pref_theme</string>
