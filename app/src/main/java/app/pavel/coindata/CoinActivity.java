@@ -590,8 +590,13 @@ public class CoinActivity extends AppCompatActivity
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
 
         graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(dp[0].getX());
-        graph.getViewport().setMaxX(dp[i - 1].getX());
+
+        try {
+            graph.getViewport().setMinX(dp[0].getX());
+            graph.getViewport().setMaxX(dp[i - 1].getX());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         runOnUiThread(() -> graph.setVisibility(View.VISIBLE));
     }

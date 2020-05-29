@@ -4,7 +4,9 @@
     android:id="@+id/item_coin"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_height_vertical"
-    android:layout_margin="0dp">
+    android:layout_margin="0dp"
+    android:clickable="true"
+    android:focusable="true">
 
     <RadioGroup
         android:layout_width="match_parent"

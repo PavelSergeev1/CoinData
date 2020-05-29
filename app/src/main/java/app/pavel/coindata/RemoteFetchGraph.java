@@ -98,8 +98,6 @@ class RemoteFetchGraph {
                 reader = new BufferedReader(
                         new InputStreamReader(connection.getInputStream()));
             } catch (Exception e) {
-                e.printStackTrace();
-
                 return null;
             }
 
